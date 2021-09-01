@@ -1,8 +1,9 @@
-package com.example.book
+package com.example.book.view.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.book.ui.main.MainFragment
+import com.example.book.R
+import com.example.book.view.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
