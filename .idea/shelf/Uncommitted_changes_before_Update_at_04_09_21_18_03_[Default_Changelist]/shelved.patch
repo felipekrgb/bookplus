@@ -1,0 +1,119 @@
+Index: app/src/main/java/com/example/book/viewmodel/BookListingViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.book.viewmodel\n\nimport androidx.lifecycle.ViewModel\n\nclass BookListingViewModel : ViewModel() {\n    // TODO: Implement the ViewModel\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/book/viewmodel/BookListingViewModel.kt b/app/src/main/java/com/example/book/viewmodel/BookListingViewModel.kt
+--- a/app/src/main/java/com/example/book/viewmodel/BookListingViewModel.kt	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
++++ b/app/src/main/java/com/example/book/viewmodel/BookListingViewModel.kt	(date 1630788956700)
+@@ -1,7 +1,15 @@
+ package com.example.book.viewmodel
+ 
+ import androidx.lifecycle.ViewModel
++import com.example.book.repository.BooksRepository
++import dagger.hilt.android.lifecycle.HiltViewModel
++import javax.inject.Inject
++
++@HiltViewModel
++class BookListingViewModel @Inject constructor(
+ 
+-class BookListingViewModel : ViewModel() {
+-    // TODO: Implement the ViewModel
++    private val repository : BooksRepository
++
++) : ViewModel() {
++
+ }
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+deleted file mode 100644
+--- a/.idea/gradle.xml	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
++++ /dev/null	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
+@@ -1,20 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="GradleMigrationSettings" migrationVersion="1" />
+-  <component name="GradleSettings">
+-    <option name="linkedExternalProjectsSettings">
+-      <GradleProjectSettings>
+-        <option name="testRunner" value="GRADLE" />
+-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="modules">
+-          <set>
+-            <option value="$PROJECT_DIR$" />
+-            <option value="$PROJECT_DIR$/app" />
+-          </set>
+-        </option>
+-        <option name="resolveModulePerSourceSet" value="false" />
+-      </GradleProjectSettings>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+deleted file mode 100644
+--- a/.idea/vcs.xml	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
++++ /dev/null	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+deleted file mode 100644
+--- a/.idea/compiler.xml	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
++++ /dev/null	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="CompilerConfiguration">
+-    <bytecodeTargetLevel target="11" />
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+deleted file mode 100644
+--- a/.idea/.gitignore	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
++++ /dev/null	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
+@@ -1,3 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+Index: .idea/.name
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.name b/.idea/.name
+deleted file mode 100644
+--- a/.idea/.name	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
++++ /dev/null	(revision f6eda41c624a02aebd459c4b9e2241eb009f6756)
+@@ -1,1 +0,0 @@
+-Book+
+\ No newline at end of file
