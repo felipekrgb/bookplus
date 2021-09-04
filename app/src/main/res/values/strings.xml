@@ -6,4 +6,7 @@
     <string name="hint_password">Password</string>
     <string name="hint_username">Username</string>
     <string name="logo_content_description">Bookplus</string>
+    <string name="book_name">Book name</string>
+    <string name="book_description">Book description</string>
+    <string name="page_count">Page count</string>
 </resources>
