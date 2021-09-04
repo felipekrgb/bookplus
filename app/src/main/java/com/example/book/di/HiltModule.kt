@@ -1,5 +1,6 @@
 package com.example.book.di
 
+import com.example.book.repository.BooksRepository
 import com.example.book.service.GoogleBookAPIService
 import com.example.book.service.RetrofitBuilder
 import dagger.Module
@@ -12,5 +13,9 @@ import dagger.hilt.components.SingletonComponent
 object HiltModule {
 
     @Provides
-    fun providerBookService(): GoogleBookAPIService = RetrofitBuilder.getGoogleBookAPIService()
+    fun provideBookService(): GoogleBookAPIService = RetrofitBuilder.getGoogleBookAPIService()
+
+    @Provides
+    fun provideBookRepository(service: GoogleBookAPIService): BooksRepository =
+        BooksRepository(service)
 }

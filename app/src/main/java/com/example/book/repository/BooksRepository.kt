@@ -18,6 +18,7 @@ class BooksRepository @Inject constructor(private val bookService: GoogleBookAPI
                 call: Call<BookResponse>,
                 response: Response<BookResponse>
             ) {
+                println(response.body())
                 if (response.body() != null) {
                     onComplete(response.body()!!.items, null)
                 } else {
