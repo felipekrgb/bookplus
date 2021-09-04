@@ -22,7 +22,6 @@ data class Book(
     val pageCount: Int,
     @SerializedName("imageLinks")
     val imageLinks: ImageLinks?
-
 )
 data class VolumeInfo(
 
