@@ -40,16 +40,16 @@ class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(book: Book) {
 
-        book.volumeInfo.let {
-            binding.bookTextView.text = it.title
-        }
+        println(book.volumeInfo.imageLinks?.thumbnail)
+        println(book.volumeInfo.imageLinks?.smallThumbnail)
 
-//        book.volumeInfo.imageLinks.let {
-//            Glide.with(itemView.context)
-//                .load(it?.thumbnail)
-//                .placeholder(R.drawable.ic_launcher_background)
-//                .into(binding.bookImageView)
-//        }
+        book.volumeInfo.imageLinks.let {
+            println(it?.thumbnail)
+            Glide.with(itemView.context)
+                .load(it?.thumbnail?.replace("http", "https"))
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(binding.bookImageView)
+        }
 
     }
 

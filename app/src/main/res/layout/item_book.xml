@@ -5,24 +5,15 @@
     android:layout_height="wrap_content"
     android:layout_margin="16dp">
 
-    <TextView
-        android:id="@+id/bookTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Book's name"
-        android:maxLines="1"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/bookImageView"
+        android:layout_width="128dp"
+        android:layout_height="182dp"
+        android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/bookImageView"-->
-    <!--        android:layout_width="128dp"-->
-    <!--        android:layout_height="164dp"-->
-    <!--        android:src="@drawable/ic_launcher_background"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
