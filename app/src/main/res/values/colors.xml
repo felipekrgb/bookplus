@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="loginPageBackgroundColor">#FFFFFF</color>
+    <color name="brown_text">#2A1811</color>
 </resources>

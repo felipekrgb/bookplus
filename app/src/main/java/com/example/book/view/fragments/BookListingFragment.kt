@@ -25,7 +25,8 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
 
     private lateinit var binding: BookListingFragmentBinding
     private lateinit var viewModel: BookListingViewModel
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var firstCategoryRecyclerView: RecyclerView
+    private lateinit var secondCategoryRecyclerView: RecyclerView
     private var adapter = BookAdapter()
 
     private val observerBooks = Observer<List<Book>> {
@@ -42,10 +43,10 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
 
         viewModel = ViewModelProvider(this).get(BookListingViewModel::class.java)
 
-        recyclerView = binding.bookListingRecyclerView
-        recyclerView.layoutManager =
+        firstCategoryRecyclerView = binding.bookFirstCategoryRecyclerView
+        firstCategoryRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = adapter
+        firstCategoryRecyclerView.adapter = adapter
 
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
         viewModel.error.observe(viewLifecycleOwner, observerError)
