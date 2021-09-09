@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/loginPageBackgroundColor"
+    android:background="@color/white"
     tools:context=".view.activities.MainActivity">
 
     <LinearLayout
@@ -22,7 +22,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="16dp"
-            android:contentDescription="@string/logo_content_description"  />
+            android:contentDescription="@string/logo_content_description" />
         <!--            app:srcCompat="@drawable/bookplusLogo"-->
 
         <TextView
@@ -57,7 +57,7 @@
                 android:id="@+id/password_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
