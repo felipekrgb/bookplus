@@ -1,4 +1,4 @@
-package com.example.book.ui.main
+package com.example.book.view.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.book.R
+import com.example.book.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
 
