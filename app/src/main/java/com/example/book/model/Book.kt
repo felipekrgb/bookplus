@@ -22,13 +22,13 @@ data class VolumeInfo(
     @SerializedName("title")
     val title: String,
     @SerializedName("authors")
-    val authors: List<String>,
+    val authors: List<String>?,
     @SerializedName("description")
-    val description: String,
+    val description: String?,
     @SerializedName("publishedDate")
-    val publishedDate: String,
+    val publishedDate: String?,
     @SerializedName("pageCount")
-    val pageCount: Int,
+    val pageCount: Int?,
     @SerializedName("imageLinks")
     val imageLinks: ImageLinks?
 )
