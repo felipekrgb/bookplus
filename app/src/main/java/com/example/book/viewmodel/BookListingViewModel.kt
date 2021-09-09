@@ -3,9 +3,11 @@ package com.example.book.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.book.model.Book
 import com.example.book.repository.BooksRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,16 +25,10 @@ class BookListingViewModel @Inject constructor(
     val error: LiveData<String> = _error
 
     fun getBooksByTerms(terms: String) {
-
-        repository.getBooksByTerms(terms) { response, error ->
-
-            response?.let {
-                _books.value = it
+        viewModelScope.launch {
+            repository.getBooksByTerms(terms)?.let {  books ->
+                _books.value = books
             }
-            error?.let {
-                _error.value = it
-            }
-
         }
     }
 
