@@ -28,6 +28,7 @@ class BookSearchViewModel @Inject constructor(private val repository: BooksRepos
         viewModelScope.launch {
             repository.getBooksByTerms(terms).let {
                 _books.value = it
+                _isLoading.value = false
             }
         }
     }

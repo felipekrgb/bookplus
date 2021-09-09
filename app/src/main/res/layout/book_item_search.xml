@@ -22,8 +22,8 @@
             <ImageView
                 android:layout_margin="8dp"
                 android:id="@+id/imageViewBookSearch"
-                android:layout_width="128dp"
-                android:layout_height="182dp"
+                android:layout_width="108dp"
+                android:layout_height="152dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/no_cover_thumb"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -45,6 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/libre_caslon_text_regular"
                     android:maxLines="3"
                     android:text="Descricao do livro e tls" />
@@ -54,6 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:textStyle="italic"
                     android:fontFamily="@font/libre_caslon_text_regular"
                     android:maxLines="1"
                     android:text="Autor e tls"
