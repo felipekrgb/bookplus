@@ -9,7 +9,7 @@ import com.example.book.R
 import com.example.book.databinding.ItemBookBinding
 import com.example.book.model.Book
 
-class BookAdapter : RecyclerView.Adapter<BookViewHolder>() {
+class BookAdapter(val onClick: (Book) -> Unit) : RecyclerView.Adapter<BookViewHolder>() {
 
     var bookList = mutableListOf<Book>()
 
@@ -21,6 +21,9 @@ class BookAdapter : RecyclerView.Adapter<BookViewHolder>() {
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         bookList[position].apply {
             holder.bind(this)
+            holder.itemView.setOnClickListener {
+                onClick(this)
+            }
         }
     }
 
@@ -40,16 +43,15 @@ class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(book: Book) {
 
-        book.volumeInfo.let {
-            binding.bookTextView.text = it.title
-        }
+        println(book.volumeInfo.imageLinks?.thumbnail)
+        println(book.volumeInfo.imageLinks?.smallThumbnail)
 
-//        book.volumeInfo.imageLinks.let {
-//            Glide.with(itemView.context)
-//                .load(it?.thumbnail)
-//                .placeholder(R.drawable.ic_launcher_background)
-//                .into(binding.bookImageView)
-//        }
+        book.volumeInfo.imageLinks.let {
+            Glide.with(itemView.context)
+                .load(it?.thumbnail)
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(binding.bookImageView)
+        }
 
     }
 
