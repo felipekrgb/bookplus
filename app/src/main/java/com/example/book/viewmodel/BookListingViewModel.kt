@@ -12,9 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookListingViewModel @Inject constructor(
-
     private val repository: BooksRepository
-
 ) : ViewModel() {
 
 
