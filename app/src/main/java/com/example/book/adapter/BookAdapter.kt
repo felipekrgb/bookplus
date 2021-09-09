@@ -9,7 +9,7 @@ import com.example.book.R
 import com.example.book.databinding.ItemBookBinding
 import com.example.book.model.Book
 
-class BookAdapter : RecyclerView.Adapter<BookViewHolder>() {
+class BookAdapter(val onClick: (Book) -> Unit) : RecyclerView.Adapter<BookViewHolder>() {
 
     var bookList = mutableListOf<Book>()
 
@@ -21,6 +21,9 @@ class BookAdapter : RecyclerView.Adapter<BookViewHolder>() {
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         bookList[position].apply {
             holder.bind(this)
+            holder.itemView.setOnClickListener {
+                onClick(this)
+            }
         }
     }
 

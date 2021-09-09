@@ -3,9 +3,7 @@ package com.example.book.view.fragments
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +11,7 @@ import com.example.book.R
 import com.example.book.adapter.BookAdapter
 import com.example.book.databinding.BookListingFragmentBinding
 import com.example.book.model.Book
+import com.example.book.view.dialogs.BasicDetailsFragment
 import com.example.book.viewmodel.BookListingViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,8 +25,11 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
     private lateinit var binding: BookListingFragmentBinding
     private lateinit var viewModel: BookListingViewModel
     private lateinit var firstCategoryRecyclerView: RecyclerView
-    private lateinit var secondCategoryRecyclerView: RecyclerView
-    private var adapter = BookAdapter()
+    private var adapter = BookAdapter() {
+        BasicDetailsFragment.newInstance(it).let {
+            it.show(parentFragmentManager, "dialog_basic_details")
+        }
+    }
 
     private val observerBooks = Observer<List<Book>> {
         adapter.update(it)

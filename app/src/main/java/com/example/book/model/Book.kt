@@ -1,6 +1,7 @@
 package com.example.book.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class BookResponse(
 
@@ -14,7 +15,7 @@ data class Book(
     val id: String,
     @SerializedName("volumeInfo")
     val volumeInfo: VolumeInfo,
-)
+) : Serializable
 
 data class VolumeInfo(
 
