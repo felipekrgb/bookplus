@@ -21,6 +21,13 @@ class BooksRepository @Inject constructor(private val bookService: GoogleBookAPI
         }
     }
 
+    suspend fun getBookById(id: String): Book? {
+        return withContext(CoroutineScope(Dispatchers.Default).coroutineContext) {
+            val bookResponse = bookService.getBook(id)
+            processData(bookResponse)
+        }
+    }
+
     private fun <T> processData(response: Response<T>): T? {
         return if (response.isSuccessful) response.body() else null
     }
