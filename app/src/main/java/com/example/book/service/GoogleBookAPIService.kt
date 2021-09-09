@@ -9,9 +9,8 @@ import retrofit2.http.Query
 interface GoogleBookAPIService {
 
     @GET("/books/v1/volumes")
-    suspend fun getBook(
+    suspend fun getBooks(
         @Query("q") searchTerms: String,
         @Query("key") key: String = "AIzaSyDGk_-8FF3wUUiNyU8tRiq7AKkN_uayDcE"
     ): Response<BookResponse>
-
 }

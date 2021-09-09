@@ -15,7 +15,7 @@ class BooksRepository @Inject constructor(private val bookService: GoogleBookAPI
 
     suspend fun getBooksByTerms(terms: String): List<Book>? {
         return withContext(CoroutineScope(Dispatchers.Default).coroutineContext) {
-            val bookResponse = bookService.getBook(terms)
+            val bookResponse = bookService.getBooks(terms)
             val response = processData(bookResponse)
             response?.items
         }
