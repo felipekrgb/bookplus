@@ -7,11 +7,11 @@
 
 
     <ImageView
-        android:scaleType="fitXY"
         android:id="@+id/bookImageView"
         android:layout_width="128dp"
         android:layout_height="182dp"
-        android:src="@drawable/ic_launcher_background"
+        android:scaleType="fitXY"
+        android:src="@drawable/no_cover_thumb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

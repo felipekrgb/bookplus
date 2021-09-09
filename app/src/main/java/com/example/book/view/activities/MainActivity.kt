@@ -6,6 +6,7 @@ import com.example.book.R
 import com.example.book.databinding.MainActivityBinding
 import com.example.book.utils.replaceFragment
 import com.example.book.view.fragments.BookListingFragment
+import com.example.book.view.fragments.BookSearchFragment
 import com.example.book.view.fragments.MainFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
             setOnItemSelectedListener {
                 when(it.itemId) {
                     R.id.home -> replaceFragment(BookListingFragment.newInstance())
+                    R.id.search -> replaceFragment(BookSearchFragment.newInstance())
                 }
                 true
             }
