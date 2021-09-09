@@ -1,5 +1,6 @@
 package com.example.book.service
 
+import com.example.book.BuildConfig
 import com.example.book.model.Book
 import com.example.book.model.BookResponse
 import retrofit2.Call
@@ -13,7 +14,7 @@ interface GoogleBookAPIService {
     @GET("/books/v1/volumes")
     suspend fun getBooks(
         @Query("q") searchTerms: String,
-        @Query("key") key: String = "AIzaSyDGk_-8FF3wUUiNyU8tRiq7AKkN_uayDcE"
+        @Query("key") key: String = BuildConfig.API_KEY
     ): Response<BookResponse>
 
     @GET("/books/v1/volumes/{id}")
