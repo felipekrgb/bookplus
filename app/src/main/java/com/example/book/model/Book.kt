@@ -6,7 +6,7 @@ import java.io.Serializable
 data class BookResponse(
 
     @SerializedName("items")
-    val items: List<Book>
+    val items: List<Book>?
 ) : Serializable
 
 data class Book(
@@ -20,7 +20,7 @@ data class Book(
 data class VolumeInfo(
 
     @SerializedName("title")
-    val title: String,
+    val title: String?,
     @SerializedName("authors")
     val authors: List<String>?,
     @SerializedName("description")

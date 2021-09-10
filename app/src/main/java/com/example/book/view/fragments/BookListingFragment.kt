@@ -35,10 +35,6 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         adapter.update(it)
     }
 
-    private val observerError = Observer<String> {
-        println(it)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BookListingFragmentBinding.bind(view)
@@ -51,7 +47,6 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         firstCategoryRecyclerView.adapter = adapter
 
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
-        viewModel.error.observe(viewLifecycleOwner, observerError)
 
         viewModel.getBooksByTerms("dog")
     }

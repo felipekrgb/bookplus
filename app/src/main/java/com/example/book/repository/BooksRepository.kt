@@ -14,7 +14,7 @@ import javax.inject.Inject
 class BooksRepository @Inject constructor(private val bookService: GoogleBookAPIService) {
 
     suspend fun getBooksByTerms(terms: String): List<Book>? {
-        return withContext(CoroutineScope(Dispatchers.Default).coroutineContext) {
+        return withContext(Dispatchers.Default) {
             val bookResponse = bookService.getBooks(terms)
             val response = processData(bookResponse)
             response?.items
@@ -22,7 +22,7 @@ class BooksRepository @Inject constructor(private val bookService: GoogleBookAPI
     }
 
     suspend fun getBookById(id: String): Book? {
-        return withContext(CoroutineScope(Dispatchers.Default).coroutineContext) {
+        return withContext(Dispatchers.Default) {
             val bookResponse = bookService.getBook(id)
             processData(bookResponse)
         }

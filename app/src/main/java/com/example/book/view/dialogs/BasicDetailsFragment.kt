@@ -50,8 +50,14 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
         book = arguments?.getSerializable("book") as Book
 
         book.volumeInfo.imageLinks?.thumbnail.let {
-            Glide.with(view.context).load(it).into(binding.bookImageView)
+            Glide.with(view.context).load(it).placeholder(R.drawable.no_cover_thumb)
+                .into(binding.bookImageView)
         }
+
+        book.volumeInfo.title.let {
+            binding.bookTitleTextView.text = it ?: "Sem título"
+        }
+
 
         setupDetailsButton()
 
@@ -60,16 +66,11 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
     override fun getTheme() = R.style.CustomBottomSheetDialog
 
     private fun setupDetailsButton() {
-
         binding.bookDetailsButton.setOnClickListener {
-
             val intentToDetails =
                 Intent(activity?.applicationContext, BookDetailsActivity::class.java)
             intentToDetails.putExtra("book", book)
             startActivity(intentToDetails)
-
         }
-
     }
-
 }

@@ -28,7 +28,7 @@
                 android:layout_height="218.4dp"
                 android:layout_margin="8dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/no_cover_thumb"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,13 +39,13 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/bookNameTextView"
+        android:id="@+id/bookTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/libre_caslon_text_regular"
+        android:hint="Título do livro"
         android:padding="12dp"
-        android:text="The Complete Dog Book"
         android:textAlignment="center"
         android:textColor="@color/brown_text"
         android:textSize="20sp"
@@ -60,7 +60,7 @@
         android:paddingBottom="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookNameTextView">
+        app:layout_constraintTop_toBottomOf="@+id/bookTitleTextView">
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"

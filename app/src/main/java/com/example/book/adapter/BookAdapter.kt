@@ -42,10 +42,6 @@ class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val binding = ItemBookBinding.bind(view)
 
     fun bind(book: Book) {
-
-        println(book.volumeInfo.imageLinks?.thumbnail)
-        println(book.volumeInfo.imageLinks?.smallThumbnail)
-
         book.volumeInfo.imageLinks.let {
             Glide.with(itemView.context)
                 .load(it?.thumbnail)

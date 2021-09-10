@@ -17,16 +17,13 @@ class BookSearchViewModel @Inject constructor(private val repository: BooksRepos
     private val _books = MutableLiveData<List<Book>>()
     val books: LiveData<List<Book>> = _books
 
-    val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun getBooksByTerm(terms: String){
+    fun getBooksByTerm(terms: String) {
         _isLoading.value = true
         viewModelScope.launch {
-            repository.getBooksByTerms(terms).let {
+            repository.getBooksByTerms(terms.replace(" ", "+")).let {
                 _books.value = it
                 _isLoading.value = false
             }

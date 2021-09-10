@@ -9,4 +9,5 @@
     <string name="book_name">Book name</string>
     <string name="book_description">Book description</string>
     <string name="page_count">Page count</string>
+    <string name="no_search_term">Digite um termo para pesquisa</string>
 </resources>

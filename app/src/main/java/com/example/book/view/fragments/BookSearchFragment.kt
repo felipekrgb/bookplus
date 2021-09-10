@@ -3,6 +3,8 @@ package com.example.book.view.fragments
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,6 +15,8 @@ import com.example.book.adapter.BookSearchAdapter
 import com.example.book.databinding.BookSearchFragmentBinding
 import com.example.book.model.Book
 import com.example.book.utils.hideKeyboard
+import com.example.book.utils.snackBar
+import com.example.book.view.activities.MainActivity
 import com.example.book.view.dialogs.BasicDetailsFragment
 import com.example.book.viewmodel.BookSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +41,7 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
             binding.emptyBooksTextView.visibility = View.VISIBLE
         } else {
             binding.recyclerViewBookSearch.visibility = View.VISIBLE
-            adapter.refesh(it)
+            adapter.update(it)
         }
     }
 
@@ -62,7 +66,7 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
         viewModel = ViewModelProvider(this).get(BookSearchViewModel::class.java)
 
         startRecyclerView()
-        startObserver()
+        startObservers()
         startSettingsSearch()
 
     }
@@ -70,24 +74,34 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
     private fun startSettingsSearch() {
         binding.editTextSearch.editText?.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                binding.emptyBooksTextView.visibility = View.GONE
-                binding.recyclerViewBookSearch.visibility = View.GONE
-                viewModel.getBooksByTerm(binding.editTextSearch.editText?.text.toString())
-                (requireActivity() as AppCompatActivity).hideKeyboard()
+                val searchTerm = binding.editTextSearch.editText?.text.toString()
+                if (searchTerm.isNullOrEmpty()) {
+                    showSnackbar(R.string.no_search_term, R.color.red)
+                } else {
+                    binding.emptyBooksTextView.visibility = View.GONE
+                    binding.recyclerViewBookSearch.visibility = View.GONE
+                    viewModel.getBooksByTerm(searchTerm)
+                    (requireActivity() as AppCompatActivity).hideKeyboard()
+                }
                 return@OnKeyListener true
             }
             false
         })
     }
 
-    private fun startObserver() {
+    private fun startObservers() {
         viewModel.books.observe(viewLifecycleOwner, observerBooksSearch)
-        viewModel.error.observe(viewLifecycleOwner, observerErrorSearch)
         viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
     }
 
     private fun startRecyclerView() {
         binding.recyclerViewBookSearch.adapter = adapter
         binding.recyclerViewBookSearch.layoutManager = LinearLayoutManager(requireContext())
+    }
+
+    private fun showSnackbar(@StringRes msgId: Int, @ColorRes colorId: Int) {
+        val activity = requireActivity() as MainActivity
+        val bottomNav = activity.binding.bottomNav
+        activity.snackBar(bottomNav, msgId, colorId)
     }
 }

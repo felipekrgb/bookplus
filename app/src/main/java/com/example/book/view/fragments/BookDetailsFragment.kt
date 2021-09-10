@@ -46,7 +46,7 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
 
     private fun bindData(book: Book?) {
 
-        binding.bookNameTextView.text = book!!.id
+        binding.bookTitleTextView.text = book!!.id
 
     }
 

@@ -31,7 +31,7 @@ class BookSearchAdapter(private val onClick: (Book) -> Unit) :
 
     override fun getItemCount(): Int = listOfBooks.size
 
-    fun refesh(newList: List<Book>) {
+    fun update(newList: List<Book>) {
         listOfBooks = mutableListOf()
         listOfBooks.addAll(newList)
         notifyDataSetChanged()

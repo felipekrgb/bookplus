@@ -19,12 +19,9 @@ class BookListingViewModel @Inject constructor(
     private val _books = MutableLiveData<List<Book>>()
     val books: LiveData<List<Book>> = _books
 
-    val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
-
     fun getBooksByTerms(terms: String) {
         viewModelScope.launch {
-            repository.getBooksByTerms(terms)?.let {  books ->
+            repository.getBooksByTerms(terms.replace(" ", "+"))?.let { books ->
                 _books.value = books
             }
         }

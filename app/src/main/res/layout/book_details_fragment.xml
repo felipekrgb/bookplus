@@ -6,7 +6,7 @@
     tools:context=".view.fragments.BookDetailsFragment">
 
     <TextView
-        android:id="@+id/bookNameTextView"
+        android:id="@+id/bookTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
