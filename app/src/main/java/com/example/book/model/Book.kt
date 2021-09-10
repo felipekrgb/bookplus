@@ -7,7 +7,7 @@ data class BookResponse(
 
     @SerializedName("items")
     val items: List<Book>
-)
+) : Serializable
 
 data class Book(
 
@@ -31,7 +31,7 @@ data class VolumeInfo(
     val pageCount: Int?,
     @SerializedName("imageLinks")
     val imageLinks: ImageLinks?
-)
+) : Serializable
 
 data class ImageLinks(
 
@@ -39,4 +39,4 @@ data class ImageLinks(
     val smallThumbnail: String?,
     @SerializedName("thumbnail")
     val thumbnail: String?
-)
+) : Serializable
