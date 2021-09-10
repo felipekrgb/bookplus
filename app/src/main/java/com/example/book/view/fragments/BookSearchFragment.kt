@@ -10,13 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.book.R
 import com.example.book.adapter.BookSearchAdapter
 import com.example.book.databinding.BookSearchFragmentBinding
 import com.example.book.model.Book
 import com.example.book.utils.hideKeyboard
 import com.example.book.utils.snackBar
-import com.example.book.view.activities.MainActivity
+import com.example.book.view.activities.HomeActivity
 import com.example.book.view.dialogs.BasicDetailsFragment
 import com.example.book.viewmodel.BookSearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +31,7 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
 
     private lateinit var binding: BookSearchFragmentBinding
     private lateinit var viewModel: BookSearchViewModel
+    private lateinit var recyclerView: RecyclerView
     private var adapter = BookSearchAdapter() {
         BasicDetailsFragment.newInstance(it).let {
             it.show(parentFragmentManager, "dialog_basic_details")
@@ -42,11 +44,9 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
         } else {
             binding.recyclerViewBookSearch.visibility = View.VISIBLE
             adapter.update(it)
-        }
-    }
+            recyclerView.scrollToPosition(0)
 
-    private val observerErrorSearch = Observer<String> {
-        println(it)
+        }
     }
 
     private val observerLoading = Observer<Boolean> { isLoading ->
@@ -65,13 +65,23 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
         binding = BookSearchFragmentBinding.bind(view)
         viewModel = ViewModelProvider(this).get(BookSearchViewModel::class.java)
 
-        startRecyclerView()
-        startObservers()
-        startSettingsSearch()
-
+        setupRecyclerView()
+        setupObservers()
+        setupSettingsSearch()
     }
 
-    private fun startSettingsSearch() {
+    private fun setupRecyclerView() {
+        recyclerView = binding.recyclerViewBookSearch
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+    }
+
+    private fun setupObservers() {
+        viewModel.books.observe(viewLifecycleOwner, observerBooksSearch)
+        viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
+    }
+
+    private fun setupSettingsSearch() {
         binding.editTextSearch.editText?.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 val searchTerm = binding.editTextSearch.editText?.text.toString()
@@ -89,18 +99,8 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
         })
     }
 
-    private fun startObservers() {
-        viewModel.books.observe(viewLifecycleOwner, observerBooksSearch)
-        viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
-    }
-
-    private fun startRecyclerView() {
-        binding.recyclerViewBookSearch.adapter = adapter
-        binding.recyclerViewBookSearch.layoutManager = LinearLayoutManager(requireContext())
-    }
-
     private fun showSnackbar(@StringRes msgId: Int, @ColorRes colorId: Int) {
-        val activity = requireActivity() as MainActivity
+        val activity = requireActivity() as HomeActivity
         val bottomNav = activity.binding.bottomNav
         activity.snackBar(bottomNav, msgId, colorId)
     }

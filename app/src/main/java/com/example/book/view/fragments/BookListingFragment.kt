@@ -24,7 +24,7 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
 
     private lateinit var binding: BookListingFragmentBinding
     private lateinit var viewModel: BookListingViewModel
-    private lateinit var firstCategoryRecyclerView: RecyclerView
+    private lateinit var recyclerView: RecyclerView
     private var adapter = BookAdapter() {
         BasicDetailsFragment.newInstance(it).let {
             it.show(parentFragmentManager, "dialog_basic_details")
@@ -41,13 +41,20 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
 
         viewModel = ViewModelProvider(this).get(BookListingViewModel::class.java)
 
-        firstCategoryRecyclerView = binding.bookFirstCategoryRecyclerView
-        firstCategoryRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        firstCategoryRecyclerView.adapter = adapter
-
-        viewModel.books.observe(viewLifecycleOwner, observerBooks)
+        setupRecyclerView()
+        setupObservers()
 
         viewModel.getBooksByTerms("dog")
+    }
+
+    private fun setupRecyclerView() {
+        recyclerView = binding.bookFirstCategoryRecyclerView
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.adapter = adapter
+    }
+
+    private fun setupObservers() {
+        viewModel.books.observe(viewLifecycleOwner, observerBooks)
     }
 }
