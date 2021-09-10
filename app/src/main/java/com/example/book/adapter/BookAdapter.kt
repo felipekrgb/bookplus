@@ -49,7 +49,7 @@ class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         book.volumeInfo.imageLinks.let {
             Glide.with(itemView.context)
                 .load(it?.thumbnail)
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.no_cover_thumb)
                 .into(binding.bookImageView)
         }
 
