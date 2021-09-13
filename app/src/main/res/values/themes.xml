@@ -41,5 +41,11 @@
         <item name="cornerSizeBottomLeft">30dp</item>
         <item name="cornerSizeBottomRight">30dp</item>
     </style>
+    <style name="Theme.Book.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.Book.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Book.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
