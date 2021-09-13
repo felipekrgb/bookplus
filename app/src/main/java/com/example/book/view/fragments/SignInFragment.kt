@@ -1,33 +1,28 @@
 package com.example.book.view.fragments
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
-import com.example.book.viewmodel.SignInViewModel
+import com.example.book.databinding.SignInFragmentBinding
+import com.example.book.viewmodel.AuthenticationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class SignInFragment : Fragment() {
+@AndroidEntryPoint
+class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     companion object {
         fun newInstance() = SignInFragment()
     }
 
-    private lateinit var viewModel: SignInViewModel
+    private lateinit var viewModel: AuthenticationViewModel
+    private lateinit var binding: SignInFragmentBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.sign_in_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(AuthenticationViewModel::class.java)
+        binding = SignInFragmentBinding.bind(view)
     }
 
 }
