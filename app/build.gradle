@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -44,6 +45,7 @@ dependencies {
     //Dagger
     implementation "com.google.dagger:hilt-android:2.38.1"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     kapt "com.google.dagger:hilt-android-compiler:2.38.1"
 
     //Retrofit
