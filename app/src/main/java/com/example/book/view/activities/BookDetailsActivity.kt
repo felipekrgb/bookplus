@@ -1,9 +1,8 @@
 package com.example.book.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.book.R
-import com.example.book.databinding.BookDetailsActivityBinding
 import com.example.book.model.Book
 import com.example.book.utils.replaceFragment
 import com.example.book.view.fragments.BookDetailsFragment
@@ -18,7 +17,15 @@ class BookDetailsActivity : AppCompatActivity() {
 
         val book = intent.getSerializableExtra("book") as Book
 
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         replaceFragment(BookDetailsFragment.newInstance(book.id))
 
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.example.book.R
 import com.example.book.databinding.BookDetailsFragmentBinding
 import com.example.book.model.Book
@@ -46,7 +47,20 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
 
     private fun bindData(book: Book?) {
 
-        binding.bookTitleTextView.text = book!!.id
+        book!!.volumeInfo.imageLinks!!.thumbnail.apply {
+            context?.let {
+                Glide.with(it)
+                    .load(this)
+                    .placeholder(R.drawable.no_cover_thumb)
+                    .into(binding.bookImageView)
+            }
+        }
+
+        binding.bookTitleTextView.text = book.volumeInfo.title
+        binding.bookAuthorTextView.text = book.volumeInfo.authors?.get(0) ?: "Autor indisponível"
+        binding.pageCountTextView.text = book.volumeInfo.pageCount.toString()
+        binding.releaseDateTextView.text = book.volumeInfo.publishedDate
+        binding.bookDescriptionTextView.text = book.volumeInfo.description ?: "Nenhuma sinopse disponível."
 
     }
 

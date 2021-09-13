@@ -7,7 +7,10 @@
     <string name="hint_username">Username</string>
     <string name="logo_content_description">Bookplus</string>
     <string name="book_name">Book name</string>
-    <string name="book_description">Book description</string>
-    <string name="page_count">Page count</string>
+    <string name="book_description">Descrição</string>
+    <string name="page_count">Número de páginas:</string>
     <string name="no_search_term">Digite um termo para pesquisa</string>
+    <string name="book_author">Book author</string>
+    <string name="release_date">Ano de lançamento:</string>
+    <string name="author">Autor:</string>
 </resources>

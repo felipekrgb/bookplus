@@ -70,6 +70,7 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
             val intentToDetails =
                 Intent(activity?.applicationContext, BookDetailsActivity::class.java)
             intentToDetails.putExtra("book", book)
+            dismiss()
             startActivity(intentToDetails)
         }
     }
