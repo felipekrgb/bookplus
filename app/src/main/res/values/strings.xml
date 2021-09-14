@@ -7,8 +7,8 @@
     <string name="hint_username">Username</string>
     <string name="logo_content_description">Bookplus</string>
     <string name="book_name">Book name</string>
-    <string name="book_description">Book description</string>
-    <string name="page_count">Page count</string>
+    <string name="book_description">Descrição</string>
+    <string name="page_count">Número de páginas:</string>
     <string name="no_search_term">Digite um termo para pesquisa</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -18,7 +18,9 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="book_author">Book author</string>
+    <string name="release_date">Ano de lançamento:</string>
+    <string name="author">Autor:</string>
 </resources>

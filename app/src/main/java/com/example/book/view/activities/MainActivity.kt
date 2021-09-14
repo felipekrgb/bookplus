@@ -1,19 +1,31 @@
 package com.example.book.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import com.example.book.R
+import androidx.appcompat.app.AppCompatActivity
+import com.example.book.databinding.MainActivityBinding
+import com.example.book.utils.replaceFragment
+import com.example.book.view.fragments.BookListingFragment
 import com.example.book.view.fragments.SignInFragment
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, SignInFragment.newInstance())
-                .commitNow()
+        binding = MainActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            Intent(this, HomeActivity::class.java).apply {
+                startActivity(this)
+            }
+        } else {
+            replaceFragment(SignInFragment.newInstance())
         }
     }
 }
