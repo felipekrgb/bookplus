@@ -25,8 +25,14 @@ class HomeActivity : AppCompatActivity() {
 
             setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.home -> replaceFragment(BookListingFragment.newInstance())
-                    R.id.search -> replaceFragment(BookSearchFragment.newInstance())
+                    R.id.home -> replaceFragment(
+                        BookListingFragment.newInstance(),
+                        R.id.containerHome
+                    )
+                    R.id.search -> replaceFragment(
+                        BookSearchFragment.newInstance(),
+                        R.id.containerHome
+                    )
                 }
                 true
             }

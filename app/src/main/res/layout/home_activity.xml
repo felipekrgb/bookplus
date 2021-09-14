@@ -8,7 +8,7 @@
     tools:context=".view.activities.HomeActivity">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/container"
+        android:id="@+id/containerHome"
         style="@style/CustomCardCorners"
         android:layout_width="match_parent"
         android:layout_height="0dp"
