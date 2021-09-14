@@ -19,7 +19,7 @@ class HomeActivity : AppCompatActivity() {
         binding = HomeActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        replaceFragment(BookListingFragment.newInstance())
+        replaceFragment(BookListingFragment.newInstance(), R.id.containerHome)
 
         binding.bottomNav.apply {
 

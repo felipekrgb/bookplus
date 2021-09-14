@@ -20,7 +20,7 @@ class BookDetailsActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        replaceFragment(BookDetailsFragment.newInstance(book.id))
+        replaceFragment(BookDetailsFragment.newInstance(book.id), R.id.containerDetails)
 
     }
 

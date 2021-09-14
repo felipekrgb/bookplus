@@ -3,6 +3,7 @@ package com.example.book.view.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.book.R
 import com.example.book.databinding.MainActivityBinding
 import com.example.book.utils.replaceFragment
 import com.example.book.view.fragments.SignInFragment
