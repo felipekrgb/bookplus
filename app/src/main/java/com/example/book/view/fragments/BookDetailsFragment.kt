@@ -3,9 +3,11 @@ package com.example.book.view.fragments
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.palette.graphics.Palette
@@ -103,10 +105,12 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         }
 
         if (colorPallete == null) {
-            binding.bookTitleTextView.setBackgroundColor(getColor(
-                requireActivity(),
-                R.color.brown_light
-            ))
+            binding.bookTitleTextView.setBackgroundColor(
+                getColor(
+                    requireActivity(),
+                    R.color.brown_light
+                )
+            )
         }
 
         binding.bookTitleTextView.text = book.volumeInfo.title
@@ -114,7 +118,11 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         binding.pageCountTextView.text = book.volumeInfo.pageCount.toString()
         binding.releaseDateTextView.text = book.volumeInfo.publishedDate
         binding.bookDescriptionTextView.text =
-            book.volumeInfo.description ?: "Nenhuma sinopse disponível."
+            if (book.volumeInfo.description != null) HtmlCompat.fromHtml(
+                book.volumeInfo.description,
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
+                .toString() else "Nenhuma sinopse disponível."
 
     }
 
