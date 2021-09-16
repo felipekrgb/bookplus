@@ -27,9 +27,10 @@ class AuthenticationRepository @Inject constructor(private val authent: Firebase
         }
     }
 
-    fun creatAccount(
+    fun createAccount(
         email: String,
         password: String,
+        user: String,
         callback: (FirebaseUser?) -> Unit
     ) {
         authent.createUserWithEmailAndPassword(email, password)
