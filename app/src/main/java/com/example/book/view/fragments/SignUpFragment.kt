@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
 import com.example.book.databinding.FragmentSignUpBinding
+import com.example.book.utils.hideKeyboard
 import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
@@ -33,6 +34,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private val observerNewUser = Observer<FirebaseUser?> {
         Intent(requireContext(), HomeActivity::class.java).apply {
             startActivity(this)
+            requireActivity().finish()
         }
     }
 
@@ -47,6 +49,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
         setupObservers()
         setupSettingsSignUp()
+        setupBackButton()
     }
 
     private fun setupObservers() {
@@ -59,6 +62,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             val inputEmail = binding.editTextEmail.editText
             val inputPassword = binding.editTextPassword.editText
             val inputUser = binding.editTextUser.editText
+
+            (requireActivity() as AppCompatActivity).hideKeyboard()
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty() && !inputUser?.text.isNullOrEmpty()) {
                 viewModel.signUpEmailAndPassword(
@@ -75,7 +80,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment.newInstance())
 
         }
+    }
 
+    private fun setupBackButton() {
+        binding.arrowBackImageView.setOnClickListener {
+            (requireActivity() as AppCompatActivity).replaceFragment(IntroductionFragment())
+        }
     }
 
     private fun showSnackbar(@StringRes msgId: Int, @ColorRes colorId: Int) {

@@ -20,14 +20,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        replaceFragment(IntroductionFragment())
 
-//        if (FirebaseAuth.getInstance().currentUser != null) {
-//            Intent(this, HomeActivity::class.java).apply {
-//                startActivity(this)
-//            }
-//        } else {
-//            replaceFragment(SignInFragment.newInstance())
-//        }
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            Intent(this, HomeActivity::class.java).apply {
+                startActivity(this)
+            }
+        } else {
+            replaceFragment(IntroductionFragment())
+        }
     }
 }
