@@ -10,4 +10,7 @@
     <string name="book_description">Book description</string>
     <string name="page_count">Page count</string>
     <string name="no_search_term">Digite um termo para pesquisa</string>
+    <string name="no_user">Informe um usuário válido</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
