@@ -23,4 +23,5 @@
     <string name="book_author">Book author</string>
     <string name="release_date">Ano de lançamento:</string>
     <string name="author">Autor:</string>
+    <string name="no_user">Informe um usuário válido</string>
 </resources>

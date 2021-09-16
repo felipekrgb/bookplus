@@ -28,8 +28,8 @@ class AuthenticationViewModel @Inject constructor(private val repository: Authen
         }
     }
 
-    fun signUpEmailAndPassword(email: String, password: String) {
-        repository.creatAccount(email, password) {
+    fun signUpEmailAndPassword(email: String, password: String, user: String) {
+        repository.createAccount(email, password, user) {
             _user.value = it
         }
     }

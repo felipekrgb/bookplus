@@ -59,8 +59,9 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
     }
 
     private fun bindData(book: Book?) {
-        book!!.volumeInfo.imageLinks!!.thumbnail.apply {
+        book!!.volumeInfo.imageLinks?.thumbnail?.apply {
             context?.let {
+                colorPallete = R.color.brown_light
                 Glide.with(it).asBitmap()
                     .load(this).diskCacheStrategy(DiskCacheStrategy.ALL)
                     .placeholder(R.drawable.no_cover_thumb)
@@ -89,9 +90,10 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
                                 colorPallete = p.getMutedColor(
                                     getColor(
                                         requireActivity(),
-                                        R.color.teal_200
+                                        R.color.brown_light
                                     )
                                 )
+
                                 binding.bookTitleTextView.setBackgroundColor(colorPallete!!)
                                 binding.bookImageView.setImageBitmap(resource)
                                 (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(colorPallete!!))
@@ -102,6 +104,13 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
                     })
                     .into(binding.bookImageView)
             }
+        }
+
+        if (colorPallete == null) {
+            binding.bookTitleTextView.setBackgroundColor(getColor(
+                requireActivity(),
+                R.color.brown_light
+            ))
         }
 
         binding.bookTitleTextView.text = book.volumeInfo.title

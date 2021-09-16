@@ -23,9 +23,8 @@ class IntroductionFragment : Fragment(R.layout.introduction_fragment) {
             (requireActivity() as MainActivity).replaceFragment(SignInFragment.newInstance())
         }
 
-        // TODO adicionar SIGNUP
         binding.signUpButton.setOnClickListener {
-            (requireActivity() as MainActivity).replaceFragment(SignInFragment.newInstance())
+            (requireActivity() as MainActivity).replaceFragment(SignUpFragment.newInstance())
         }
 
     }
