@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
 import com.example.book.databinding.SignInFragmentBinding
+import com.example.book.utils.hideKeyboard
 import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
@@ -33,6 +34,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private val observerUser = Observer<FirebaseUser?> {
         Intent(requireContext(), HomeActivity::class.java).apply {
             startActivity(this)
+            requireActivity().finish()
         }
     }
     private val observerError = Observer<String> {
@@ -45,20 +47,21 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         setupObservers()
         setupSettingsSignIn()
+        setupBackButton()
 
     }
 
     private fun setupObservers() {
-
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.error.observe(viewLifecycleOwner, observerError)
     }
 
     private fun setupSettingsSignIn() {
-
         binding.buttonLogin.setOnClickListener {
             val inputEmail = binding.editTextUser.editText
             val inputPassword = binding.editTextPassword.editText
+
+            (requireActivity() as AppCompatActivity).hideKeyboard()
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty()) {
                 viewModel.signInEmailAndPassword(
@@ -71,6 +74,12 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         }
         binding.registerTextView.setOnClickListener {
             (requireActivity() as AppCompatActivity).replaceFragment(SignUpFragment.newInstance())
+        }
+    }
+
+    private fun setupBackButton() {
+        binding.arrowBackImageView.setOnClickListener {
+            (requireActivity() as AppCompatActivity).replaceFragment(IntroductionFragment())
         }
     }
 
