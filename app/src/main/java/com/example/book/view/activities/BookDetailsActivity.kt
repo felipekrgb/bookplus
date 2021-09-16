@@ -17,15 +17,8 @@ class BookDetailsActivity : AppCompatActivity() {
 
         val book = intent.getSerializableExtra("book") as Book
 
-        setSupportActionBar(findViewById(R.id.toolbar))
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         replaceFragment(BookDetailsFragment.newInstance(book.id), R.id.containerDetails)
 
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        finish()
-        return super.onSupportNavigateUp()
-    }
 }
