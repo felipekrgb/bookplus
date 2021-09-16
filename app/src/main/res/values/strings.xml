@@ -10,7 +10,6 @@
     <string name="book_description">Descrição</string>
     <string name="page_count">Número de páginas:</string>
     <string name="no_search_term">Digite um termo para pesquisa</string>
-<<<<<<< HEAD
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_teste">TesteActivity</string>
@@ -24,9 +23,5 @@
     <string name="book_author">Book author</string>
     <string name="release_date">Ano de lançamento:</string>
     <string name="author">Autor:</string>
-=======
     <string name="no_user">Informe um usuário válido</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
->>>>>>> BOOK-26
 </resources>
