@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
+    android:background="@color/brown_light"
+    android:padding="16dp"
     tools:context=".view.fragments.BookDetailsFragment">
 
     <ImageView
@@ -13,6 +14,7 @@
         android:layout_height="214dp"
         android:layout_marginTop="70dp"
         android:src="@drawable/no_cover_thumb"
+        android:translationZ="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -111,7 +113,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-black"
         android:hint="@string/book_description"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/additionalInfoLayout" />
 
     <TextView
@@ -121,7 +123,7 @@
         android:layout_marginTop="5dp"
         android:fontFamily="sans-serif-black"
         android:hint="@string/book_description"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/labelBookDescriptionTextView" />
 
 
