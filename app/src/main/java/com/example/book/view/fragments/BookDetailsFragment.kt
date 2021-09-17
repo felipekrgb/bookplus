@@ -1,13 +1,16 @@
 package com.example.book.view.fragments
 
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.GradientDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.palette.graphics.Palette
@@ -94,9 +97,18 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
                                     )
                                 )
 
-                                binding.bookTitleTextView.setBackgroundColor(colorPallete!!)
                                 binding.bookImageView.setImageBitmap(resource)
                                 (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(colorPallete!!))
+
+                                var background = ResourcesCompat.getDrawable(resources, R.drawable.gradient, null) as GradientDrawable
+                                var colorList = intArrayOf(
+                                    colorPallete!!,
+                                    colorPallete!!,
+                                )
+
+                                background.colors = colorList
+                                binding.colorBandLayout.background = background
+
                             }
                             return true
                         }
@@ -109,7 +121,7 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         if (colorPallete == null) {
             binding.bookTitleTextView.setBackgroundColor(getColor(
                 requireActivity(),
-                R.color.brown_light
+                R.color.brown_medium
             ))
         }
 
@@ -119,7 +131,7 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         binding.releaseDateTextView.text = book.volumeInfo.publishedDate
         binding.bookDescriptionTextView.text =
             book.volumeInfo.description ?: "Nenhuma sinopse disponível."
-        binding.buttonFinish.setOnClickListener{
+        binding.backButton.setOnClickListener{
             (requireActivity() as AppCompatActivity).finish()
         }
 

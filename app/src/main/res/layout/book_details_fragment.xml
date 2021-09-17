@@ -1,132 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.fragments.BookDetailsFragment"
-    android:padding="30dp"
-    >
+    tools:context=".view.fragments.BookDetailsFragment">
 
-    <ImageView
-        android:id="@+id/bookImageView"
-        android:layout_width="144dp"
-        android:layout_height="214dp"
-        android:layout_marginTop="70dp"
-        android:src="@drawable/no_cover_thumb"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/bookTitleTextView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/bookImageView"
-        android:hint="@string/book_name"
-        android:textSize="16dp"
-        android:fontFamily="sans-serif-black"
-        />
-
-    <TextView
-        android:id="@+id/authorLabelTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/bookTitleTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/author"
-        android:fontFamily="sans-serif-black"
-        android:textSize="12dp"/>
-
-
-
-    <TextView
-        android:id="@+id/bookAuthorTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintTop_toBottomOf="@id/bookTitleTextView"
-        app:layout_constraintStart_toEndOf="@id/authorLabelTextView"
-        android:hint="@string/book_author"
-        android:fontFamily="sans-serif-black"
-        android:textSize="12dp" />
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/additionalInfoLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/bookAuthorTextView">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/labelPageCountTextView"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bookCoverLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/page_count"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:paddingBottom="20dp"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/pageCountTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toEndOf="@id/labelPageCountTextView"
-                android:hint="0"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/colorBandLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/gradient"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/labelReleaseDateTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/labelPageCountTextView"
-                android:hint="@string/release_date" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="20dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="40dp"
+                    android:background="@color/brown_light"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/releaseDateTextView"
-                android:layout_width="wrap_content"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/backButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_arrow_back"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/bookImageCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="70dp"
+                    android:elevation="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeColor="@color/brown_light"
+                    app:strokeWidth="8dp">
+
+                    <ImageView
+                        android:id="@+id/bookImageView"
+                        android:layout_width="144dp"
+                        android:layout_height="214dp"
+                        android:src="@drawable/no_cover_thumb"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bookDetailsLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:layout_constraintStart_toEndOf="@id/labelReleaseDateTextView"
-                app:layout_constraintTop_toBottomOf="@id/pageCountTextView"
-                android:hint="0000" />
+                android:padding="16dp"
+                app:layout_constraintTop_toBottomOf="@id/bookCoverLayout">
+
+                <TextView
+                    android:id="@+id/bookTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:elevation="2dp"
+                    android:fontFamily="sans-serif-black"
+                    android:hint="@string/book_name"
+                    android:textAlignment="center"
+                    android:textSize="22sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/authorLabelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/author"
+                    android:textSize="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bookTitleTextView" />
+
+                <TextView
+                    android:id="@+id/bookAuthorTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-black"
+                    android:hint="@string/book_author"
+                    android:textSize="12dp"
+                    app:layout_constraintStart_toEndOf="@id/authorLabelTextView"
+                    app:layout_constraintTop_toBottomOf="@id/bookTitleTextView" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/additionalInfoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/bookAuthorTextView">
+
+                    <TextView
+                        android:id="@+id/labelPageCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/page_count"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/pageCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:hint="0"
+                        app:layout_constraintStart_toEndOf="@id/labelPageCountTextView"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/labelReleaseDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/release_date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/labelPageCountTextView" />
+
+                    <TextView
+                        android:id="@+id/releaseDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:hint="0000"
+                        app:layout_constraintStart_toEndOf="@id/labelReleaseDateTextView"
+                        app:layout_constraintTop_toBottomOf="@id/pageCountTextView" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/labelBookDescriptionTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="sans-serif-black"
+                    android:hint="@string/book_description"
+                    android:textSize="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/additionalInfoLayout" />
+
+
+                <TextView
+                    android:id="@+id/bookDescriptionTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="sans-serif-black"
+                    android:hint="@string/book_description"
+                    android:textSize="16sp"
+                    app:layout_constraintTop_toBottomOf="@id/labelBookDescriptionTextView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/labelBookDescriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintTop_toBottomOf="@id/additionalInfoLayout"
-        android:hint="@string/book_description"
-        android:textSize="16dp"
-        android:fontFamily="sans-serif-black"
-        />
-
-    <TextView
-        android:id="@+id/bookDescriptionTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        app:layout_constraintTop_toBottomOf="@id/labelBookDescriptionTextView"
-        android:hint="@string/book_description"
-        android:textSize="16dp"
-        android:fontFamily="sans-serif-black"
-        />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonFinish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="finish"/>
-
-
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
