@@ -5,6 +5,9 @@ import com.example.book.repository.BooksRepository
 import com.example.book.service.GoogleBookAPIService
 import com.example.book.service.RetrofitBuilder
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,8 +27,14 @@ object HiltModule {
     @Provides
     fun provideFirebaseAuth(): FirebaseAuth =
         FirebaseAuth.getInstance()
+
     @Provides
     fun provideRepositoryAuth(auth: FirebaseAuth): AuthenticationRepository {
         return AuthenticationRepository(auth)
+    }
+
+    @Provides
+    fun provideFirebaseFirestore(): FirebaseFirestore {
+        return Firebase.firestore
     }
 }

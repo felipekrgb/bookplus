@@ -1,18 +1,19 @@
 package com.example.book.view.dialogs
 
-import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.book.R
 import com.example.book.databinding.BasicDetailsFragmentBinding
 import com.example.book.model.Book
 import com.example.book.view.activities.BookDetailsActivity
 import com.example.book.viewmodel.BasicDetailsViewModel
+import com.example.book.viewmodel.BookFavoritesViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,8 +31,13 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
     }
 
     private lateinit var binding: BasicDetailsFragmentBinding
-    private lateinit var viewModel: BasicDetailsViewModel
     private lateinit var book: Book
+    private lateinit var viewModelFireBase: BookFavoritesViewModel
+
+    private val observerBookFav = Observer<List<String>> { listOfFavorites ->
+        binding.checkBoxSave.isChecked = listOfFavorites.contains(book.id)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +51,8 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = BasicDetailsFragmentBinding.bind(view)
 
-        viewModel = ViewModelProvider(this).get(BasicDetailsViewModel::class.java)
+        viewModelFireBase = ViewModelProvider(this).get(BookFavoritesViewModel::class.java)
+
 
         book = arguments?.getSerializable("book") as Book
 
@@ -59,7 +66,18 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
         }
 
 
+
+        binding.checkBoxSave.setOnCheckedChangeListener { checked, isChecked ->
+            if (isChecked) {
+                viewModelFireBase.save(book.id)
+            } else {
+                viewModelFireBase.delete(book.id)
+            }
+        }
+
         setupDetailsButton()
+        viewModelFireBase.booksFavs.observe(viewLifecycleOwner, observerBookFav)
+        viewModelFireBase.fetchAllBooksFav()
 
     }
 
