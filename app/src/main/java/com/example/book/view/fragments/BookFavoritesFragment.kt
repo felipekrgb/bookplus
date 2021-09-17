@@ -1,5 +1,6 @@
 package com.example.book.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import com.example.book.R
 import com.example.book.adapter.BookFavoritesAdapter
 import com.example.book.databinding.BookFavoritesFragmentBinding
 import com.example.book.model.Book
+import com.example.book.view.activities.BookDetailsActivity
 import com.example.book.view.dialogs.BasicDetailsFragment
 import com.example.book.viewmodel.BookFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,10 +24,11 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     }
 
     private lateinit var viewModel: BookFavoritesViewModel
-    private var adapter = BookFavoritesAdapter() {
-        BasicDetailsFragment.newInstance(it).let {
-            it.show(parentFragmentManager, "dialog_basic_details")
-        }
+    private var adapter = BookFavoritesAdapter() { book ->
+        val intentToDetails =
+            Intent(activity?.applicationContext, BookDetailsActivity::class.java)
+        intentToDetails.putExtra("book", book)
+        startActivity(intentToDetails)
     }
     private lateinit var binding: BookFavoritesFragmentBinding
 
