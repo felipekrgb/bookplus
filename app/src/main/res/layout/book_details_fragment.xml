@@ -7,7 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".view.fragments.BookDetailsFragment">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/bookSearchAnimation"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:elevation="12dp"
+        app:lottie_url="https://assets6.lottiefiles.com/private_files/lf30_t8f3t4.json" />
+
     <ScrollView
+        android:id="@+id/scrollViewLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

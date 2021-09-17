@@ -18,10 +18,15 @@ class BookDetailsViewModel @Inject constructor(
     private val _book = MutableLiveData<Book?>()
     val book: LiveData<Book?> = _book
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun getBookById(id: String) {
+        _isLoading.value = true
         viewModelScope.launch {
             repository.getBookById(id)?.let {
                 _book.value = it
+                _isLoading.value = false
             }
         }
     }

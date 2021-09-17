@@ -49,6 +49,17 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         bindData(it)
     }
 
+    private val observerLoading = Observer<Boolean> { isLoading ->
+        if (isLoading) {
+            binding.bookSearchAnimation.visibility = View.VISIBLE
+            binding.scrollViewLayout.visibility = View.INVISIBLE
+            binding.bookSearchAnimation.playAnimation()
+        } else {
+            binding.bookSearchAnimation.cancelAnimation()
+            binding.scrollViewLayout.visibility = View.VISIBLE
+            binding.bookSearchAnimation.visibility = View.INVISIBLE
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,6 +67,7 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
 
         viewModel = ViewModelProvider(this).get(BookDetailsViewModel::class.java)
         viewModel.book.observe(viewLifecycleOwner, observerBook)
+        viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
 
         val bookId = arguments?.getString("book_id") as String
 
