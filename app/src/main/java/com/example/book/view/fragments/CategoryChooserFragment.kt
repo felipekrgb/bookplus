@@ -47,8 +47,8 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
             handleChipChecked(group as Chip, checkedId, Category.ANIMAL)
         }
 
-        binding.chipFood.setOnCheckedChangeListener { group, checkedId ->
-            handleChipChecked(group as Chip, checkedId, Category.FOOD)
+        binding.chipCulinary.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.CULINARY)
         }
 
         binding.chipSport.setOnCheckedChangeListener { group, checkedId ->
@@ -127,7 +127,7 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
 
     enum class Category(val categoryName: String) {
         ANIMAL("Animal"),
-        FOOD("Comida"),
+        CULINARY("Culinária"),
         SPORT("Esporte"),
         GEOGRAPHY("Geografia"),
         POLITICS("Política"),
