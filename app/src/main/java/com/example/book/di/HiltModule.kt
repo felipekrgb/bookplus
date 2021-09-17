@@ -45,7 +45,7 @@ object HiltModule {
     @Provides
     fun provideFirebaseFirestore(): FirebaseFirestore {
         return Firebase.firestore
-    }git
+    }
 
     fun provideUserCategorieRepository(dao: UserCategoriesDAO): UserCategoriesRepository =
         UserCategoriesRepository(dao)
