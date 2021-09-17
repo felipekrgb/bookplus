@@ -1,8 +1,6 @@
 package com.example.book.view.dialogs
 
-import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +10,6 @@ import com.example.book.R
 import com.example.book.databinding.BasicDetailsFragmentBinding
 import com.example.book.model.Book
 import com.example.book.view.activities.BookDetailsActivity
-import com.example.book.viewmodel.BasicDetailsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +27,6 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
     }
 
     private lateinit var binding: BasicDetailsFragmentBinding
-    private lateinit var viewModel: BasicDetailsViewModel
     private lateinit var book: Book
 
     override fun onCreateView(
@@ -44,8 +40,6 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BasicDetailsFragmentBinding.bind(view)
-
-        viewModel = ViewModelProvider(this).get(BasicDetailsViewModel::class.java)
 
         book = arguments?.getSerializable("book") as Book
 

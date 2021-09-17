@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(this)
             }
         } else {
-            replaceFragment(CategoryChooserFragment())
+            replaceFragment(IntroductionFragment())
         }
     }
 }

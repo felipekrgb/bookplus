@@ -16,7 +16,8 @@ import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
 import com.example.book.view.activities.MainActivity
-import com.example.book.viewmodel.AuthenticationViewModel
+import com.example.book.viewmodel.SignInViewModel
+import com.example.book.viewmodel.SignUpViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +29,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         fun newInstance() = SignUpFragment()
     }
 
-    private lateinit var viewModel: AuthenticationViewModel
+    private lateinit var viewModel: SignUpViewModel
     private lateinit var binding: FragmentSignUpBinding
 
     private val observerNewUser = Observer<FirebaseUser?> {
@@ -38,13 +39,9 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
     }
 
-    private val observerError = Observer<String> {
-        Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AuthenticationViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
         binding = FragmentSignUpBinding.bind(view)
 
         setupObservers()
@@ -54,7 +51,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, observerNewUser)
-        viewModel.error.observe(viewLifecycleOwner, observerError)
     }
 
     private fun setupSettingsSignUp() {

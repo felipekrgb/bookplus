@@ -29,10 +29,13 @@ class BookAdapter(val onClick: (Book) -> Unit) : RecyclerView.Adapter<BookViewHo
 
     override fun getItemCount(): Int = bookList.size
 
-    fun update(newList: List<Book>) {
-        bookList = mutableListOf()
-        bookList.addAll(newList)
-        notifyDataSetChanged()
+    fun update(newList: List<Book>?) {
+        newList?.let {
+            bookList = mutableListOf()
+            bookList.addAll(it)
+            notifyDataSetChanged()
+        }
+
     }
 
 }

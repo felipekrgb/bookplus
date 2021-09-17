@@ -9,8 +9,8 @@ import com.example.book.model.UserCategories
 interface UserCategoriesDAO {
 
     @Query("SELECT * FROM UserCategories WHERE user_id = :userId")
-    fun getUserCategories(userId: String): UserCategories
+    suspend fun getUserCategories(userId: String): UserCategories?
 
     @Insert
-    fun insertUserCategories(userCategories: UserCategories)
+    suspend fun insertUserCategories(userCategories: UserCategories)
 }

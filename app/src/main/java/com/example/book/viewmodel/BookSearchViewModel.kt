@@ -11,8 +11,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BookSearchViewModel @Inject constructor(private val repository: BooksRepository) :
-    ViewModel() {
+class BookSearchViewModel @Inject constructor(
+    private val booksRepository: BooksRepository
+) : ViewModel() {
 
     private val _books = MutableLiveData<List<Book>>()
     val books: LiveData<List<Book>> = _books
@@ -23,7 +24,7 @@ class BookSearchViewModel @Inject constructor(private val repository: BooksRepos
     fun getBooksByTerm(terms: String) {
         _isLoading.value = true
         viewModelScope.launch {
-            repository.getBooksByTerms(terms.replace(" ", "+")).let {
+            booksRepository.getBooksByTerms(terms.replace(" ", "+")).let {
                 _books.value = it
                 _isLoading.value = false
             }

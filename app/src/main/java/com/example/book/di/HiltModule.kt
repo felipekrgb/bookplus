@@ -5,6 +5,7 @@ import com.example.book.database.AppDatabase
 import com.example.book.database.dao.UserCategoriesDAO
 import com.example.book.repository.AuthenticationRepository
 import com.example.book.repository.BooksRepository
+import com.example.book.repository.UserCategoriesRepository
 import com.example.book.service.GoogleBookAPIService
 import com.example.book.service.RetrofitBuilder
 import com.google.firebase.auth.FirebaseAuth
@@ -37,4 +38,8 @@ object HiltModule {
     @Provides
     fun provideUserCategoriesDAO(@ApplicationContext context: Context): UserCategoriesDAO =
         AppDatabase.getDatabase(context).getUserCategoriesDAO()
+
+    @Provides
+    fun provideUserCategorieRepository(dao: UserCategoriesDAO): UserCategoriesRepository =
+        UserCategoriesRepository(dao)
 }

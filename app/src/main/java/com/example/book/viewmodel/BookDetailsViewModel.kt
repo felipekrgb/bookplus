@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BookDetailsViewModel @Inject constructor(
-    private val repository: BooksRepository
+    private val booksRepository: BooksRepository
 ) : ViewModel() {
 
     private val _book = MutableLiveData<Book?>()
@@ -20,7 +20,7 @@ class BookDetailsViewModel @Inject constructor(
 
     fun getBookById(id: String) {
         viewModelScope.launch {
-            repository.getBookById(id)?.let {
+            booksRepository.getBookById(id)?.let {
                 _book.value = it
             }
         }
