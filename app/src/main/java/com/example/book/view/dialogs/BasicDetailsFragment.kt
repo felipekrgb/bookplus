@@ -60,6 +60,7 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
 
 
         setupDetailsButton()
+        setupImageButton()
 
     }
 
@@ -67,6 +68,16 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
 
     private fun setupDetailsButton() {
         binding.bookDetailsButton.setOnClickListener {
+            val intentToDetails =
+                Intent(activity?.applicationContext, BookDetailsActivity::class.java)
+            intentToDetails.putExtra("book", book)
+            dismiss()
+            startActivity(intentToDetails)
+        }
+    }
+
+    private fun setupImageButton() {
+        binding.bookImageView.setOnClickListener {
             val intentToDetails =
                 Intent(activity?.applicationContext, BookDetailsActivity::class.java)
             intentToDetails.putExtra("book", book)
