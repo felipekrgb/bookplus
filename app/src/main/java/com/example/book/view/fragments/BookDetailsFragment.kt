@@ -1,15 +1,12 @@
 package com.example.book.view.fragments
 
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.text.HtmlCompat
 import androidx.core.content.res.ResourcesCompat
@@ -25,7 +22,6 @@ import com.bumptech.glide.request.target.Target
 import com.example.book.R
 import com.example.book.databinding.BookDetailsFragmentBinding
 import com.example.book.model.Book
-import com.example.book.view.activities.BookDetailsActivity
 import com.example.book.viewmodel.BookDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -114,7 +110,7 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
                                 binding.bookImageView.setImageBitmap(resource)
                                 (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(colorPallete!!))
 
-                                var background = ResourcesCompat.getDrawable(resources, R.drawable.gradient, null) as GradientDrawable
+                                var background = ResourcesCompat.getDrawable(resources, R.drawable.background_detail, null) as GradientDrawable
                                 var colorList = intArrayOf(
                                     colorPallete!!,
                                     colorPallete!!,

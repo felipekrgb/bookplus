@@ -5,12 +5,14 @@
     android:id="@+id/detailsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/brown_light"
     tools:context=".view.fragments.BookDetailsFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/bookSearchAnimation"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="12dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,13 +20,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        android:elevation="12dp"
         app:lottie_url="https://assets6.lottiefiles.com/private_files/lf30_t8f3t4.json" />
 
     <ScrollView
         android:id="@+id/scrollViewLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,22 +40,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <View
                     android:id="@+id/colorBandLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@drawable/gradient"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_width="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_detail"
+                    android:translationY="-60dp"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/materialCardView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_margin="20dp"
+                    android:background="@color/brown_light"
                     android:elevation="10dp"
                     app:cardCornerRadius="40dp"
-                    android:background="@color/brown_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
