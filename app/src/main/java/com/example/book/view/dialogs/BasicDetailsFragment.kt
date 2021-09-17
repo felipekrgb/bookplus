@@ -12,7 +12,6 @@ import com.example.book.R
 import com.example.book.databinding.BasicDetailsFragmentBinding
 import com.example.book.model.Book
 import com.example.book.view.activities.BookDetailsActivity
-import com.example.book.viewmodel.BasicDetailsViewModel
 import com.example.book.viewmodel.BookFavoritesViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint

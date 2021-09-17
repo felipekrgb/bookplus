@@ -51,6 +51,17 @@
                     android:text="Titulo do livro"
                     android:textSize="18sp" />
 
+                <TextView
+                    android:id="@+id/authorSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textStyle="italic"
+                    android:fontFamily="@font/libre_caslon_text_regular"
+                    android:maxLines="1"
+                    android:text="Autor e tls"
+                    android:textAlignment="textEnd" />
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

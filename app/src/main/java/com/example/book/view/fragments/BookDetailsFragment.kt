@@ -1,20 +1,17 @@
 package com.example.book.view.fragments
 
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.text.Html
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
-import androidx.core.text.HtmlCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -25,7 +22,6 @@ import com.bumptech.glide.request.target.Target
 import com.example.book.R
 import com.example.book.databinding.BookDetailsFragmentBinding
 import com.example.book.model.Book
-import com.example.book.view.activities.BookDetailsActivity
 import com.example.book.viewmodel.BookDetailsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
