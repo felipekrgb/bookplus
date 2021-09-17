@@ -137,16 +137,15 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         binding.bookAuthorTextView.text = book.volumeInfo.authors?.get(0) ?: "Autor indisponível"
         binding.pageCountTextView.text = book.volumeInfo.pageCount.toString()
         binding.releaseDateTextView.text = book.volumeInfo.publishedDate
-        binding.bookDescriptionTextView.text =
-            book.volumeInfo.description ?: "Nenhuma sinopse disponível."
+        binding.bookDescriptionTextView.text = if (book.volumeInfo.description != null) HtmlCompat.fromHtml(
+            book.volumeInfo.description,
+            HtmlCompat.FROM_HTML_MODE_LEGACY
+        )
+            .toString() else "Nenhuma sinopse disponível."
+
         binding.backButton.setOnClickListener{
             (requireActivity() as AppCompatActivity).finish()
         }
-            if (book.volumeInfo.description != null) HtmlCompat.fromHtml(
-                book.volumeInfo.description,
-                HtmlCompat.FROM_HTML_MODE_LEGACY
-            )
-                .toString() else "Nenhuma sinopse disponível."
 
     }
 
