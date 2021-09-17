@@ -34,7 +34,7 @@ class UserCategoriesDAOTest {
         val categories = listOf("Ação", "Aventura", "Terror")
         val userCategories = UserCategories(1L, "123ABC", categories)
 
-        dao.insertCategories(userCategories)
+        dao.insertUserCategories(userCategories)
 
         val results = dao.getUserCategories("123ABC")
         assertThat(results.categories).isEqualTo(categories)

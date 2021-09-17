@@ -12,5 +12,5 @@ interface UserCategoriesDAO {
     fun getUserCategories(userId: String): UserCategories
 
     @Insert
-    fun insertCategories(userCategories: UserCategories)
+    fun insertUserCategories(userCategories: UserCategories)
 }
