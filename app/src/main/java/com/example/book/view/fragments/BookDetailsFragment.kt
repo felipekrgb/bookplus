@@ -6,10 +6,12 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Html
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.text.HtmlCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -123,6 +125,12 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
                 requireActivity(),
                 R.color.brown_medium
             ))
+            binding.bookTitleTextView.setBackgroundColor(
+                getColor(
+                    requireActivity(),
+                    R.color.brown_light
+                )
+            )
         }
 
         binding.bookTitleTextView.text = book.volumeInfo.title
@@ -134,6 +142,11 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         binding.backButton.setOnClickListener{
             (requireActivity() as AppCompatActivity).finish()
         }
+            if (book.volumeInfo.description != null) HtmlCompat.fromHtml(
+                book.volumeInfo.description,
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
+                .toString() else "Nenhuma sinopse disponível."
 
     }
 
