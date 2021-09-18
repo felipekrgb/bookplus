@@ -29,10 +29,13 @@ class BookAdapter(val onClick: (Book) -> Unit) : RecyclerView.Adapter<BookViewHo
 
     override fun getItemCount(): Int = bookList.size
 
-    fun update(newList: List<Book>) {
-        bookList = mutableListOf()
-        bookList.addAll(newList)
-        notifyDataSetChanged()
+    fun update(newList: List<Book>?) {
+        newList?.let {
+            bookList = mutableListOf()
+            bookList.addAll(it)
+            notifyDataSetChanged()
+        }
+
     }
 
 }
@@ -42,14 +45,10 @@ class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val binding = ItemBookBinding.bind(view)
 
     fun bind(book: Book) {
-
-        println(book.volumeInfo.imageLinks?.thumbnail)
-        println(book.volumeInfo.imageLinks?.smallThumbnail)
-
         book.volumeInfo.imageLinks.let {
             Glide.with(itemView.context)
                 .load(it?.thumbnail)
-                .placeholder(R.drawable.ic_launcher_background)
+                .placeholder(R.drawable.no_cover_thumb)
                 .into(binding.bookImageView)
         }
 

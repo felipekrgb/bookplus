@@ -1,0 +1,208 @@
+Index: app/src/main/java/com/example/book/view/activities/BookDetailsActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.book.view.activities\n\nimport android.os.Bundle\nimport androidx.appcompat.app.AppCompatActivity\nimport com.example.book.R\nimport com.example.book.model.Book\nimport com.example.book.utils.replaceFragment\nimport com.example.book.view.fragments.BookDetailsFragment\nimport dagger.hilt.android.AndroidEntryPoint\n\n@AndroidEntryPoint\nclass BookDetailsActivity : AppCompatActivity() {\n\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.book_details_activity)\n\n        val book = intent.getSerializableExtra(\"book\") as Book\n\n        setSupportActionBar(findViewById(R.id.toolbar))\n        supportActionBar?.setDisplayHomeAsUpEnabled(true)\n\n        replaceFragment(BookDetailsFragment.newInstance(book.id))\n\n    }\n\n    override fun onSupportNavigateUp(): Boolean {\n        finish()\n        return super.onSupportNavigateUp()\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/book/view/activities/BookDetailsActivity.kt b/app/src/main/java/com/example/book/view/activities/BookDetailsActivity.kt
+--- a/app/src/main/java/com/example/book/view/activities/BookDetailsActivity.kt	
++++ b/app/src/main/java/com/example/book/view/activities/BookDetailsActivity.kt	
+@@ -1,10 +1,14 @@
+ package com.example.book.view.activities
+ 
++import android.graphics.Color
++import android.graphics.drawable.ColorDrawable
+ import android.os.Bundle
+ import androidx.appcompat.app.AppCompatActivity
++import androidx.core.graphics.ColorUtils
+ import com.example.book.R
+ import com.example.book.model.Book
+ import com.example.book.utils.replaceFragment
++import com.example.book.utils.manipulateColor
+ import com.example.book.view.fragments.BookDetailsFragment
+ import dagger.hilt.android.AndroidEntryPoint
+ 
+@@ -20,6 +24,10 @@
+         setSupportActionBar(findViewById(R.id.toolbar))
+         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+ 
++        supportActionBar?.setBackgroundDrawable(ColorDrawable(manipulateColor(R.color.teal_700, 0.62f)))
++
++        window.statusBarColor = manipulateColor(R.color.teal_200, 0.32f);
++
+         replaceFragment(BookDetailsFragment.newInstance(book.id))
+ 
+     }
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\n    id 'com.android.application'\n    id 'kotlin-android'\n    id 'dagger.hilt.android.plugin'\n    id 'kotlin-kapt'\n    id 'com.google.gms.google-services'\n}\n\nandroid {\n    compileSdk 31\n\n    defaultConfig {\n        applicationId \"com.example.book\"\n        minSdk 23\n        targetSdk 31\n        versionCode 1\n        versionName \"1.0\"\n\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\n        buildConfigField \"String\", \"API_KEY\", \"\\\"AIzaSyDGk_-8FF3wUUiNyU8tRiq7AKkN_uayDcE\\\"\"\n    }\n\n    buildTypes {\n        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\n        }\n    }\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_1_8\n        targetCompatibility JavaVersion.VERSION_1_8\n    }\n    kotlinOptions {\n        jvmTarget = '1.8'\n    }\n\n    //Bind\n    buildFeatures{\n        viewBinding true\n    }\n}\n\ndependencies {\n\n    //Dagger\n    implementation \"com.google.dagger:hilt-android:2.38.1\"\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\n    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'\n    kapt \"com.google.dagger:hilt-android-compiler:2.38.1\"\n\n    //Retrofit\n    implementation 'com.squareup.retrofit2:retrofit:2.9.0'\n    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'\n\n    //Glide\n    implementation 'com.github.bumptech.glide:glide:4.12.0'\n\n    //Airbnb\n    implementation \"com.airbnb.android:lottie:4.1.0\"\n\n    //Android Dependencies\n    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'\n    implementation 'androidx.core:core-ktx:1.6.0'\n    implementation 'androidx.appcompat:appcompat:1.3.1'\n    implementation 'com.google.android.material:material:1.4.0'\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'\n    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'\n    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'\n    testImplementation 'junit:junit:4.+'\n    androidTestImplementation 'androidx.test.ext:junit:1.1.3'\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	
++++ b/app/build.gradle	
+@@ -54,6 +54,8 @@
+ 
+     //Glide
+     implementation 'com.github.bumptech.glide:glide:4.12.0'
++    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
++    implementation 'androidx.palette:palette-ktx:1.0.0'
+ 
+     //Airbnb
+     implementation "com.airbnb.android:lottie:4.1.0"
+Index: app/src/main/java/com/example/book/view/fragments/BookDetailsFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.book.view.fragments\n\nimport androidx.lifecycle.ViewModelProvider\nimport android.os.Bundle\nimport android.view.View\nimport androidx.fragment.app.Fragment\nimport androidx.lifecycle.Observer\nimport com.bumptech.glide.Glide\nimport com.example.book.R\nimport com.example.book.databinding.BookDetailsFragmentBinding\nimport com.example.book.model.Book\nimport com.example.book.viewmodel.BookDetailsViewModel\nimport dagger.hilt.android.AndroidEntryPoint\n\n@AndroidEntryPoint\nclass BookDetailsFragment : Fragment(R.layout.book_details_fragment) {\n\n    companion object {\n        fun newInstance(id: String): BookDetailsFragment {\n            return BookDetailsFragment().apply {\n                arguments = Bundle().apply {\n                    putString(\"book_id\", id)\n                }\n            }\n        }\n    }\n\n    private lateinit var viewModel: BookDetailsViewModel\n    private lateinit var binding: BookDetailsFragmentBinding\n    private val observerBook = Observer<Book?> {\n        bindData(it)\n    }\n\n\n    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {\n        super.onViewCreated(view, savedInstanceState)\n        binding = BookDetailsFragmentBinding.bind(view)\n\n        viewModel = ViewModelProvider(this).get(BookDetailsViewModel::class.java)\n        viewModel.book.observe(viewLifecycleOwner, observerBook)\n\n        val bookId = arguments?.getString(\"book_id\") as String\n\n        viewModel.getBookById(bookId)\n\n    }\n\n    private fun bindData(book: Book?) {\n\n        book!!.volumeInfo.imageLinks!!.thumbnail.apply {\n            context?.let {\n                Glide.with(it)\n                    .load(this)\n                    .placeholder(R.drawable.no_cover_thumb)\n                    .into(binding.bookImageView)\n            }\n        }\n\n        binding.bookTitleTextView.text = book.volumeInfo.title\n        binding.bookAuthorTextView.text = book.volumeInfo.authors?.get(0) ?: \"Autor indisponível\"\n        binding.pageCountTextView.text = book.volumeInfo.pageCount.toString()\n        binding.releaseDateTextView.text = book.volumeInfo.publishedDate\n        binding.bookDescriptionTextView.text = book.volumeInfo.description ?: \"Nenhuma sinopse disponível.\"\n\n    }\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/book/view/fragments/BookDetailsFragment.kt b/app/src/main/java/com/example/book/view/fragments/BookDetailsFragment.kt
+--- a/app/src/main/java/com/example/book/view/fragments/BookDetailsFragment.kt	
++++ b/app/src/main/java/com/example/book/view/fragments/BookDetailsFragment.kt	
+@@ -12,6 +12,19 @@
+ import com.example.book.viewmodel.BookDetailsViewModel
+ import dagger.hilt.android.AndroidEntryPoint
+ 
++
++
++import androidx.core.content.ContextCompat
++import android.graphics.Bitmap
++import androidx.annotation.Nullable
++import androidx.palette.graphics.Palette
++import com.bumptech.glide.load.DataSource
++import com.bumptech.glide.load.engine.GlideException
++import com.bumptech.glide.request.RequestListener
++import com.bumptech.glide.load.engine.DiskCacheStrategy
++import com.bumptech.glide.request.target.Target
++
++
+ @AndroidEntryPoint
+ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
+ 
+@@ -53,6 +66,58 @@
+                     .load(this)
+                     .placeholder(R.drawable.no_cover_thumb)
+                     .into(binding.bookImageView)
++
++
++
++
++                Glide.with(it)
++                    .asBitmap()
++                    .load(this)
++                    .diskCacheStrategy(DiskCacheStrategy.ALL)
++                    .placeholder(R.drawable.no_cover_thumb)
++                    .listener(object : RequestListener<Bitmap?> {
++                        override fun onLoadFailed(
++                            @Nullable e: GlideException?,
++                            model: Any?,
++                            target: Target<Bitmap?>?,
++                            isFirstResource: Boolean
++                        ): Boolean {
++                            requireActivity().startPostponedEnterTransition()
++                            return false
++                        }
++
++                        override fun onResourceReady(
++                            resource: Bitmap?,
++                            model: Any?,
++                            target: Target<Bitmap?>?,
++                            dataSource: DataSource?,
++                            isFirstResource: Boolean
++                        ): Boolean {
++                            requireActivity().startPostponedEnterTransition()
++                            if (resource != null) {
++                                val p: Palette = Palette.from(resource).generate()
++                                // Use generated instance
++                                binding.bookTitleTextView.setBackgroundColor(p.getMutedColor(
++                                    ContextCompat.getColor(
++                                        requireContext(),
++                                        R.color.teal_200
++                                    )
++                                ))
++                            }
++                            return false
++                        }
++                    })
++                    .into(binding.bookImageView)
++
++
++
++
++
++
++
++
++
++
+             }
+         }
+ 
+Index: app/src/main/java/com/example/book/utils/Extensions.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.book.utils\n\nimport android.app.Activity\nimport android.view.View\nimport android.view.inputmethod.InputMethodManager\nimport android.widget.TextView\nimport androidx.annotation.ColorRes\nimport androidx.annotation.IdRes\nimport androidx.annotation.StringRes\nimport androidx.appcompat.app.AppCompatActivity\nimport androidx.core.view.marginBottom\nimport androidx.fragment.app.Fragment\nimport com.example.book.R\nimport com.google.android.material.navigation.NavigationBarView\nimport com.google.android.material.snackbar.Snackbar\n\nfun AppCompatActivity.replaceFragment(\n    fragment: Fragment,\n    @IdRes idComponent: Int = R.id.container\n) {\n    supportFragmentManager.beginTransaction()\n        .replace(idComponent, fragment)\n        .commitNow()\n}\n\nfun AppCompatActivity.hideKeyboard() {\n    val imm = window.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager\n    imm.hideSoftInputFromWindow(window.decorView.windowToken, 0)\n}\n\nfun AppCompatActivity.snackBar(view: View, @StringRes msgId: Int, @ColorRes colorId: Int) {\n    hideKeyboard()\n\n    setupSnackbar(view, msgId, colorId).apply {\n        this.show()\n    }\n}\n\nprivate fun AppCompatActivity.setupSnackbar(\n    v: View,\n    @StringRes msgId: Int,\n    @ColorRes colorId: Int,\n): Snackbar {\n    return Snackbar.make(v, msgId, Snackbar.LENGTH_LONG).apply {\n        view.setBackgroundColor(getColor(colorId))\n\n        v.findViewById<NavigationBarView>(R.id.bottomNav)?.apply {\n            anchorView = this\n        }\n\n        view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).apply {\n            setTextColor(getColor(R.color.white))\n            textAlignment = View.TEXT_ALIGNMENT_CENTER\n        }\n\n        show()\n    }\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/book/utils/Extensions.kt b/app/src/main/java/com/example/book/utils/Extensions.kt
+--- a/app/src/main/java/com/example/book/utils/Extensions.kt	
++++ b/app/src/main/java/com/example/book/utils/Extensions.kt	
+@@ -1,6 +1,7 @@
+ package com.example.book.utils
+ 
+ import android.app.Activity
++import android.graphics.Color
+ import android.view.View
+ import android.view.inputmethod.InputMethodManager
+ import android.widget.TextView
+@@ -8,11 +9,13 @@
+ import androidx.annotation.IdRes
+ import androidx.annotation.StringRes
+ import androidx.appcompat.app.AppCompatActivity
++import androidx.core.graphics.ColorUtils
+ import androidx.core.view.marginBottom
+ import androidx.fragment.app.Fragment
+ import com.example.book.R
+ import com.google.android.material.navigation.NavigationBarView
+ import com.google.android.material.snackbar.Snackbar
++import kotlin.math.roundToInt
+ 
+ fun AppCompatActivity.replaceFragment(
+     fragment: Fragment,
+@@ -57,3 +60,15 @@
+     }
+ }
+ 
++fun manipulateColor(color: Int, factor: Float): Int {
++    val a: Int = Color.alpha(color)
++    val r = (Color.red(color) * factor).roundToInt()
++    val g = (Color.green(color) * factor).roundToInt()
++    val b = (Color.blue(color) * factor).roundToInt()
++    return Color.argb(
++        a,
++        r.coerceAtMost(255),
++        g.coerceAtMost(255),
++        b.coerceAtMost(255)
++    )
++}
+Index: app/src/main/java/com/example/book/di/GlideModule.kt
+===================================================================
+diff --git a/app/src/main/java/com/example/book/di/GlideModule.kt b/app/src/main/java/com/example/book/di/GlideModule.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/book/di/GlideModule.kt	
+@@ -0,0 +1,8 @@
++package com.example.book.di
++
++import com.bumptech.glide.annotation.GlideModule
++import com.bumptech.glide.module.AppGlideModule
++
++@GlideModule
++class GlideModule : AppGlideModule() {
++}
+\ No newline at end of file

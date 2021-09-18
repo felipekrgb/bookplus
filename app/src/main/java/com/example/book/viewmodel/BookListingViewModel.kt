@@ -5,29 +5,52 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.book.model.Book
+import com.example.book.repository.AuthenticationRepository
 import com.example.book.repository.BooksRepository
+import com.example.book.repository.UserCategoriesRepository
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class BookListingViewModel @Inject constructor(
-    private val repository: BooksRepository
+    private val booksRepository: BooksRepository,
+    private val userCategoriesRepository: UserCategoriesRepository,
+    private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {
 
 
-    private val _books = MutableLiveData<List<Book>>()
-    val books: LiveData<List<Book>> = _books
+    private val _books = MutableLiveData<HashMap<String, List<Book>>>()
+    val books: LiveData<HashMap<String, List<Book>>> = _books
 
-    val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
+    private val _user = MutableLiveData<FirebaseUser>()
+    val user: LiveData<FirebaseUser> = _user
 
-    fun getBooksByTerms(terms: String) {
+    private val _categories = MutableLiveData<List<String>>()
+    val categories: LiveData<List<String>> = _categories
+
+    fun getBooksByTerms(terms: List<String>) {
         viewModelScope.launch {
-            repository.getBooksByTerms(terms)?.let {  books ->
-                _books.value = books
+            terms.forEach { term ->
+                booksRepository.getBooksByTerms(term.replace(" ", "+"))?.let { books ->
+                    _books.value = hashMapOf(term to books)
+                }
             }
         }
     }
 
+    fun getUserCategories(userId: String) {
+        viewModelScope.launch {
+            userCategoriesRepository.getUserCategories(userId)?.let { userCategories ->
+                _categories.value = userCategories.categories
+            }
+        }
+    }
+
+    fun getCurrentUser() {
+        authenticationRepository.currentUser()?.apply {
+            _user.value = this
+        }
+    }
 }
