@@ -69,6 +69,7 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
 
         if (booksListed == 3) {
             binding.booksLoadingAnimation.visibility = View.GONE
+            binding.booksLoadingAnimation.cancelAnimation()
             binding.container.visibility = View.VISIBLE
         }
     }

@@ -2,7 +2,9 @@ package com.example.book.view.fragments
 
 import android.graphics.Bitmap
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ShapeDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View

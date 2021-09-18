@@ -22,11 +22,12 @@
         app:lottie_loop="true"
         app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_2scSKA.json" />
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,11 +38,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/libre_caslon_text_regular"
-            android:text="Livros de Cachorro"
             android:textColor="@color/brown_text"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bookFirstCategoryRecyclerView"
@@ -61,7 +62,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/libre_caslon_text_regular"
-            android:text="Livros de Cachorro"
             android:textColor="@color/brown_text"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +85,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:fontFamily="@font/libre_caslon_text_regular"
-            android:text="Livros de Cachorro"
             android:textColor="@color/brown_text"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"

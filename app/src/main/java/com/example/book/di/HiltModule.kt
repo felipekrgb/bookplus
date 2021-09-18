@@ -47,6 +47,7 @@ object HiltModule {
         return Firebase.firestore
     }
 
+    @Provides
     fun provideUserCategorieRepository(dao: UserCategoriesDAO): UserCategoriesRepository =
         UserCategoriesRepository(dao)
 }

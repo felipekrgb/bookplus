@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
-import com.example.book.databinding.FragmentSignUpBinding
+import com.example.book.databinding.SignUpFragmentBinding
 import com.example.book.utils.hideKeyboard
 import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
@@ -28,7 +28,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
     }
 
     private lateinit var viewModel: SignUpViewModel
-    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var binding: SignUpFragmentBinding
 
     private val observerNewUser = Observer<FirebaseUser?> {
         Intent(requireContext(), HomeActivity::class.java).apply {
@@ -40,7 +40,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
-        binding = FragmentSignUpBinding.bind(view)
+        binding = SignUpFragmentBinding.bind(view)
 
         setupObservers()
         setupSettingsSignUp()
