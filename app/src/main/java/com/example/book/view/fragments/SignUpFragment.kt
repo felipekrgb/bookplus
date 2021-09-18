@@ -10,42 +10,34 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
-import com.example.book.databinding.FragmentSignUpBinding
+import com.example.book.databinding.SignUpFragmentBinding
 import com.example.book.utils.hideKeyboard
 import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
 import com.example.book.view.activities.MainActivity
-import com.example.book.viewmodel.AuthenticationViewModel
-import com.google.android.material.snackbar.Snackbar
+import com.example.book.viewmodel.SignUpViewModel
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
+class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     companion object {
         fun newInstance() = SignUpFragment()
     }
 
-    private lateinit var viewModel: AuthenticationViewModel
-    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var viewModel: SignUpViewModel
+    private lateinit var binding: SignUpFragmentBinding
 
     private val observerNewUser = Observer<FirebaseUser?> {
-        Intent(requireContext(), HomeActivity::class.java).apply {
-            startActivity(this)
-            requireActivity().finish()
-        }
-    }
-
-    private val observerError = Observer<String> {
-        Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
+        (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AuthenticationViewModel::class.java)
-        binding = FragmentSignUpBinding.bind(view)
+        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
+        binding = SignUpFragmentBinding.bind(view)
 
         setupObservers()
         setupSettingsSignUp()
@@ -54,7 +46,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, observerNewUser)
-        viewModel.error.observe(viewLifecycleOwner, observerError)
     }
 
     private fun setupSettingsSignUp() {

@@ -9,9 +9,9 @@
         android:id="@+id/arrowBackImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/brown_medium" />
 
     <LinearLayout
@@ -26,32 +26,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/arrowBackImageView">
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/bookSearchAnimation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_url="https://assets8.lottiefiles.com/packages/lf20_2scSKA.json" />
-
         <TextView
             android:id="@+id/loginTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/libre_caslon_text_regular"
             android:layout_marginBottom="12dp"
-            android:text="Seja bem vindo"
+            android:fontFamily="@font/libre_caslon_text_regular"
+            android:text="Seja bem-vindo"
             android:textSize="32sp" />
 
         <com.google.android.material.textfield.TextInputLayout
 
             android:id="@+id/editTextUser"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="12dp"
@@ -60,17 +48,15 @@
             app:boxCornerRadiusBottomStart="13dp"
             app:boxCornerRadiusTopEnd="13dp"
             app:boxCornerRadiusTopStart="13dp"
-            app:hintEnabled="false"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableRight="@drawable/ic_person"
+                android:drawableRight="@drawable/ic_email"
                 android:fontFamily="@font/montserrat_bold"
-                android:hint="Usuario"
+                android:hint="E-mail"
                 android:maxLines="1"
-                android:paddingTop="8dp"
                 android:singleLine="true"
                 android:textSize="14dp" />
 
@@ -78,6 +64,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editTextPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="12dp"
@@ -87,8 +74,7 @@
             app:boxCornerRadiusTopEnd="13dp"
             app:boxCornerRadiusTopStart="13dp"
             app:endIconMode="password_toggle"
-            app:hintEnabled="false"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:hintEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -97,7 +83,6 @@
                 android:hint="Senha"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:paddingTop="8dp"
                 android:singleLine="true"
                 android:textSize="14dp" />
 
@@ -107,27 +92,28 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:orientation="horizontal"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/registerNotTextView"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Não tem uma conta?" />
+
         <TextView
             android:id="@+id/registerTextView"
-            android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/brown_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text=" Registre-se" />
+            android:fontFamily="@font/montserrat_bold"
+            android:text=" Registre-se"
+            android:textColor="@color/brown_medium" />
 
     </LinearLayout>
 

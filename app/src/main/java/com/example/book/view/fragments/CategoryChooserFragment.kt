@@ -1,14 +1,24 @@
 package com.example.book.view.fragments
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.book.R
 import com.example.book.databinding.CategoryChooserFragmentBinding
+import com.example.book.model.UserCategories
+import com.example.book.utils.replaceFragment
+import com.example.book.utils.snackBar
+import com.example.book.view.activities.HomeActivity
 import com.example.book.viewmodel.CategoryChooserViewModel
 import com.google.android.material.chip.Chip
+import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
 
     companion object {
@@ -19,17 +29,28 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
     private lateinit var binding: CategoryChooserFragmentBinding
     private val listOfCategories = mutableListOf<String>()
 
+    private val observerSignedUser = Observer<FirebaseUser> { user ->
+        setupSaveCategoriesButton(user.uid)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = CategoryChooserFragmentBinding.bind(view)
         viewModel = ViewModelProvider(this).get(CategoryChooserViewModel::class.java)
 
+        viewModel.user.observe(viewLifecycleOwner, observerSignedUser)
+
+        setupChips()
+        viewModel.getCurrentUser()
+    }
+
+    private fun setupChips() {
         binding.chipAnimal.setOnCheckedChangeListener { group, checkedId ->
             handleChipChecked(group as Chip, checkedId, Category.ANIMAL)
         }
 
-        binding.chipFood.setOnCheckedChangeListener { group, checkedId ->
-            handleChipChecked(group as Chip, checkedId, Category.FOOD)
+        binding.chipCulinary.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.CULINARY)
         }
 
         binding.chipSport.setOnCheckedChangeListener { group, checkedId ->
@@ -75,13 +96,26 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
         binding.chipTechnology.setOnCheckedChangeListener { group, checkedId ->
             handleChipChecked(group as Chip, checkedId, Category.TECHNOLOGY)
         }
-
-        setupSaveCategoriesButton()
     }
 
-    private fun setupSaveCategoriesButton() {
+    private fun setupSaveCategoriesButton(userId: String) {
         binding.saveCategoriesButton.setOnClickListener {
-            println("Cliquei no botao")
+            if (listOfCategories.size != 3) {
+                (requireActivity() as AppCompatActivity).snackBar(
+                    it,
+                    R.string.categories_error,
+                    R.color.red,
+                )
+            } else {
+                viewModel.addUserCategories(
+                    UserCategories(userId = userId, categories = listOfCategories)
+                )
+
+                Intent(requireContext(), HomeActivity::class.java).apply {
+                    startActivity(this)
+                    requireActivity().finish()
+                }
+            }
         }
     }
 
@@ -98,7 +132,7 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
 
     enum class Category(val categoryName: String) {
         ANIMAL("Animal"),
-        FOOD("Comida"),
+        CULINARY("Culinária"),
         SPORT("Esporte"),
         GEOGRAPHY("Geografia"),
         POLITICS("Política"),

@@ -16,7 +16,7 @@ import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
 import com.example.book.view.activities.MainActivity
-import com.example.book.viewmodel.AuthenticationViewModel
+import com.example.book.viewmodel.SignInViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,21 +28,31 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         fun newInstance() = SignInFragment()
     }
 
-    private lateinit var viewModel: AuthenticationViewModel
+    private lateinit var viewModel: SignInViewModel
     private lateinit var binding: SignInFragmentBinding
 
     private val observerUser = Observer<FirebaseUser?> {
-        Intent(requireContext(), HomeActivity::class.java).apply {
-            startActivity(this)
-            requireActivity().finish()
-        }
+        viewModel.getUserCategories(it.uid)
     }
+
     private val observerError = Observer<String> {
         Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
     }
+
+    private val observerCategories = Observer<List<String>?> { categories ->
+        if (categories != null) {
+            Intent(requireContext(), HomeActivity::class.java).apply {
+                startActivity(this)
+                requireActivity().finish()
+            }
+        } else {
+            (requireActivity() as AppCompatActivity).replaceFragment(CategoryChooserFragment())
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AuthenticationViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding = SignInFragmentBinding.bind(view)
 
         setupObservers()
@@ -54,6 +64,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.error.observe(viewLifecycleOwner, observerError)
+        viewModel.categories.observe(viewLifecycleOwner, observerCategories)
     }
 
     private fun setupSettingsSignIn() {

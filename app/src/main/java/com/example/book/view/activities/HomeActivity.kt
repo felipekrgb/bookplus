@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.book.R
 import com.example.book.databinding.HomeActivityBinding
 import com.example.book.utils.replaceFragment
+import com.example.book.view.fragments.BookFavoritesFragment
 import com.example.book.view.fragments.BookListingFragment
 import com.example.book.view.fragments.BookSearchFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,6 +32,10 @@ class HomeActivity : AppCompatActivity() {
                     )
                     R.id.search -> replaceFragment(
                         BookSearchFragment.newInstance(),
+                        R.id.containerHome
+                    )
+                    R.id.favorites -> replaceFragment(
+                        BookFavoritesFragment(),
                         R.id.containerHome
                     )
                 }

@@ -47,12 +47,12 @@
                 android:text="Animal" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_food"
+                android:id="@+id/chip_culinary"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:text="Comida" />
+                android:text="Culinária" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_sport"

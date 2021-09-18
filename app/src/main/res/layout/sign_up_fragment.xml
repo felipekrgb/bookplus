@@ -9,9 +9,9 @@
         android:id="@+id/arrowBackImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/brown_medium" />
 
     <LinearLayout
@@ -55,9 +55,8 @@
                 android:layout_height="match_parent"
                 android:drawableRight="@drawable/ic_person"
                 android:fontFamily="@font/montserrat_bold"
-                android:hint="Usuario"
+                android:hint="Usuário"
                 android:maxLines="1"
-                android:paddingTop="8dp"
                 android:singleLine="true"
                 android:textSize="14dp" />
 
@@ -82,9 +81,8 @@
                 android:layout_height="match_parent"
                 android:drawableRight="@drawable/ic_email"
                 android:fontFamily="@font/montserrat_bold"
-                android:hint="Email"
+                android:hint="E-mail"
                 android:maxLines="1"
-                android:paddingTop="8dp"
                 android:singleLine="true"
                 android:textSize="14dp" />
 
@@ -111,7 +109,6 @@
                 android:hint="Senha"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:paddingTop="8dp"
                 android:singleLine="true"
                 android:textSize="14dp" />
 
@@ -121,27 +118,28 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:orientation="horizontal"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/buttonCreate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" >
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/registerNotTextView"
             android:layout_width="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Já tem uma conta?" />
+
         <TextView
             android:id="@+id/loginTextView"
-            android:fontFamily="@font/montserrat_bold"
-            android:textColor="@color/brown_medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:text=" Entrar!" />
+            android:fontFamily="@font/montserrat_bold"
+            android:text=" Entrar!"
+            android:textColor="@color/brown_medium" />
 
     </LinearLayout>
 
@@ -153,8 +151,8 @@
         android:backgroundTint="@color/brown_medium"
         android:fontFamily="@font/montserrat_bold"
         android:padding="14dp"
-        android:textAllCaps="false"
         android:text="Criar Conta"
+        android:textAllCaps="false"
         android:textColor="@color/brown_text"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"

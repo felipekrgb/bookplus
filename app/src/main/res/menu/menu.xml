@@ -11,5 +11,10 @@
         android:icon="@drawable/ic_search"
         android:title="Pesquisa" />
 
+    <item
+        android:id="@+id/favorites"
+        android:icon="@drawable/ic_favorite"
+        android:title="Favoritos" />
+
 
 </menu>

@@ -5,11 +5,13 @@
     android:layout_height="wrap_content"
     android:layout_margin="16dp">
 
+<!--    android:layout_width="104.96dp"-->
+<!--    android:layout_height="149.24dp"-->
 
     <ImageView
         android:id="@+id/bookImageView"
-        android:layout_width="128dp"
-        android:layout_height="182dp"
+        android:layout_width="115.2dp"
+        android:layout_height="163.8dp"
         android:scaleType="fitXY"
         android:src="@drawable/no_cover_thumb"
         app:layout_constraintEnd_toEndOf="parent"
