@@ -2,7 +2,9 @@ package com.example.book.view.fragments
 
 import android.graphics.Bitmap
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ShapeDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
@@ -108,15 +110,13 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
                                 )
 
                                 binding.bookImageView.setImageBitmap(resource)
-                                (requireActivity() as AppCompatActivity).supportActionBar?.setBackgroundDrawable(ColorDrawable(colorPallete!!))
 
-                                var background = ResourcesCompat.getDrawable(resources, R.drawable.background_detail, null) as GradientDrawable
-                                var colorList = intArrayOf(
-                                    colorPallete!!,
-                                    colorPallete!!,
+                                val background = ResourcesCompat.getDrawable(
+                                    resources,
+                                    R.drawable.background_detail,
+                                    null
                                 )
-
-                                background.colors = colorList
+                                background?.setTint(colorPallete!!)
                                 binding.colorBandLayout.background = background
 
                             }
@@ -129,10 +129,12 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         }
 
         if (colorPallete == null) {
-            binding.bookTitleTextView.setBackgroundColor(getColor(
-                requireActivity(),
-                R.color.brown_medium
-            ))
+            binding.bookTitleTextView.setBackgroundColor(
+                getColor(
+                    requireActivity(),
+                    R.color.brown_medium
+                )
+            )
             binding.bookTitleTextView.setBackgroundColor(
                 getColor(
                     requireActivity(),
@@ -145,13 +147,14 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         binding.bookAuthorTextView.text = book.volumeInfo.authors?.get(0) ?: "Autor indisponível"
         binding.pageCountTextView.text = book.volumeInfo.pageCount.toString()
         binding.releaseDateTextView.text = book.volumeInfo.publishedDate
-        binding.bookDescriptionTextView.text = if (book.volumeInfo.description != null) HtmlCompat.fromHtml(
-            book.volumeInfo.description,
-            HtmlCompat.FROM_HTML_MODE_LEGACY
-        )
-            .toString() else "Nenhuma sinopse disponível."
+        binding.bookDescriptionTextView.text =
+            if (book.volumeInfo.description != null) HtmlCompat.fromHtml(
+                book.volumeInfo.description,
+                HtmlCompat.FROM_HTML_MODE_LEGACY
+            )
+                .toString() else "Nenhuma sinopse disponível."
 
-        binding.backButton.setOnClickListener{
+        binding.backButton.setOnClickListener {
             (requireActivity() as AppCompatActivity).finish()
         }
 
