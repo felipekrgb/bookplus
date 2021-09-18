@@ -1,12 +1,16 @@
 package com.example.book.repository
 
+import com.example.book.service.GoogleBookAPIService
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import javax.inject.Inject
 
 const val COLLECTION_FAVBOOK = "booksFavorites"
 
-class UserBookPreferenceRepository @Inject constructor(private val firestore: FirebaseFirestore) {
+class UserBookPreferenceRepository @Inject constructor(
+    private val firestore: FirebaseFirestore,
+    private val bookService: GoogleBookAPIService
+) {
 
     fun saveBooks(uid: String, idBook: String) {
         val task = firestore.collection(COLLECTION_FAVBOOK)
@@ -69,4 +73,21 @@ class UserBookPreferenceRepository @Inject constructor(private val firestore: Fi
                     ?: arrayListOf())
             }
     }
+
+//    suspend fun getFavBooksByApi(uid: String, idBook: String) {
+////        firestore.collection(COLLECTION_FAVBOOK)
+////            .document(uid)
+////            .get()
+////            .addOnSuccessListener {
+////                it["favorites"]
+////            }
+//        fetchAllBooks(uid){ it ->
+//            it.forEach {
+//                val STRINGPORRA = it as String
+//
+//                bookService.getBook(STRINGPORRA)
+//            }
+//        }
+//
+//    }
 }

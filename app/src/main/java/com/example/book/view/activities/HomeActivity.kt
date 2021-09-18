@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
                         R.id.containerHome
                     )
                     R.id.favorites -> replaceFragment(
-                        BookFavoritesFragment.newInstance(),
+                        BookFavoritesFragment(),
                         R.id.containerHome
                     )
                 }
