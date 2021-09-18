@@ -16,14 +16,12 @@ import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
 import com.example.book.view.activities.MainActivity
-import com.example.book.viewmodel.SignInViewModel
 import com.example.book.viewmodel.SignUpViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
+class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     companion object {
         fun newInstance() = SignUpFragment()
