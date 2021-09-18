@@ -15,6 +15,8 @@ data class Book(
     val id: String,
     @SerializedName("volumeInfo")
     val volumeInfo: VolumeInfo,
+    @SerializedName("saleInfo")
+    val saleInfo: SaleInfo?
 ) : Serializable
 
 data class VolumeInfo(
@@ -30,7 +32,14 @@ data class VolumeInfo(
     @SerializedName("pageCount")
     val pageCount: Int?,
     @SerializedName("imageLinks")
-    val imageLinks: ImageLinks?
+    val imageLinks: ImageLinks?,
+    @SerializedName("previewLink")
+    val previewLink: String?
+) : Serializable
+
+data class SaleInfo(
+    @SerializedName("buyLink")
+    val buyLink: String?
 ) : Serializable
 
 data class ImageLinks(

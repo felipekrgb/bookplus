@@ -24,4 +24,6 @@
     <string name="release_date">Ano de lançamento:</string>
     <string name="author">Autor:</string>
     <string name="no_user">Informe um usuário válido</string>
+    <string name="preview">Preview</string>
+    <string name="buy">Comprar</string>
 </resources>

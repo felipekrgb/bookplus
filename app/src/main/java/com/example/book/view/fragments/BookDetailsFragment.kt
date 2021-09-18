@@ -1,9 +1,11 @@
 package com.example.book.view.fragments
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.text.Html
@@ -157,6 +159,31 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
 
         binding.backButton.setOnClickListener{
             (requireActivity() as AppCompatActivity).finish()
+        }
+
+        binding.buyActionButton.apply {
+
+            if (book.saleInfo?.buyLink != null) {
+
+                setOnClickListener {
+                    val browserIntent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse(book.saleInfo!!.buyLink))
+                    startActivity(browserIntent)
+                }
+
+            } else if (book.volumeInfo.previewLink != null) {
+
+                this.text = getText(R.string.preview)
+                setOnClickListener {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(book.volumeInfo.previewLink))
+                    startActivity(browserIntent)
+                }
+
+            } else {
+                this.isEnabled = false
+                this.alpha = 0.5f
+            }
+
         }
 
     }
