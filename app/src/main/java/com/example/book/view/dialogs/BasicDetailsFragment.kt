@@ -1,12 +1,13 @@
 package com.example.book.view.dialogs
 
 import android.content.Intent
+import android.net.Uri
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.book.R
 import com.example.book.databinding.BasicDetailsFragmentBinding
@@ -77,7 +78,7 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
         viewModelFireBase.booksFavs.observe(viewLifecycleOwner, observerBookFav)
         viewModelFireBase.fetchAllBooksFav()
         setupImageButton()
-
+        setupBuyButton()
     }
 
     override fun getTheme() = R.style.CustomBottomSheetDialog
@@ -100,5 +101,32 @@ class BasicDetailsFragment : BottomSheetDialogFragment() {
             dismiss()
             startActivity(intentToDetails)
         }
+    }
+
+    private fun setupBuyButton() {
+
+        binding.buyActionButton.apply {
+            if (book.saleInfo?.buyLink != null) {
+
+                setOnClickListener {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(book.saleInfo!!.buyLink))
+                    startActivity(browserIntent)
+                }
+
+            } else if (book.volumeInfo.previewLink != null) {
+
+                this.text = getText(R.string.preview)
+                setOnClickListener {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(book.volumeInfo.previewLink))
+                    startActivity(browserIntent)
+                }
+
+            } else {
+                this.isEnabled = false
+                this.alpha = 0.5f
+            }
+
+        }
+
     }
 }

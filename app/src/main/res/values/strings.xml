@@ -25,4 +25,6 @@
     <string name="author">Autor:</string>
     <string name="no_user">Informe um usuário válido</string>
     <string name="categories_error">Escolha três categorias</string>
+    <string name="preview">Preview</string>
+    <string name="buy">Comprar</string>
 </resources>

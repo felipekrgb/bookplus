@@ -140,7 +140,7 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/author"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bookTitleTextView" />
 
@@ -152,7 +152,7 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-black"
                     android:hint="@string/book_author"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/authorLabelTextView"
                     app:layout_constraintTop_toBottomOf="@id/bookTitleTextView" />
 
@@ -206,7 +206,7 @@
                     android:layout_marginTop="30dp"
                     android:fontFamily="sans-serif-black"
                     android:hint="@string/book_description"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@id/additionalInfoLayout" />
 
 
@@ -219,6 +219,28 @@
                     android:hint="@string/book_description"
                     android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@id/labelBookDescriptionTextView" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buyActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:paddingStart="24dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/buy"
+                    android:textColor="@color/brown_text"
+                    app:cornerRadius="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/bookDescriptionTextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
