@@ -1,5 +1,6 @@
 package com.example.book.view.fragments
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import com.example.book.databinding.CategoryChooserFragmentBinding
 import com.example.book.model.UserCategories
 import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
+import com.example.book.view.activities.HomeActivity
 import com.example.book.viewmodel.CategoryChooserViewModel
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseUser
@@ -109,7 +111,10 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
                     UserCategories(userId = userId, categories = listOfCategories)
                 )
 
-                (requireActivity() as AppCompatActivity).replaceFragment(BookListingFragment.newInstance())
+                Intent(requireContext(), HomeActivity::class.java).apply {
+                    startActivity(this)
+                    requireActivity().finish()
+                }
             }
         }
     }

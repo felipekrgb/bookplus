@@ -53,9 +53,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableRight="@drawable/ic_person"
+                android:drawableRight="@drawable/ic_email"
                 android:fontFamily="@font/montserrat_bold"
-                android:hint="Usuário"
+                android:hint="E-mail"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textSize="14dp" />

@@ -31,10 +31,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
     private lateinit var binding: SignUpFragmentBinding
 
     private val observerNewUser = Observer<FirebaseUser?> {
-        Intent(requireContext(), HomeActivity::class.java).apply {
-            startActivity(this)
-            requireActivity().finish()
-        }
+        (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
