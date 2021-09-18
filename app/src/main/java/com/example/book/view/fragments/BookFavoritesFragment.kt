@@ -37,7 +37,12 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     }
 
     private val observerBooks = Observer<List<Book>> { listOfBooks ->
-        adapter.refesh(listOfBooks)
+        if (listOfBooks.isEmpty()) {
+            binding.emptyBooksTextView.visibility = View.VISIBLE
+        } else {
+            binding.recyclerViewFavs.visibility = View.VISIBLE
+            adapter.refesh(listOfBooks)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
