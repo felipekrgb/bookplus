@@ -29,7 +29,7 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
     private lateinit var bookSecondCategoryRecyclerView: RecyclerView
     private lateinit var bookThirdCategoryRecyclerView: RecyclerView
     private var categories = mutableListOf<String>()
-    private var booksListPosition = 0
+    private var booksListed = 0
     private var adapterFirstCategory = BookAdapter() {
         BasicDetailsFragment.newInstance(it).show(parentFragmentManager, "dialog_basic_details")
     }
@@ -55,16 +55,21 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
     }
 
     private val observerBooks = Observer<HashMap<String, List<Book>>> { hashMap ->
-
         val key = hashMap.keys.map { it }[0]
         val finalKey = categories.filter { it == key }[0]
         if (finalKey == categories[0]) {
             adapterFirstCategory.update(hashMap[finalKey]?.map { it })
-            booksListPosition++
         } else if (finalKey == categories[1]) {
             adapterSecondCategory.update(hashMap[finalKey]?.map { it })
         } else if (finalKey == categories[2]) {
             adapterThirdCategory.update(hashMap[finalKey]?.map { it })
+        }
+
+        booksListed++
+
+        if (booksListed == 3) {
+            binding.booksLoadingAnimation.visibility = View.GONE
+            binding.container.visibility = View.VISIBLE
         }
     }
 
