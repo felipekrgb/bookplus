@@ -34,10 +34,24 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewFavs"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="0dp"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/bookAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_2scSKA.json" />
 
     <TextView
         android:id="@+id/emptyBooksTextView"

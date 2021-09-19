@@ -3,6 +3,7 @@ package com.example.book.view.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.View.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,8 +24,10 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     companion object {
         fun newInstance() = BookFavoritesFragment
     }
-
+    private lateinit var binding: BookFavoritesFragmentBinding
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var viewModel: BookFavoritesViewModel
+
     private var adapter = BookFavoritesAdapter() { book ->
         val intentToDetails =
             Intent(activity?.applicationContext, BookDetailsActivity::class.java)
@@ -32,7 +35,6 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
         startActivity(intentToDetails)
         swipeRefreshLayout.isRefreshing = false
     }
-    private lateinit var binding: BookFavoritesFragmentBinding
 
     private val observerBookFav = Observer<List<String>> { listOfFavs ->
         viewModel.getFavBooksByApi(listOfFavs)
@@ -40,14 +42,24 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
 
     private val observerBooks = Observer<List<Book>> { listOfBooks ->
         if (listOfBooks.isEmpty()) {
-            binding.emptyBooksTextView.visibility = View.VISIBLE
+            binding.emptyBooksTextView.visibility = VISIBLE
         } else {
-            binding.recyclerViewFavs.visibility = View.VISIBLE
+            binding.swipeContainer.visibility = VISIBLE
+            binding.recyclerViewFavs.visibility = VISIBLE
             adapter.refesh(listOfBooks)
         }
     }
 
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private val observerLoading = Observer<Boolean> { isLoading ->
+        if (isLoading) {
+            binding.swipeContainer.visibility = GONE
+            binding.bookAnimation.visibility = VISIBLE
+            binding.bookAnimation.playAnimation()
+        } else {
+            binding.bookAnimation.cancelAnimation()
+            binding.bookAnimation.visibility = INVISIBLE
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -61,6 +73,7 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     private fun startViewModel() {
         viewModel.booksFavs.observe(viewLifecycleOwner, observerBookFav)
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
+        viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
         viewModel.fetchAllBooksFav()
     }
 
@@ -77,9 +90,9 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
 
     private fun startSwipe() {
         swipeRefreshLayout.setOnRefreshListener {
-            Toast.makeText(requireContext(), "Página recarregada", Toast.LENGTH_LONG ).show()
             swipeRefreshLayout.isRefreshing = false
             loadFavBook()
+            Toast.makeText(requireContext(), "Página recarregada", Toast.LENGTH_LONG ).show()
         }
     }
 

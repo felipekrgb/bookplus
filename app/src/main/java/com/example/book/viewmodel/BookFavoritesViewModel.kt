@@ -25,6 +25,9 @@ class BookFavoritesViewModel @Inject constructor(
     private val _books = MutableLiveData<List<Book>>()
     val books: LiveData<List<Book>> = _books
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun save(ids: String) {
         FirebaseAuth.getInstance().currentUser?.let {
             repository.saveBooks(it.uid, ids)
@@ -46,13 +49,21 @@ class BookFavoritesViewModel @Inject constructor(
         }
     }
 
+    //Funcao cirada para realizar a busca do ID do Livro na API.
+
     fun getFavBooksByApi(listOfFavs: List<String>) {
         val listOfBooks = arrayListOf<Book>()
         viewModelScope.launch {
             listOfFavs.forEach {
-                booksRepository.getBookById(it)?.let { book -> listOfBooks.add(book) }
+                _isLoading.value = true
+                booksRepository.getBookById(it)?.let { book ->
+                    listOfBooks.add(book)
+
+                }
             }
+            _isLoading.value = false //Preciso verificar, animacao sendo gerada para cada item da lista
             _books.value = listOfBooks
+
         }
     }
 }

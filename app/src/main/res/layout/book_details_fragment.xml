@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:button="@drawable/selector_item_fav"
-                    android:buttonTint="@color/red"
+                    android:buttonTint="@color/brown_dark"
                     android:gravity="start"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
