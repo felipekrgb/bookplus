@@ -128,6 +128,10 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
                 }
             }
         })
+
+        binding.swipeContainer.setOnRefreshListener {
+            binding.swipeContainer.isRefreshing = false
+        }
     }
 
     private fun showSnackbar(@StringRes msgId: Int, @ColorRes colorId: Int) {

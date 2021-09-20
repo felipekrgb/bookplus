@@ -14,7 +14,7 @@ import javax.inject.Inject
 class BooksRepository @Inject constructor(private val bookService: GoogleBookAPIService) {
 
     suspend fun getBooksByTerms(terms: String, startIndex: Int): List<Book>? {
-        return withContext(Dispatchefault) {
+        return withContext(Dispatchers.Default) {
             val bookResponse = bookService.getBooks(terms, startIndex)
             val response = processData(bookResponse)
             response?.items
