@@ -105,5 +105,23 @@
             app:layout_constraintTop_toBottomOf="@+id/bookThirdCategoryTextView"
             tools:listitem="@layout/item_book" />
 
+        <ImageView
+            android:id="@+id/signOutImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bookThirdCategoryRecyclerView"
+            android:src="@drawable/ic_logout" />
+
+        <TextView
+            android:id="@+id/editTextUser"
+            android:text="Name user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signOutImage"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
