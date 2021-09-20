@@ -23,6 +23,7 @@ import com.example.book.R
 import com.example.book.databinding.BookDetailsFragmentBinding
 import com.example.book.model.Book
 import com.example.book.viewmodel.BookDetailsViewModel
+import com.example.book.viewmodel.BookFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,14 +38,17 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
             }
         }
     }
-
+    private lateinit var viewModelFireBase: BookFavoritesViewModel
+    private lateinit var bookFavs: String
     private lateinit var viewModel: BookDetailsViewModel
     private lateinit var binding: BookDetailsFragmentBinding
     private var colorPallete: Int? = null
     private val observerBook = Observer<Book?> {
         bindData(it)
     }
-
+    private val observerBookFav = Observer<List<String>> { listOfFavorites ->
+        binding.checkBoxSave.isChecked = listOfFavorites.contains(bookFavs)
+    }
     private val observerLoading = Observer<Boolean> { isLoading ->
         if (isLoading) {
             binding.bookSearchAnimation.visibility = View.VISIBLE
@@ -61,14 +65,34 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         super.onViewCreated(view, savedInstanceState)
         binding = BookDetailsFragmentBinding.bind(view)
 
+        viewModelFireBase = ViewModelProvider(this).get(BookFavoritesViewModel::class.java)
         viewModel = ViewModelProvider(this).get(BookDetailsViewModel::class.java)
+        setupObservers()
+        setupViewModelFuns()
+        setupCheckIcon()
+        val bookId = arguments?.getString("book_id") as String
+        bookFavs = bookId
+        viewModel.getBookById(bookId)
+    }
+
+    private fun setupCheckIcon() {
+        binding.checkBoxSave.setOnCheckedChangeListener { checked, isChecked ->
+            if (isChecked) {
+                viewModelFireBase.save(bookFavs)
+            } else {
+                viewModelFireBase.delete(bookFavs)
+            }
+        }
+    }
+
+    private fun setupViewModelFuns() {
+        viewModelFireBase.fetchAllBooksFav()
+    }
+
+    private fun setupObservers() {
         viewModel.book.observe(viewLifecycleOwner, observerBook)
         viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
-
-        val bookId = arguments?.getString("book_id") as String
-
-        viewModel.getBookById(bookId)
-
+        viewModelFireBase.booksFavs.observe(viewLifecycleOwner, observerBookFav)
     }
 
     private fun bindData(book: Book?) {

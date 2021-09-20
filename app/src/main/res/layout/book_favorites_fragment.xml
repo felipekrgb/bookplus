@@ -21,17 +21,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFavs"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="0dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/favoriteBooksTextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/favoriteBooksTextView">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewFavs"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/bookAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_2scSKA.json" />
 
     <TextView
         android:id="@+id/emptyBooksTextView"

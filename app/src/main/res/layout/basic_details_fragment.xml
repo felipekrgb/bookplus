@@ -103,9 +103,8 @@
         android:id="@+id/checkBoxSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:buttonTint="@color/red"
+        android:layout_margin="16dp"
+        android:buttonTint="@color/brown_dark"
         android:button="@drawable/selector_item_fav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
