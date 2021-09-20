@@ -40,6 +40,12 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     }
 
     private val observerCategories = Observer<List<String>?> { categories ->
+        binding.buttonLogin.apply {
+            isEnabled = true
+            alpha = 1f
+        }
+        binding.buttonLoginTextView.visibility = View.VISIBLE
+        binding.buttonLoginProgressBar.visibility = View.INVISIBLE
         if (categories != null) {
             Intent(requireContext(), HomeActivity::class.java).apply {
                 startActivity(this)
@@ -72,6 +78,13 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
             val inputEmail = binding.editTextUser.editText
             val inputPassword = binding.editTextPassword.editText
 
+            binding.buttonLogin.apply {
+                isEnabled = false
+                alpha = 0.5f
+            }
+            binding.buttonLoginTextView.visibility = View.GONE
+            binding.buttonLoginProgressBar.visibility = View.VISIBLE
+
             (requireActivity() as AppCompatActivity).hideKeyboard()
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty()) {
@@ -80,6 +93,12 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
                     password = inputPassword?.text.toString()
                 )
             } else {
+                binding.buttonLogin.apply {
+                    isEnabled = true
+                    alpha = 1f
+                }
+                binding.buttonLoginTextView.visibility = View.VISIBLE
+                binding.buttonLoginProgressBar.visibility = View.INVISIBLE
                 showSnackbar(R.string.no_user, R.color.red)
             }
         }
