@@ -54,8 +54,8 @@ class BookFavoritesViewModel @Inject constructor(
     fun getFavBooksByApi(listOfFavs: List<String>) {
         val listOfBooks = arrayListOf<Book>()
         viewModelScope.launch {
+            _isLoading.value = true
             listOfFavs.forEach {
-                _isLoading.value = true
                 booksRepository.getBookById(it)?.let { book ->
                     listOfBooks.add(book)
 
