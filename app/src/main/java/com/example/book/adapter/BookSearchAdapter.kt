@@ -1,13 +1,16 @@
 package com.example.book.adapter
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.book.R
 import com.example.book.databinding.BookItemSearchBinding
 import com.example.book.model.Book
+import javax.xml.transform.URIResolver
 
 class BookSearchAdapter(private val onClick: (Book) -> Unit) :
     RecyclerView.Adapter<BookSearchViewHolder>() {
@@ -31,8 +34,10 @@ class BookSearchAdapter(private val onClick: (Book) -> Unit) :
 
     override fun getItemCount(): Int = listOfBooks.size
 
-    fun update(newList: List<Book>) {
-        listOfBooks.clear()
+    fun update(newList: List<Book>, clearList: Boolean = false) {
+        if (clearList) {
+            listOfBooks.clear()
+        }
         listOfBooks.addAll(newList)
         notifyDataSetChanged()
     }
@@ -44,7 +49,8 @@ class BookSearchViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
     fun bind(book: Book) {
 
-        binding.titleSearch.text = book.volumeInfo?.title
+        binding.titleSearch.text = book.volumeInfo.title
+
         book.volumeInfo.authors?.let {
             binding.authorSearch.text = it[0]
         }

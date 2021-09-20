@@ -14,7 +14,8 @@ interface GoogleBookAPIService {
     @GET("/books/v1/volumes")
     suspend fun getBooks(
         @Query("q") searchTerms: String,
-        @Query("key") key: String = BuildConfig.API_KEY
+        @Query("startIndex") startIndex: Int,
+        @Query("key") key: String = BuildConfig.API_KEY,
     ): Response<BookResponse>
 
     @GET("/books/v1/volumes/{id}")

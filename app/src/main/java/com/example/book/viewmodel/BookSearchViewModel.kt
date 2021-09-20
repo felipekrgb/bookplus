@@ -21,13 +21,20 @@ class BookSearchViewModel @Inject constructor(
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun getBooksByTerm(terms: String) {
+    private val _startIndex = MutableLiveData(0)
+    val startIndex: LiveData<Int> = _startIndex
+
+    fun getBooksByTerm(terms: String, startIndex: Int = 0) {
         _isLoading.value = true
         viewModelScope.launch {
-            booksRepository.getBooksByTerms(terms.replace(" ", "+")).let {
+            booksRepository.getBooksByTerms(terms.replace(" ", "+"), startIndex).let {
                 _books.value = it
                 _isLoading.value = false
             }
         }
+    }
+
+    fun nextBooks() {
+        _startIndex.value = startIndex.value!! + 10
     }
 }

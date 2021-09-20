@@ -30,10 +30,10 @@ class BookListingViewModel @Inject constructor(
     private val _categories = MutableLiveData<List<String>>()
     val categories: LiveData<List<String>> = _categories
 
-    fun getBooksByTerms(terms: List<String>) {
+    fun getBooksByTerms(terms: List<String>, startIndex: Int = 0) {
         viewModelScope.launch {
             terms.forEach { term ->
-                booksRepository.getBooksByTerms(term.replace(" ", "+"))?.let { books ->
+                booksRepository.getBooksByTerms(term.replace(" ", "+"), startIndex)?.let { books ->
                     _books.value = hashMapOf(term to books)
                 }
             }
