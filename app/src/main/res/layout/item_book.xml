@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/bookImageView"
-        android:layout_width="104.96dp"
-        android:layout_height="149.24dp"
+        android:layout_width="128dp"
+        android:layout_height="182dp"
         android:scaleType="fitXY"
         android:src="@drawable/no_cover_thumb"
         app:layout_constraintBottom_toBottomOf="parent"

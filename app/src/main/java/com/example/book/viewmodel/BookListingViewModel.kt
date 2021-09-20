@@ -33,10 +33,10 @@ class BookListingViewModel @Inject constructor(
     private val _isSigned = MutableLiveData<Boolean>(true)
     val isSignedIn: LiveData<Boolean> = _isSigned
 
-    fun getBooksByTerms(terms: List<String>) {
+    fun getBooksByTerms(terms: List<String>, startIndex: Int = 0) {
         viewModelScope.launch {
             terms.forEach { term ->
-                booksRepository.getBooksByTerms(term.replace(" ", "+"))?.let { books ->
+                booksRepository.getBooksByTerms(term.replace(" ", "+"), startIndex)?.let { books ->
                     _books.value = hashMapOf(term to books)
                 }
             }
