@@ -19,8 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:fontFamily="@font/libre_caslon_text_regular"
-            android:text="Pesquise seu Livro"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/book_search"
             android:textColor="#333"
             android:textSize="32sp" />
 
@@ -44,11 +44,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/montserrat_bold"
-                android:hint="Pesquise por uma palavra chave..."
+                android:hint="@string/search_field"
                 android:maxLines="1"
                 android:paddingTop="8dp"
                 android:singleLine="true"
-                android:textSize="14dp" />
+                android:textSize="14sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Nenhum livro encontrado"
+        android:text="@string/no_book_found"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

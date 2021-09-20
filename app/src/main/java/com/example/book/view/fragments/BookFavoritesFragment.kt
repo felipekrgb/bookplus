@@ -45,6 +45,17 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
         }
     }
 
+    private val observerLoading = Observer<Boolean> { isLoading ->
+        if (isLoading) {
+            binding.bookSearchAnimation.visibility = View.VISIBLE
+            binding.bookSearchAnimation.playAnimation()
+        } else {
+            binding.recyclerViewFavs.visibility = View.VISIBLE
+            binding.bookSearchAnimation.visibility = View.INVISIBLE
+            binding.bookSearchAnimation.cancelAnimation()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(BookFavoritesViewModel::class.java)
@@ -56,6 +67,7 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     }
 
     private fun startViewModel() {
+        viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
         viewModel.booksFavs.observe(viewLifecycleOwner, observerBookFav)
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
         viewModel.fetchAllBooksFav()

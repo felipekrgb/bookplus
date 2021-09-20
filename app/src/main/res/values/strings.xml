@@ -27,4 +27,8 @@
     <string name="categories_error">Escolha três categorias</string>
     <string name="preview">Preview</string>
     <string name="buy">Comprar</string>
+    <string name="favorite_books">Seus Livros Favoritos</string>
+    <string name="no_book_found">Nenhum livro encontrado</string>
+    <string name="book_search">Pesquise seu Livro</string>
+    <string name="search_field">Pesquise por uma palavra chave...</string>
 </resources>
