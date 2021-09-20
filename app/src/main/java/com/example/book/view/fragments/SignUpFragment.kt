@@ -59,8 +59,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty() && !inputUser?.text.isNullOrEmpty()) {
                 viewModel.signUpEmailAndPassword(
                     email = inputEmail?.text.toString(),
-                    password = inputPassword?.text.toString(),
-                    user = inputUser?.text.toString()
+                    password = inputPassword?.text.toString()
                 )
             } else {
                 showSnackbar(R.string.no_user, R.color.red)

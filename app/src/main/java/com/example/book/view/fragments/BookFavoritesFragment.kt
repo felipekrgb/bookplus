@@ -24,6 +24,7 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     companion object {
         fun newInstance() = BookFavoritesFragment
     }
+
     private lateinit var binding: BookFavoritesFragmentBinding
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var viewModel: BookFavoritesViewModel
@@ -93,7 +94,7 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             loadFavBook()
-            Toast.makeText(requireContext(), "Página recarregada", Toast.LENGTH_LONG ).show()
+            Toast.makeText(requireContext(), "Carregando favoritos...", Toast.LENGTH_SHORT).show()
         }
     }
 
