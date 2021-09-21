@@ -70,9 +70,9 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     private fun setupSettingsSignUp() {
         binding.buttonCreate.setOnClickListener {
+            val inputUser = binding.editTextUser.editText
             val inputEmail = binding.editTextEmail.editText
             val inputPassword = binding.editTextPassword.editText
-            val inputUser = binding.editTextUser.editText
 
             binding.buttonCreate.apply {
                 isEnabled = false
@@ -84,6 +84,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             (requireActivity() as AppCompatActivity).hideKeyboard()
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty() && !inputUser?.text.isNullOrEmpty()) {
+<<<<<<< HEAD
                 if (inputPassword!!.length() >= 6) {
                     viewModel.signUpEmailAndPassword(
                         email = inputEmail?.text.toString(),
@@ -101,6 +102,13 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
                 }
 
+=======
+                viewModel.signUpEmailAndPassword(
+                    email = inputEmail?.text.toString(),
+                    password = inputPassword?.text.toString(),
+                    name = inputUser?.text.toString()
+                )
+>>>>>>> BOOK-51
             } else {
                 binding.buttonCreate.apply {
                     isEnabled = true

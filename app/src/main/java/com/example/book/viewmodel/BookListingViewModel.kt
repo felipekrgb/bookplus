@@ -33,6 +33,9 @@ class BookListingViewModel @Inject constructor(
     private val _isSigned = MutableLiveData<Boolean>(true)
     val isSignedIn: LiveData<Boolean> = _isSigned
 
+    private val _userName = MutableLiveData<String>()
+    val userName: LiveData<String> = _userName
+
     fun getBooksByTerms(terms: List<String>, startIndex: Int = 0) {
         viewModelScope.launch {
             terms.forEach { term ->
@@ -48,6 +51,12 @@ class BookListingViewModel @Inject constructor(
             userCategoriesRepository.getUserCategories(userId)?.let { userCategories ->
                 _categories.value = userCategories.categories
             }
+        }
+    }
+
+    fun getCurrentUserName() {
+        authenticationRepository.currentUserName {
+            _userName.value = it
         }
     }
 
