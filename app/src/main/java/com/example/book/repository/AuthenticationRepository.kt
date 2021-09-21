@@ -3,13 +3,13 @@ package com.example.book.repository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import javax.inject.Inject
 
-const val COLLECTION_USERS = "usersNames"
+val COLLECTION_USERS = "usersNames"
 
 class AuthenticationRepository @Inject constructor(
-    private val authent: FirebaseAuth,
+    private val auth: FirebaseAuth,
+    private val fireStore: FirebaseFirestore
 ) {
 
     fun singEmailAndPassword(
@@ -17,8 +17,8 @@ class AuthenticationRepository @Inject constructor(
         password: String,
         callback: (FirebaseUser?, String?) -> Unit
     ) {
-        val tesk = authent.signInWithEmailAndPassword(email, password)
-        tesk.addOnSuccessListener {
+        val task = auth.signInWithEmailAndPassword(email, password)
+        task.addOnSuccessListener {
             if (it.user != null) {
                 callback(it.user, null)
             } else {
@@ -26,8 +26,7 @@ class AuthenticationRepository @Inject constructor(
             }
 
         }
-
-        tesk.addOnFailureListener { exception ->
+        task.addOnFailureListener { exception ->
             callback(null, exception.message)
         }
     }
@@ -35,22 +34,43 @@ class AuthenticationRepository @Inject constructor(
     fun createAccount(
         email: String,
         password: String,
-        callback: (FirebaseUser?) -> Unit
+        name: String,
+        callback: (FirebaseUser?, String?) -> Unit
     ) {
-        authent.createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
-                callback(authResult.user)
+                val task =
+                    fireStore.collection(COLLECTION_USERS).document(authResult.user!!.uid).set(
+                        hashMapOf(
+                            "name" to name
+                        )
+                    )
+
+                task.addOnSuccessListener {
+                    callback(authResult.user, null)
+                }
             }
             .addOnFailureListener {
-                it.message
+                callback(null, it.message)
             }
     }
 
+    fun currentUserName(callback: (String) -> Unit) {
+        val task = fireStore.collection(COLLECTION_USERS).document(currentUser()!!.uid).get()
+
+        task.addOnSuccessListener { documentSnapshot ->
+            documentSnapshot["name"].let {
+                callback(it as String)
+            }
+        }
+    }
+
+
     fun currentUser(): FirebaseUser? {
-        return authent.currentUser
+        return auth.currentUser
     }
 
     fun signOut() {
-        authent.signOut()
+        auth.signOut()
     }
 }

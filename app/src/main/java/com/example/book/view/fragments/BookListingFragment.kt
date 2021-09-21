@@ -46,23 +46,18 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         viewModel.getUserCategories(user.uid)
     }
 
-    private val observerSignOut = Observer<Boolean> {
-        if (!it) {
-            Intent(requireActivity(), MainActivity::class.java).apply {
+    private val observerSignOut = Observer<Boolean> { isSigned ->
+        if (!isSigned) {
+            Intent(requireContext(), MainActivity::class.java).apply {
                 startActivity(this)
+                requireActivity().finish()
             }
-            requireActivity().finish()
         }
     }
 
     private val observerCategories = Observer<List<String>> { categories ->
         this.categories.addAll(categories)
         viewModel.getBooksByTerms(categories)
-
-
-        binding.bookFirstCategoryTextView.text = categories[0]
-        binding.bookSecondCategoryTextView.text = categories[1]
-        binding.bookThirdCategoryTextView.text = categories[2]
     }
 
     private val observerBooks = Observer<HashMap<String, List<Book>>> { hashMap ->
@@ -70,10 +65,13 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         val finalKey = categories.filter { it == key }[0]
         if (finalKey == categories[0]) {
             adapterFirstCategory.update(hashMap[finalKey]?.map { it })
+            binding.bookFirstCategoryTextView.text = categories[0]
         } else if (finalKey == categories[1]) {
             adapterSecondCategory.update(hashMap[finalKey]?.map { it })
+            binding.bookSecondCategoryTextView.text = categories[1]
         } else if (finalKey == categories[2]) {
             adapterThirdCategory.update(hashMap[finalKey]?.map { it })
+            binding.bookThirdCategoryTextView.text = categories[2]
         }
 
         booksListed++
@@ -82,7 +80,12 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
             binding.booksLoadingAnimation.visibility = View.GONE
             binding.booksLoadingAnimation.cancelAnimation()
             binding.container.visibility = View.VISIBLE
+            binding.infoContainer.visibility = View.VISIBLE
         }
+    }
+
+    private val observerUserName = Observer<String> {
+        binding.greetingsTextView.text = "Olá, $it"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -98,6 +101,7 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         setupObservers()
         setupButtons()
 
+        viewModel.getCurrentUserName()
         viewModel.getCurrentUser()
     }
 
@@ -127,5 +131,6 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
     private fun setupObservers() {
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
         viewModel.isSignedIn.observe(viewLifecycleOwner, observerSignOut)
+        viewModel.userName.observe(viewLifecycleOwner, observerUserName)
     }
 }

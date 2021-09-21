@@ -30,22 +30,25 @@ object HiltModule {
         BooksRepository(service)
 
     @Provides
-    fun provideFirebaseAuth(): FirebaseAuth =
-        FirebaseAuth.getInstance()
-
-    @Provides
-    fun provideRepositoryAuth(auth: FirebaseAuth): AuthenticationRepository {
-        return AuthenticationRepository(auth)
+    fun provideRepositoryAuth(
+        auth: FirebaseAuth,
+        fireStore: FirebaseFirestore
+    ): AuthenticationRepository {
+        return AuthenticationRepository(auth, fireStore)
     }
 
     @Provides
-    fun provideUserCategoriesDAO(@ApplicationContext context: Context): UserCategoriesDAO =
-        AppDatabase.getDatabase(context).getUserCategoriesDAO()
+    fun provideFirebaseAuth(): FirebaseAuth =
+        FirebaseAuth.getInstance()
 
     @Provides
     fun provideFirebaseFirestore(): FirebaseFirestore {
         return Firebase.firestore
     }
+
+    @Provides
+    fun provideUserCategoriesDAO(@ApplicationContext context: Context): UserCategoriesDAO =
+        AppDatabase.getDatabase(context).getUserCategoriesDAO()
 
     @Provides
     fun provideUserCategorieRepository(dao: UserCategoriesDAO): UserCategoriesRepository =

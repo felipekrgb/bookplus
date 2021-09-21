@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         if (FirebaseAuth.getInstance().currentUser != null) {
             Intent(this, HomeActivity::class.java).apply {
                 startActivity(this)
+                finish()
             }
         } else {
             replaceFragment(IntroductionFragment())
