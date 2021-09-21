@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import javax.inject.Inject
 
-val COLLECTION_USERS = "userNames"
+val COLLECTION_USERS = "usersNames"
 
 class AuthenticationRepository @Inject constructor(
     private val auth: FirebaseAuth,
