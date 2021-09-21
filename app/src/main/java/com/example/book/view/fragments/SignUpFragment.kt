@@ -1,6 +1,5 @@
 package com.example.book.view.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.ColorRes
@@ -14,7 +13,6 @@ import com.example.book.databinding.SignUpFragmentBinding
 import com.example.book.utils.hideKeyboard
 import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
-import com.example.book.view.activities.HomeActivity
 import com.example.book.view.activities.MainActivity
 import com.example.book.viewmodel.SignUpViewModel
 import com.google.firebase.auth.FirebaseUser
@@ -40,6 +38,21 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment())
     }
 
+    private val observerError = Observer<String> {
+        binding.buttonCreate.apply {
+            isEnabled = true
+            alpha = 1f
+        }
+        binding.buttonCreate.visibility = View.VISIBLE
+        binding.buttonCreateTextView.visibility = View.VISIBLE
+        binding.buttonCreateProgressBar.visibility = View.INVISIBLE
+        if (it == "The email address is already in use by another account.") {
+            showSnackbar(R.string.error_created_account_user_existent, R.color.red)
+        }
+
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
@@ -52,6 +65,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, observerNewUser)
+        viewModel.error.observe(viewLifecycleOwner, observerError)
     }
 
     private fun setupSettingsSignUp() {
@@ -70,18 +84,31 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             (requireActivity() as AppCompatActivity).hideKeyboard()
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty() && !inputUser?.text.isNullOrEmpty()) {
-                viewModel.signUpEmailAndPassword(
-                    email = inputEmail?.text.toString(),
-                    password = inputPassword?.text.toString()
-                )
+                if (inputPassword!!.length() >= 6) {
+                    viewModel.signUpEmailAndPassword(
+                        email = inputEmail?.text.toString(),
+                        password = inputPassword?.text.toString()
+                    )
+                } else {
+
+                    binding.buttonCreate.apply {
+                        isEnabled = true
+                        alpha = 1f
+                    }
+                    binding.buttonCreateTextView.visibility = View.VISIBLE
+                    binding.buttonCreateProgressBar.visibility = View.INVISIBLE
+                    showSnackbar(R.string.error_created_account_password_invalided, R.color.red)
+
+                }
+
             } else {
                 binding.buttonCreate.apply {
-                    isEnabled = false
-                    alpha = 0.5f
+                    isEnabled = true
+                    alpha = 1f
                 }
                 binding.buttonCreateTextView.visibility = View.VISIBLE
                 binding.buttonCreateProgressBar.visibility = View.INVISIBLE
-                showSnackbar(R.string.no_user, R.color.red)
+                showSnackbar(R.string.error_created_account_empty, R.color.red)
             }
         }
 

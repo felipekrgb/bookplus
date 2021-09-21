@@ -36,7 +36,13 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     }
 
     private val observerError = Observer<String> {
-        Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
+        binding.buttonLogin.apply {
+            isEnabled = true
+            alpha = 1f
+        }
+        binding.buttonLoginTextView.visibility = View.VISIBLE
+        binding.buttonLoginProgressBar.visibility = View.INVISIBLE
+        showSnackbar(R.string.user_invalided, R.color.red)
     }
 
     private val observerCategories = Observer<List<String>?> { categories ->

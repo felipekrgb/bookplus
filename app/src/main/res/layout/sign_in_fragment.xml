@@ -57,6 +57,7 @@
                 android:fontFamily="@font/montserrat_bold"
                 android:hint="E-mail"
                 android:maxLines="1"
+                android:inputType="textEmailAddress"
                 android:singleLine="true"
                 android:textSize="14dp" />
 
