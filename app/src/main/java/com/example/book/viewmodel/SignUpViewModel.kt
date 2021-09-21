@@ -17,8 +17,8 @@ class SignUpViewModel @Inject constructor(
     private val _user = MutableLiveData<FirebaseUser?>()
     val user: LiveData<FirebaseUser?> = _user
 
-    fun signUpEmailAndPassword(email: String, password: String) {
-        authenticationRepository.createAccount(email, password) {
+    fun signUpEmailAndPassword(email: String, password: String, name: String) {
+        authenticationRepository.createAccount(email, password, name) {
             _user.value = it
         }
     }

@@ -83,6 +83,10 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         }
     }
 
+    private val observerUserName = Observer<String> {
+        binding.greetingsTextView.text = "Olá, $it"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BookListingFragmentBinding.bind(view)
@@ -96,6 +100,7 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         setupObservers()
         setupButtons()
 
+        viewModel.getCurrentUserName()
         viewModel.getCurrentUser()
     }
 
@@ -125,5 +130,6 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
     private fun setupObservers() {
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
         viewModel.isSignedIn.observe(viewLifecycleOwner, observerSignOut)
+        viewModel.userName.observe(viewLifecycleOwner, observerUserName)
     }
 }
