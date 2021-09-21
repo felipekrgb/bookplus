@@ -39,12 +39,12 @@
             app:justifyContent="center">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_animal"
+                android:id="@+id/chip_biology"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:text="Animal" />
+                android:text="Biologia" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_culinary"
@@ -141,6 +141,30 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:text="Tecnologia" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_drama"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="Drama" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_romance"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="Romance" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_children"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="Infantil" />
 
         </com.google.android.flexbox.FlexboxLayout>
     </com.google.android.material.chip.ChipGroup>
