@@ -1,16 +1,17 @@
 package com.example.book.adapter
 
-import android.net.Uri
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.HtmlCompat
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.BitmapImageViewTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.book.R
 import com.example.book.databinding.BookItemSearchBinding
 import com.example.book.model.Book
-import javax.xml.transform.URIResolver
 
 class BookSearchAdapter(private val onClick: (Book) -> Unit) :
     RecyclerView.Adapter<BookSearchViewHolder>() {
@@ -57,9 +58,23 @@ class BookSearchViewHolder(item: View) : RecyclerView.ViewHolder(item) {
 
         book.volumeInfo.imageLinks.let {
             Glide.with(itemView.context)
+                .asBitmap()
                 .load(it?.thumbnail)
                 .placeholder(R.drawable.no_cover_thumb)
-                .into(binding.imageViewBookSearch)
+                .into(object: BitmapImageViewTarget(binding.imageViewBookSearch) {
+
+                    override fun onResourceReady(
+                        bitmap: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        super.onResourceReady(bitmap, transition)
+                        Palette.generateAsync(bitmap) {
+
+                            binding.bookCoverCard.setStrokeColor(it!!.getMutedColor(itemView.context.getColor(R.color.brown_light)))
+
+                        }
+                    }
+                })
         }
 
     }

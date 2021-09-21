@@ -25,9 +25,6 @@ class BookFavoritesViewModel @Inject constructor(
     private val _books = MutableLiveData<List<Book>>()
     val books: LiveData<List<Book>> = _books
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
     fun save(ids: String) {
         FirebaseAuth.getInstance().currentUser?.let {
             repository.saveBooks(it.uid, ids)
@@ -42,11 +39,9 @@ class BookFavoritesViewModel @Inject constructor(
     }
 
     fun fetchAllBooksFav() {
-        _isLoading.value = true
         FirebaseAuth.getInstance().currentUser?.let {
             repository.fetchAllBooks(it.uid) {
                 _booksFavs.value = it as List<String>
-                _isLoading.value = false
             }
         }
     }
@@ -55,16 +50,12 @@ class BookFavoritesViewModel @Inject constructor(
 
     fun getFavBooksByApi(listOfFavs: List<String>) {
         val listOfBooks = arrayListOf<Book>()
-        _isLoading.value = true
         viewModelScope.launch {
-            _isLoading.value = true
             listOfFavs.forEach {
                 booksRepository.getBookById(it)?.let { book ->
                     listOfBooks.add(book)
-
                 }
             }
-            _isLoading.value = false //Preciso verificar, animacao sendo gerada para cada item da lista
             _books.value = listOfBooks
         }
     }
