@@ -40,12 +40,6 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     }
 
     private val observerCategories = Observer<List<String>?> { categories ->
-        binding.buttonLogin.apply {
-            isEnabled = true
-            alpha = 1f
-        }
-        binding.buttonLoginTextView.visibility = View.VISIBLE
-        binding.buttonLoginProgressBar.visibility = View.INVISIBLE
         if (categories != null) {
             Intent(requireContext(), HomeActivity::class.java).apply {
                 startActivity(this)
