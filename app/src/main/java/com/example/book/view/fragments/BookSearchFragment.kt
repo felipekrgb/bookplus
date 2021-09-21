@@ -132,6 +132,11 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
         binding.swipeContainer.setOnRefreshListener {
             binding.swipeContainer.isRefreshing = false
         }
+
+        binding.swipeContainer.apply {
+            setColorSchemeColors(requireContext().getColor(R.color.white))
+            setProgressBackgroundColorSchemeColor(requireContext().getColor(R.color.brown_medium))
+        }
     }
 
     private fun showSnackbar(@StringRes msgId: Int, @ColorRes colorId: Int) {
