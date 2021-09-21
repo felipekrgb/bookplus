@@ -31,6 +31,12 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
     private lateinit var binding: SignUpFragmentBinding
 
     private val observerNewUser = Observer<FirebaseUser?> {
+        binding.buttonCreate.apply {
+            isEnabled = true
+            alpha = 1f
+        }
+        binding.buttonCreateTextView.visibility = View.VISIBLE
+        binding.buttonCreateProgressBar.visibility = View.INVISIBLE
         (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment())
     }
 
@@ -54,15 +60,27 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             val inputPassword = binding.editTextPassword.editText
             val inputUser = binding.editTextUser.editText
 
+            binding.buttonCreate.apply {
+                isEnabled = false
+                alpha = 0.5f
+            }
+            binding.buttonCreateTextView.visibility = View.GONE
+            binding.buttonCreateProgressBar.visibility = View.VISIBLE
+
             (requireActivity() as AppCompatActivity).hideKeyboard()
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty() && !inputUser?.text.isNullOrEmpty()) {
                 viewModel.signUpEmailAndPassword(
                     email = inputEmail?.text.toString(),
-                    password = inputPassword?.text.toString(),
-                    user = inputUser?.text.toString()
+                    password = inputPassword?.text.toString()
                 )
             } else {
+                binding.buttonCreate.apply {
+                    isEnabled = false
+                    alpha = 0.5f
+                }
+                binding.buttonCreateTextView.visibility = View.VISIBLE
+                binding.buttonCreateProgressBar.visibility = View.INVISIBLE
                 showSnackbar(R.string.no_user, R.color.red)
             }
         }

@@ -1,16 +1,18 @@
 package com.example.book.view.fragments
 
-import androidx.lifecycle.ViewModelProvider
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.book.R
 import com.example.book.adapter.BookAdapter
 import com.example.book.databinding.BookListingFragmentBinding
 import com.example.book.model.Book
+import com.example.book.view.activities.MainActivity
 import com.example.book.view.dialogs.BasicDetailsFragment
 import com.example.book.viewmodel.BookListingViewModel
 import com.google.firebase.auth.FirebaseUser
@@ -42,6 +44,15 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
 
     private val observerSignedUser = Observer<FirebaseUser> { user ->
         viewModel.getUserCategories(user.uid)
+    }
+
+    private val observerSignOut = Observer<Boolean> {
+        if (!it) {
+            Intent(requireActivity(), MainActivity::class.java).apply {
+                startActivity(this)
+            }
+            requireActivity().finish()
+        }
     }
 
     private val observerCategories = Observer<List<String>> { categories ->
@@ -85,8 +96,15 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
 
         setupRecyclerView()
         setupObservers()
+        setupButtons()
 
         viewModel.getCurrentUser()
+    }
+
+    private fun setupButtons() {
+        binding.signOutImage.setOnClickListener {
+            viewModel.signOut()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -108,5 +126,6 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
 
     private fun setupObservers() {
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
+        viewModel.isSignedIn.observe(viewLifecycleOwner, observerSignOut)
     }
 }

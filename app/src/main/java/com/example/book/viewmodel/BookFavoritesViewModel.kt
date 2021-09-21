@@ -51,15 +51,21 @@ class BookFavoritesViewModel @Inject constructor(
         }
     }
 
+    //Funcao criada para realizar a busca do ID do Livro na API.
+
     fun getFavBooksByApi(listOfFavs: List<String>) {
         val listOfBooks = arrayListOf<Book>()
         _isLoading.value = true
         viewModelScope.launch {
+            _isLoading.value = true
             listOfFavs.forEach {
-                booksRepository.getBookById(it)?.let { book -> listOfBooks.add(book) }
+                booksRepository.getBookById(it)?.let { book ->
+                    listOfBooks.add(book)
+
+                }
             }
+            _isLoading.value = false //Preciso verificar, animacao sendo gerada para cada item da lista
             _books.value = listOfBooks
-            _isLoading.value = false
         }
     }
 }

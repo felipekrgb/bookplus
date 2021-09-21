@@ -73,21 +73,4 @@ class UserBookPreferenceRepository @Inject constructor(
                     ?: arrayListOf())
             }
     }
-
-//    suspend fun getFavBooksByApi(uid: String, idBook: String) {
-////        firestore.collection(COLLECTION_FAVBOOK)
-////            .document(uid)
-////            .get()
-////            .addOnSuccessListener {
-////                it["favorites"]
-////            }
-//        fetchAllBooks(uid){ it ->
-//            it.forEach {
-//                val STRINGPORRA = it as String
-//
-//                bookService.getBook(STRINGPORRA)
-//            }
-//        }
-//
-//    }
 }

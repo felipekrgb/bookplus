@@ -47,37 +47,32 @@
         app:layout_constraintTop_toBottomOf="@id/appNameTextView" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/signUpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/brown_medium"
-        android:fontFamily="@font/montserrat_bold"
-        android:padding="24dp"
-        android:text="Registrar"
-        android:textColor="@color/brown_text"
-        android:translationZ="30dp"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/singInButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="2dp"
         android:backgroundTint="@color/brown_dark"
         android:fontFamily="@font/montserrat_bold"
-        android:padding="24dp"
-        android:paddingStart="42dp"
-        android:stateListAnimator="@null"
+        android:padding="18dp"
         android:text="Acessar Conta"
         android:textColor="@color/white"
         app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@id/signUpButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signUpButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/brown_medium"
+        android:fontFamily="@font/montserrat_bold"
+        android:padding="18dp"
+        android:text="Registrar"
+        android:textColor="@color/brown_text"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
