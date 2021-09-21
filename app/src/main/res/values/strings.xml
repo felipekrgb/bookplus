@@ -33,7 +33,11 @@
     <string name="search_field">Pesquise por uma palavra chave...</string>
     <string name="user_invalided">E-mail ou senha inválido</string>
     <string name="error_created_account">Erro na criação de conta</string>
-    <string name="error_created_account_empty">Por favor, preencha os campos</string>
-    <string name="error_created_account_user_existent">Usuário já cadastrado</string>
-    <string name="error_created_account_password_invalided">A senha precisa ser maior que 6 dígitos</string>
+    <string name="error_created_account_empty">Por favor, preencha todos os campos</string>
+    <string name="error_created_account_user_existent">E-mail já cadastrado</string>
+    <string name="error_created_account_password_invalided">A senha necessita no mínimo 6 caracters</string>
+    <string name="error_login_no_user">Usuário não cadastrado</string>
+    <string name="error_generic_login">Houve um erro ao fazer login</string>
+    <string name="error_generic_created">Houve um erro ao criar a conta</string>
+    <string name="error_email_format">Formato do e-mail inválido</string>
 </resources>

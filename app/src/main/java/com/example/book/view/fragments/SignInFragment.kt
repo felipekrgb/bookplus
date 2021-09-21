@@ -17,7 +17,6 @@ import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
 import com.example.book.view.activities.MainActivity
 import com.example.book.viewmodel.SignInViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,11 +39,17 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
             isEnabled = true
             alpha = 1f
         }
+
         binding.buttonLoginTextView.visibility = View.VISIBLE
         binding.buttonLoginProgressBar.visibility = View.INVISIBLE
-        showSnackbar(R.string.user_invalided, R.color.red)
+        if (it == "There is no user record corresponding to this identifier. The user may have been deleted.") {
+            showSnackbar(R.string.error_login_no_user, R.color.red)
+        } else if (it == "The password is invalid or the user does not have a password.") {
+            showSnackbar(R.string.user_invalided, R.color.red)
+        } else{
+            showSnackbar(R.string.error_generic_login, R.color.red)
+        }
     }
-
     private val observerCategories = Observer<List<String>?> { categories ->
         if (categories != null) {
             Intent(requireContext(), HomeActivity::class.java).apply {
@@ -89,8 +94,8 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty()) {
                 viewModel.signInEmailAndPassword(
-                    email = inputEmail?.text.toString(),
-                    password = inputPassword?.text.toString()
+                        email = inputEmail?.text.toString(),
+                        password = inputPassword?.text.toString()
                 )
             } else {
                 binding.buttonLogin.apply {

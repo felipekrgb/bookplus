@@ -48,8 +48,11 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         binding.buttonCreateProgressBar.visibility = View.INVISIBLE
         if (it == "The email address is already in use by another account.") {
             showSnackbar(R.string.error_created_account_user_existent, R.color.red)
+        } else if (it == "The email address is badly formatted.") {
+            showSnackbar(R.string.error_email_format, R.color.red)
+        } else{
+            showSnackbar(R.string.error_generic_created, R.color.red)
         }
-
     }
 
 
