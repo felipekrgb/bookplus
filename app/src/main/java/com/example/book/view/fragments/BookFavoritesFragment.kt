@@ -28,7 +28,6 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     private lateinit var binding: BookFavoritesFragmentBinding
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private lateinit var viewModel: BookFavoritesViewModel
-
     private var adapter = BookFavoritesAdapter() { book ->
         val intentToDetails =
             Intent(activity?.applicationContext, BookDetailsActivity::class.java)
@@ -73,6 +72,7 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     }
 
     private fun startViewModel() {
+        viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
         viewModel.booksFavs.observe(viewLifecycleOwner, observerBookFav)
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
         viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)

@@ -42,17 +42,20 @@ class BookFavoritesViewModel @Inject constructor(
     }
 
     fun fetchAllBooksFav() {
+        _isLoading.value = true
         FirebaseAuth.getInstance().currentUser?.let {
             repository.fetchAllBooks(it.uid) {
                 _booksFavs.value = it as List<String>
+                _isLoading.value = false
             }
         }
     }
 
-    //Funcao cirada para realizar a busca do ID do Livro na API.
+    //Funcao criada para realizar a busca do ID do Livro na API.
 
     fun getFavBooksByApi(listOfFavs: List<String>) {
         val listOfBooks = arrayListOf<Book>()
+        _isLoading.value = true
         viewModelScope.launch {
             _isLoading.value = true
             listOfFavs.forEach {
@@ -63,7 +66,6 @@ class BookFavoritesViewModel @Inject constructor(
             }
             _isLoading.value = false //Preciso verificar, animacao sendo gerada para cada item da lista
             _books.value = listOfBooks
-
         }
     }
 }

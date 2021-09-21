@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="14dp"
     tools:context=".view.fragments.BookFavoritesFragment">
-
-
     <TextView
         android:id="@+id/favoriteBooksTextView"
         android:layout_width="match_parent"
         android:textAlignment="center"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/libre_caslon_text_regular"
-        android:text="Seus Livros Favoritos"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/favorite_books"
         android:textColor="#333"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,12 +57,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Nenhum livro encontrado"
+        android:text="@string/no_book_found"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/favoriteBooksTextView" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
