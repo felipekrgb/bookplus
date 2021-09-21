@@ -46,8 +46,8 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         viewModel.getUserCategories(user.uid)
     }
 
-    private val observerSignOut = Observer<Boolean> {
-        if (!it) {
+    private val observerSignOut = Observer<Boolean> { isSigned ->
+        if (!isSigned) {
             Intent(requireContext(), MainActivity::class.java).apply {
                 startActivity(this)
                 requireActivity().finish()
@@ -80,6 +80,7 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
             binding.booksLoadingAnimation.visibility = View.GONE
             binding.booksLoadingAnimation.cancelAnimation()
             binding.container.visibility = View.VISIBLE
+            binding.infoContainer.visibility = View.VISIBLE
         }
     }
 
