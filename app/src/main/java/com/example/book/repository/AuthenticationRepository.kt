@@ -2,11 +2,7 @@ package com.example.book.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
 import javax.inject.Inject
-
-const val COLLECTION_USERS = "usersNames"
 
 class AuthenticationRepository @Inject constructor(
     private val authent: FirebaseAuth,
@@ -27,22 +23,22 @@ class AuthenticationRepository @Inject constructor(
 
         }
 
-        tesk.addOnFailureListener { exception ->
-            callback(null, exception.message)
+        tesk.addOnFailureListener {
+            callback(null, it.message)
         }
     }
 
     fun createAccount(
         email: String,
         password: String,
-        callback: (FirebaseUser?) -> Unit
+        callback: (FirebaseUser?, String?) -> Unit
     ) {
         authent.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener { authResult ->
-                callback(authResult.user)
+                callback(authResult.user, null)
             }
             .addOnFailureListener {
-                it.message
+                callback(null, it.message)
             }
     }
 
