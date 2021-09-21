@@ -44,9 +44,7 @@ private fun AppCompatActivity.setupSnackbar(
     return Snackbar.make(v, msgId, Snackbar.LENGTH_LONG).apply {
         view.setBackgroundColor(getColor(colorId))
 
-        v.findViewById<NavigationBarView>(R.id.bottomNav)?.apply {
-            anchorView = this
-        }
+        anchorView = v
 
         view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text).apply {
             setTextColor(getColor(R.color.white))

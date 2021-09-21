@@ -129,7 +129,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
     private fun showSnackbar(@StringRes msgId: Int, @ColorRes colorId: Int) {
         val activity = requireActivity() as MainActivity
-        val bottomNav = activity.binding.container
-        activity.snackBar(bottomNav, msgId, colorId)
+        val view = binding.registerNotTextView
+        activity.snackBar(view, msgId, colorId)
     }
 }
