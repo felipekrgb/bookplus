@@ -45,8 +45,8 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
     }
 
     private fun setupChips() {
-        binding.chipAnimal.setOnCheckedChangeListener { group, checkedId ->
-            handleChipChecked(group as Chip, checkedId, Category.ANIMAL)
+        binding.chipBiology.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.BIOLOGY)
         }
 
         binding.chipCulinary.setOnCheckedChangeListener { group, checkedId ->
@@ -96,6 +96,18 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
         binding.chipTechnology.setOnCheckedChangeListener { group, checkedId ->
             handleChipChecked(group as Chip, checkedId, Category.TECHNOLOGY)
         }
+
+        binding.chipDrama.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.DRAMA)
+        }
+
+        binding.chipRomance.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.ROMANCE)
+        }
+
+        binding.chipChildren.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.CHILDREN)
+        }
     }
 
     private fun setupSaveCategoriesButton(userId: String) {
@@ -131,7 +143,7 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
     }
 
     enum class Category(val categoryName: String) {
-        ANIMAL("Animal"),
+        BIOLOGY("Biologia"),
         CULINARY("Culinária"),
         SPORT("Esporte"),
         GEOGRAPHY("Geografia"),
@@ -144,6 +156,9 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
         SELF_HELP("Autoajuda"),
         PSYCHOLOGY("Psicologia"),
         TECHNOLOGY("Tecnologia"),
+        DRAMA("Drama"),
+        ROMANCE("Romance"),
+        CHILDREN("Infantil"),
     }
 
 }

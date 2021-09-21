@@ -161,7 +161,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Criar Conta"
+            android:text="REGISTRAR"
             android:textColor="@color/brown_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -180,21 +180,4 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--    <com.google.android.material.button.MaterialButton-->
-    <!--        android:id="@+id/buttonCreate"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="8dp"-->
-    <!--        android:backgroundTint="@color/brown_medium"-->
-    <!--        android:fontFamily="@font/montserrat_bold"-->
-    <!--        android:padding="14dp"-->
-    <!--        android:text="Criar Conta"-->
-    <!--        android:textAllCaps="false"-->
-    <!--        android:textColor="@color/brown_text"-->
-    <!--        app:cornerRadius="10dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent" />-->
-
 </androidx.constraintlayout.widget.ConstraintLayout>

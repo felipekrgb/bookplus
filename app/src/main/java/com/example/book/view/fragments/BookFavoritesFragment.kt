@@ -45,22 +45,14 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
             binding.recyclerViewFavs.visibility = GONE
             binding.emptyBooksTextView.visibility = VISIBLE
         } else {
+            adapter.refesh(listOfBooks)
+            binding.bookAnimation.cancelAnimation()
+            binding.bookAnimation.visibility = INVISIBLE
             binding.swipeContainer.visibility = VISIBLE
             binding.recyclerViewFavs.visibility = VISIBLE
-            adapter.refesh(listOfBooks)
         }
     }
 
-    private val observerLoading = Observer<Boolean> { isLoading ->
-        if (isLoading) {
-            binding.swipeContainer.visibility = GONE
-            binding.bookAnimation.visibility = VISIBLE
-            binding.bookAnimation.playAnimation()
-        } else {
-            binding.bookAnimation.cancelAnimation()
-            binding.bookAnimation.visibility = INVISIBLE
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,10 +64,8 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     }
 
     private fun startViewModel() {
-        viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
         viewModel.booksFavs.observe(viewLifecycleOwner, observerBookFav)
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
-        viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
         viewModel.fetchAllBooksFav()
     }
 
@@ -91,10 +81,16 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     }
 
     private fun startSwipe() {
-        swipeRefreshLayout.setOnRefreshListener {
-            swipeRefreshLayout.isRefreshing = false
-            loadFavBook()
-            Toast.makeText(requireContext(), "Carregando favoritos...", Toast.LENGTH_SHORT).show()
+
+        swipeRefreshLayout.apply {
+            setColorSchemeColors(requireContext().getColor(R.color.white))
+            setProgressBackgroundColorSchemeColor(requireContext().getColor(R.color.brown_medium))
+
+            setOnRefreshListener {
+                swipeRefreshLayout.isRefreshing = false
+                loadFavBook()
+                Toast.makeText(requireContext(), "Carregando favoritos...", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
