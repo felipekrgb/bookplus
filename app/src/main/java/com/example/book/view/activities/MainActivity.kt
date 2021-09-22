@@ -3,6 +3,7 @@ package com.example.book.view.activities
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.book.R
 import com.example.book.databinding.MainActivityBinding
 import com.example.book.utils.replaceFragment
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
