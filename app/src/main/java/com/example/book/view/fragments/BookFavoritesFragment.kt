@@ -44,6 +44,8 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
         if (listOfBooks.isEmpty()) {
             binding.recyclerViewFavs.visibility = GONE
             binding.emptyBooksTextView.visibility = VISIBLE
+            binding.bookAnimation.cancelAnimation()
+            binding.bookAnimation.visibility = INVISIBLE
         } else {
             adapter.refesh(listOfBooks)
             binding.bookAnimation.cancelAnimation()
