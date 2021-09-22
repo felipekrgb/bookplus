@@ -82,6 +82,7 @@
                 android:drawableRight="@drawable/ic_email"
                 android:fontFamily="@font/montserrat_bold"
                 android:hint="E-mail"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textSize="14dp" />

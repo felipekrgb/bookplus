@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -91,7 +90,6 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
             setOnRefreshListener {
                 swipeRefreshLayout.isRefreshing = false
                 loadFavBook()
-                Toast.makeText(requireContext(), "Carregando favoritos...", Toast.LENGTH_SHORT).show()
             }
         }
     }
