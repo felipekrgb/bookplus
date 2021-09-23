@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -66,7 +67,23 @@ class BooksViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                         super.onResourceReady(bitmap, transition)
                         Palette.generateAsync(bitmap) {
 
-                            binding.bookCoverCard.setStrokeColor(it!!.getMutedColor(itemView.context.getColor(R.color.brown_light)))
+                            binding.bookCoverCard.setStrokeColor(
+                                it!!.getMutedColor(
+                                    itemView.context.getColor(
+                                        R.color.brown_light
+                                    )
+                                )
+                            )
+
+                            binding.colorCard.apply {
+                                background.setTint(
+                                    it!!.getMutedColor(
+                                        itemView.context.getColor(
+                                            R.color.brown_medium
+                                        )
+                                    )
+                                )
+                            }
 
                         }
                     }

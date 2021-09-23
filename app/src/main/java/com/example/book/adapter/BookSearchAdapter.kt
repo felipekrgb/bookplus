@@ -70,7 +70,23 @@ class BookSearchViewHolder(item: View) : RecyclerView.ViewHolder(item) {
                         super.onResourceReady(bitmap, transition)
                         Palette.generateAsync(bitmap) {
 
-                            binding.bookCoverCard.setStrokeColor(it!!.getMutedColor(itemView.context.getColor(R.color.brown_light)))
+                            binding.bookCoverCard.setStrokeColor(
+                                it!!.getMutedColor(
+                                    itemView.context.getColor(
+                                        R.color.brown_light
+                                    )
+                                )
+                            )
+
+                            binding.colorCard.apply {
+                                background.setTint(
+                                    it!!.getMutedColor(
+                                        itemView.context.getColor(
+                                            R.color.brown_medium
+                                        )
+                                    )
+                                )
+                            }
 
                         }
                     }

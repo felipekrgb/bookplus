@@ -97,15 +97,24 @@
                     app:strokeColor="@color/brown_light"
                     app:strokeWidth="8dp">
 
-                    <ImageView
-                        android:id="@+id/bookImageView"
-                        android:layout_width="144dp"
-                        android:layout_height="214dp"
-                        android:src="@drawable/no_cover_thumb"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/bookImageView"
+                            android:layout_width="153.6dp"
+                            android:layout_height="218.4dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/no_cover_thumb"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 
