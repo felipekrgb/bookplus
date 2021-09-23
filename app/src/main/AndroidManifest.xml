@@ -14,7 +14,11 @@
         android:theme="@style/Theme.Book"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.activities.NoInternetActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.activities.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +28,11 @@
         </activity>
         <activity
             android:name=".view.activities.BookDetailsActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".view.activities.HomeActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
     </application>
