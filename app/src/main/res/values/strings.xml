@@ -40,4 +40,6 @@
     <string name="error_generic_login">Houve um erro ao fazer login</string>
     <string name="error_generic_created">Houve um erro ao criar a conta</string>
     <string name="error_email_format">Formato do e-mail inválido</string>
+    <string name="no_conection">Por favor, verifique sua conexão com a internet</string>
+
 </resources>

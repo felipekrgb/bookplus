@@ -1,10 +1,13 @@
 package com.example.book.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.book.R
 import com.example.book.databinding.HomeActivityBinding
+import com.example.book.utils.checkForInternet
 import com.example.book.utils.replaceFragment
+import com.example.book.utils.snackBar
 import com.example.book.view.fragments.BookFavoritesFragment
 import com.example.book.view.fragments.BookListingFragment
 import com.example.book.view.fragments.BookSearchFragment
@@ -19,29 +22,64 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = HomeActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (checkForInternet(this)) {
+            replaceFragment(BookListingFragment.newInstance(), R.id.containerHome)
+            binding.bottomNav.apply {
 
-        replaceFragment(BookListingFragment.newInstance(), R.id.containerHome)
+                setOnItemSelectedListener {
+                    when (it.itemId) {
+                        R.id.home -> {
+                            if (checkForInternet(context)) {
+                                replaceFragment(
+                                    BookListingFragment.newInstance(),
+                                    R.id.containerHome
+                                )
+                            } else {
+                                Intent(context, NoInternetActivity::class.java).apply {
+                                    startActivity(this)
+                                    finish()
+                                }
+                            }
+                        }
 
-        binding.bottomNav.apply {
+                        R.id.search -> {
+                            if (checkForInternet(context)) {
+                                replaceFragment(
+                                    BookSearchFragment.newInstance(),
+                                    R.id.containerHome
+                                )
+                            } else {
+                                Intent(context, NoInternetActivity::class.java).apply {
+                                    startActivity(this)
+                                    finish()
+                                }
+                            }
+                        }
+                        R.id.favorites -> {
+                            if (checkForInternet(context)) {
+                                replaceFragment(
+                                    BookFavoritesFragment(),
+                                    R.id.containerHome
+                                )
+                            } else {
+                                Intent(context, NoInternetActivity::class.java).apply {
+                                    startActivity(this)
+                                    finish()
+                                }
+                            }
 
-            setOnItemSelectedListener {
-                when (it.itemId) {
-                    R.id.home -> replaceFragment(
-                        BookListingFragment.newInstance(),
-                        R.id.containerHome
-                    )
-                    R.id.search -> replaceFragment(
-                        BookSearchFragment.newInstance(),
-                        R.id.containerHome
-                    )
-                    R.id.favorites -> replaceFragment(
-                        BookFavoritesFragment(),
-                        R.id.containerHome
-                    )
+                        }
+                    }
+                    true
                 }
-                true
+
             }
 
+        } else {
+            Intent(applicationContext, NoInternetActivity::class.java).apply {
+                startActivity(this)
+                finish()
+            }
         }
 
     }

@@ -55,7 +55,7 @@ class AuthenticationRepository @Inject constructor(
             }
     }
 
-    fun currentUserName(callback: (String) -> Unit) {
+    fun currentUserName(callback: (String?) -> Unit) {
         val task = fireStore.collection(COLLECTION_USERS).document(currentUser()!!.uid).get()
 
         task.addOnSuccessListener { documentSnapshot ->
