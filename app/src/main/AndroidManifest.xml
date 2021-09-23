@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Book"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.activities.NoInternetActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.activities.MainActivity"
             android:exported="true">
             <intent-filter>
