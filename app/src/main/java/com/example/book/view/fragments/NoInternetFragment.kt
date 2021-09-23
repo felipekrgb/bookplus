@@ -16,8 +16,10 @@ class NoInternetFragment : Fragment(R.layout.no_internet_fragment) {
         super.onViewCreated(view, savedInstanceState)
         binding = NoInternetFragmentBinding.bind(view)
 
+        binding.bookSearchAnimation.visibility = View.VISIBLE
+        binding.bookSearchAnimation.playAnimation()
 
-        binding.buttonRefesh.setOnClickListener {
+        binding.textViewNoInternet.setOnClickListener {
             Intent(context, HomeActivity::class.java).apply {
                 startActivity(this)
             }

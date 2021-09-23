@@ -1,10 +1,6 @@
 package com.example.book.view.activities
 
-import android.content.Context
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.book.R
@@ -14,7 +10,6 @@ import com.example.book.utils.checkForInternet
 import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
 import com.example.book.view.fragments.BookDetailsFragment
-import com.example.book.view.fragments.NoInternetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,12 +27,13 @@ class BookDetailsActivity : AppCompatActivity() {
         if (checkForInternet(this)) {
             replaceFragment(BookDetailsFragment.newInstance(book.id), R.id.containerDetails)
 
-        }
-        else {
+        } else {
             snackBar(binding.root, R.string.no_conection, R.color.red)
-            Intent()
+            Intent(applicationContext, NoInternetActivity::class.java).apply {
+                startActivity(this)
+                finish()
 
+            }
         }
     }
-
 }
