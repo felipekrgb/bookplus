@@ -8,6 +8,7 @@ import com.example.book.repository.BooksRepository
 import com.example.book.repository.UserCategoriesRepository
 import com.example.book.service.GoogleBookAPIService
 import com.example.book.service.RetrofitBuilder
+import com.example.book.service.notification.NotificationHandler
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -53,4 +54,8 @@ object HiltModule {
     @Provides
     fun provideUserCategorieRepository(dao: UserCategoriesDAO): UserCategoriesRepository =
         UserCategoriesRepository(dao)
+
+    @Provides
+    fun provideNotification(@ApplicationContext context: Context): NotificationHandler =
+        NotificationHandler(context)
 }
