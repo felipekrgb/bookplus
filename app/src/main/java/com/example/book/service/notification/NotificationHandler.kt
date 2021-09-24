@@ -45,7 +45,7 @@ class NotificationHandler @Inject constructor(private val context: Context) {
 
     fun createNotification(title: String, message: String): Notification {
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.icon_app)
+            .setSmallIcon(R.drawable.ic_bookmark_outline)
             .setContentTitle(title)
             .setStyle(
                 NotificationCompat.BigTextStyle()

@@ -44,7 +44,7 @@ class BookApplication : Application(), LifecycleObserver {
     }
 
     suspend fun showNotification() {
-        delay(3000)
+        delay(5000)
         notificationHandler.createNotification(
             "Como está sua leitura?",
             "Muitos homens iniciaram uma nova era na sua vida a partir da leitura de um livro \uD83D\uDE09"
@@ -67,7 +67,7 @@ class BookApplication : Application(), LifecycleObserver {
                 .build()
 
             val periodicWorkRequest = PeriodicWorkRequestBuilder<NotificationWorkMenage>(
-                60,
+                1,
                 TimeUnit.MINUTES
             ).setConstraints(constraints).build()
 
