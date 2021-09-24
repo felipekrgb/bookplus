@@ -8,8 +8,8 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_margin="5dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,8 +18,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="@string/book_search"
             android:textColor="#333"
@@ -69,7 +69,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewBookSearch"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -94,7 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_url="https://assets2.lottiefiles.com/private_files/lf30_x8aowqs9.json" />
+        app:lottie_rawRes="@raw/book_loading" />
 
     <TextView
         android:id="@+id/emptyBooksTextView"

@@ -50,7 +50,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_2scSKA.json" />
+        app:lottie_rawRes="@raw/book_loading"/>
 
     <TextView
         android:id="@+id/emptyBooksTextView"
