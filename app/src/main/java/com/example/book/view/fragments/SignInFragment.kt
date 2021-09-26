@@ -51,6 +51,16 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         binding.buttonLoginTextView.visibility = View.VISIBLE
         binding.buttonLoginProgressBar.visibility = View.INVISIBLE
 
+        binding.arrowBackImageView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
+        binding.registerTextView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
         if (it == "There is no user record corresponding to this identifier. The user may have been deleted.") {
             showSnackbar(R.string.error_login_no_user, R.color.red)
         } else if (it == "The password is invalid or the user does not have a password.") {
@@ -100,8 +110,19 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
                 isEnabled = false
                 alpha = 0.5f
             }
+
             binding.buttonLoginTextView.visibility = View.GONE
             binding.buttonLoginProgressBar.visibility = View.VISIBLE
+
+            binding.arrowBackImageView.apply {
+                isClickable = false
+                alpha = 0.5f
+            }
+
+            binding.registerTextView.apply {
+                isClickable = false
+                alpha = 0.5f
+            }
 
             (requireActivity() as AppCompatActivity).hideKeyboard()
 
@@ -115,11 +136,24 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
                     isEnabled = true
                     alpha = 1f
                 }
+
                 binding.buttonLoginTextView.visibility = View.VISIBLE
                 binding.buttonLoginProgressBar.visibility = View.INVISIBLE
+
+                binding.arrowBackImageView.apply {
+                    isClickable = true
+                    alpha = 1f
+                }
+
+                binding.registerTextView.apply {
+                    isClickable = true
+                    alpha = 1f
+                }
+
                 showSnackbar(R.string.no_user, R.color.red)
             }
         }
+
         binding.registerTextView.setOnClickListener {
             (requireActivity() as AppCompatActivity).replaceFragment(SignUpFragment.newInstance())
         }

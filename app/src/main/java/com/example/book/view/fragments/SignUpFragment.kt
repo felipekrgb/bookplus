@@ -33,8 +33,20 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             isEnabled = true
             alpha = 1f
         }
+
         binding.buttonCreateTextView.visibility = View.VISIBLE
         binding.buttonCreateProgressBar.visibility = View.INVISIBLE
+
+        binding.arrowBackImageView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
+        binding.loginTextView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
         (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment.newInstance(binding.editTextEmail.editText?.text.toString()))
     }
 
@@ -46,6 +58,17 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         binding.buttonCreate.visibility = View.VISIBLE
         binding.buttonCreateTextView.visibility = View.VISIBLE
         binding.buttonCreateProgressBar.visibility = View.INVISIBLE
+
+        binding.arrowBackImageView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
+        binding.loginTextView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
         if (it == "The email address is already in use by another account.") {
             showSnackbar(R.string.error_created_account_user_existent, R.color.red)
         } else if (it == "The email address is badly formatted.") {
@@ -84,6 +107,16 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             binding.buttonCreateTextView.visibility = View.GONE
             binding.buttonCreateProgressBar.visibility = View.VISIBLE
 
+            binding.arrowBackImageView.apply {
+                isClickable = false
+                alpha = 0.5f
+            }
+
+            binding.loginTextView.apply {
+                isClickable = false
+                alpha = 0.5f
+            }
+
             (requireActivity() as AppCompatActivity).hideKeyboard()
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty() && !inputUser?.text.isNullOrEmpty()) {
@@ -101,6 +134,17 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
                     }
                     binding.buttonCreateTextView.visibility = View.VISIBLE
                     binding.buttonCreateProgressBar.visibility = View.INVISIBLE
+
+                    binding.arrowBackImageView.apply {
+                        isClickable = true
+                        alpha = 1f
+                    }
+
+                    binding.loginTextView.apply {
+                        isClickable = true
+                        alpha = 1f
+                    }
+
                     showSnackbar(R.string.error_created_account_password_invalided, R.color.red)
 
                 }
@@ -109,8 +153,20 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
                     isEnabled = true
                     alpha = 1f
                 }
+
                 binding.buttonCreateTextView.visibility = View.VISIBLE
                 binding.buttonCreateProgressBar.visibility = View.INVISIBLE
+
+                binding.arrowBackImageView.apply {
+                    isClickable = true
+                    alpha = 1f
+                }
+
+                binding.loginTextView.apply {
+                    isClickable = true
+                    alpha = 1f
+                }
+
                 showSnackbar(R.string.error_created_account_empty, R.color.red)
             }
         }
