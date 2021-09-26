@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/libre_caslon_text_regular"
-        android:text="Escolha suas categorias favoritas"
+        android:text="Escolha 3 categorias"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/chipGroup"

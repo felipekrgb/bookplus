@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.book">
+    package="com.example.book" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".BookApplication"
@@ -13,14 +13,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Book"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".view.activities.CategoryActivity"
+            android:exported="true" />
         <activity
             android:name=".view.activities.NoInternetActivity"
             android:exported="true" />
         <activity
             android:name=".view.activities.MainActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
-            android:exported="true">
+            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,12 +33,12 @@
         </activity>
         <activity
             android:name=".view.activities.BookDetailsActivity"
-            android:screenOrientation="portrait"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activities.HomeActivity"
-            android:screenOrientation="portrait"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
     </application>
 

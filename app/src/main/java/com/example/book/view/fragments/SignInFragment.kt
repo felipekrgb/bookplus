@@ -31,7 +31,10 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private lateinit var binding: SignInFragmentBinding
 
     private val observerUser = Observer<FirebaseUser?> {
-        viewModel.getUserCategories(it.uid)
+        Intent(requireContext(), HomeActivity::class.java).apply {
+            startActivity(this)
+            requireActivity().finish()
+        }
     }
 
     private val observerError = Observer<String> {
@@ -42,22 +45,23 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         binding.buttonLoginTextView.visibility = View.VISIBLE
         binding.buttonLoginProgressBar.visibility = View.INVISIBLE
+
+        binding.arrowBackImageView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
+        binding.registerTextView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
         if (it == "There is no user record corresponding to this identifier. The user may have been deleted.") {
             showSnackbar(R.string.error_login_no_user, R.color.red)
         } else if (it == "The password is invalid or the user does not have a password.") {
             showSnackbar(R.string.user_invalided, R.color.red)
-        } else{
-            showSnackbar(R.string.error_generic_login, R.color.red)
-        }
-    }
-    private val observerCategories = Observer<List<String>?> { categories ->
-        if (categories != null) {
-            Intent(requireContext(), HomeActivity::class.java).apply {
-                startActivity(this)
-                requireActivity().finish()
-            }
         } else {
-            (requireActivity() as AppCompatActivity).replaceFragment(CategoryChooserFragment())
+            showSnackbar(R.string.error_generic_login, R.color.red)
         }
     }
 
@@ -66,47 +70,76 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding = SignInFragmentBinding.bind(view)
 
+        val userEmail = arguments?.getString("user_email")
+        userEmail?.apply {
+            showSnackbar(R.string.user_created, R.color.green)
+            binding.userEmailEditText.setText(this)
+        }
+
         setupObservers()
         setupSettingsSignIn()
         setupBackButton()
-
     }
 
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.error.observe(viewLifecycleOwner, observerError)
-        viewModel.categories.observe(viewLifecycleOwner, observerCategories)
+        //viewModel.categories.observe(viewLifecycleOwner, observerCategories)
     }
 
     private fun setupSettingsSignIn() {
         binding.buttonLogin.setOnClickListener {
-            val inputEmail = binding.editTextUser.editText
+            val inputEmail = binding.userEmailEditText
             val inputPassword = binding.editTextPassword.editText
 
             binding.buttonLogin.apply {
                 isEnabled = false
                 alpha = 0.5f
             }
+
             binding.buttonLoginTextView.visibility = View.GONE
             binding.buttonLoginProgressBar.visibility = View.VISIBLE
+
+            binding.arrowBackImageView.apply {
+                isClickable = false
+                alpha = 0.5f
+            }
+
+            binding.registerTextView.apply {
+                isClickable = false
+                alpha = 0.5f
+            }
 
             (requireActivity() as AppCompatActivity).hideKeyboard()
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty()) {
                 viewModel.signInEmailAndPassword(
-                        email = inputEmail?.text.toString(),
-                        password = inputPassword?.text.toString()
+                    email = inputEmail?.text.toString(),
+                    password = inputPassword?.text.toString()
                 )
             } else {
                 binding.buttonLogin.apply {
                     isEnabled = true
                     alpha = 1f
                 }
+
                 binding.buttonLoginTextView.visibility = View.VISIBLE
                 binding.buttonLoginProgressBar.visibility = View.INVISIBLE
+
+                binding.arrowBackImageView.apply {
+                    isClickable = true
+                    alpha = 1f
+                }
+
+                binding.registerTextView.apply {
+                    isClickable = true
+                    alpha = 1f
+                }
+
                 showSnackbar(R.string.no_user, R.color.red)
             }
         }
+
         binding.registerTextView.setOnClickListener {
             (requireActivity() as AppCompatActivity).replaceFragment(SignUpFragment.newInstance())
         }

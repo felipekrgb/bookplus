@@ -40,5 +40,4 @@ class UserCategoriesDAOTest {
         val results = dao.getUserCategories("123ABC")
         assertThat(results?.categories).isEqualTo(categories)
     }
-
 }
