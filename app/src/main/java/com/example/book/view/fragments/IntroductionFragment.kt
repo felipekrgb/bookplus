@@ -20,7 +20,7 @@ class IntroductionFragment : Fragment(R.layout.introduction_fragment) {
         binding = IntroductionFragmentBinding.bind(view)
 
         binding.singInButton.setOnClickListener {
-            (requireActivity() as MainActivity).replaceFragment(SignInFragment.newInstance())
+            (requireActivity() as MainActivity).replaceFragment(SignInFragment())
         }
 
         binding.signUpButton.setOnClickListener {

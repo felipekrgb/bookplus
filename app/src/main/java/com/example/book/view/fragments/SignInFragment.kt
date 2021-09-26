@@ -24,7 +24,15 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     companion object {
-        fun newInstance() = SignInFragment()
+        fun newInstance(email: String?): SignInFragment {
+            return SignInFragment().apply {
+                email?.let {
+                    arguments = Bundle().apply {
+                        putString("user_email", it)
+                    }
+                }
+            }
+        }
     }
 
     private lateinit var viewModel: SignInViewModel
@@ -42,11 +50,12 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         binding.buttonLoginTextView.visibility = View.VISIBLE
         binding.buttonLoginProgressBar.visibility = View.INVISIBLE
+
         if (it == "There is no user record corresponding to this identifier. The user may have been deleted.") {
             showSnackbar(R.string.error_login_no_user, R.color.red)
         } else if (it == "The password is invalid or the user does not have a password.") {
             showSnackbar(R.string.user_invalided, R.color.red)
-        } else{
+        } else {
             showSnackbar(R.string.error_generic_login, R.color.red)
         }
     }
@@ -66,10 +75,14 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding = SignInFragmentBinding.bind(view)
 
+        val userEmail = arguments?.getString("user_email")
+        userEmail?.apply {
+            binding.userEmailEditText.setText(this)
+        }
+
         setupObservers()
         setupSettingsSignIn()
         setupBackButton()
-
     }
 
     private fun setupObservers() {
@@ -80,7 +93,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     private fun setupSettingsSignIn() {
         binding.buttonLogin.setOnClickListener {
-            val inputEmail = binding.editTextUser.editText
+            val inputEmail = binding.userEmailEditText
             val inputPassword = binding.editTextPassword.editText
 
             binding.buttonLogin.apply {
@@ -94,8 +107,8 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty()) {
                 viewModel.signInEmailAndPassword(
-                        email = inputEmail?.text.toString(),
-                        password = inputPassword?.text.toString()
+                    email = inputEmail?.text.toString(),
+                    password = inputPassword?.text.toString()
                 )
             } else {
                 binding.buttonLogin.apply {

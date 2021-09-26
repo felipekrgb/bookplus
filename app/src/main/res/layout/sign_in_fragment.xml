@@ -42,8 +42,6 @@
                 android:textSize="32sp" />
 
             <com.google.android.material.textfield.TextInputLayout
-
-                android:id="@+id/editTextUser"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -56,6 +54,7 @@
                 app:hintEnabled="false">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userEmailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:drawableRight="@drawable/ic_email"

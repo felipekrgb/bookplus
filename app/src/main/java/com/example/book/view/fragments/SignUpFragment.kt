@@ -35,7 +35,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         }
         binding.buttonCreateTextView.visibility = View.VISIBLE
         binding.buttonCreateProgressBar.visibility = View.INVISIBLE
-        (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment())
+        (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment.newInstance(binding.editTextEmail.editText?.text.toString()))
     }
 
     private val observerError = Observer<String> {
@@ -50,7 +50,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             showSnackbar(R.string.error_created_account_user_existent, R.color.red)
         } else if (it == "The email address is badly formatted.") {
             showSnackbar(R.string.error_email_format, R.color.red)
-        } else{
+        } else {
             showSnackbar(R.string.error_generic_created, R.color.red)
         }
     }
@@ -116,8 +116,7 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         }
 
         binding.loginTextView.setOnClickListener {
-            (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment.newInstance())
-
+            (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment())
         }
     }
 

@@ -38,6 +38,7 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
             }
         }
     }
+
     private lateinit var viewModelFireBase: BookFavoritesViewModel
     private lateinit var bookFavs: String
     private lateinit var viewModel: BookDetailsViewModel
@@ -67,9 +68,11 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
 
         viewModelFireBase = ViewModelProvider(this).get(BookFavoritesViewModel::class.java)
         viewModel = ViewModelProvider(this).get(BookDetailsViewModel::class.java)
+
         setupObservers()
         setupViewModelFuns()
         setupCheckIcon()
+
         val bookId = arguments?.getString("book_id") as String
         bookFavs = bookId
         viewModel.getBookById(bookId)
@@ -194,7 +197,8 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
 
                 this.text = getText(R.string.preview)
                 setOnClickListener {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(book.volumeInfo.previewLink))
+                    val browserIntent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse(book.volumeInfo.previewLink))
                     startActivity(browserIntent)
                 }
 
