@@ -1,184 +1,191 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/brown_light"
+    android:fillViewport="true"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/arrowBackImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/brown_medium" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:orientation="vertical"
-        android:padding="12dp"
-        android:paddingTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/arrowBackImageView">
-
-        <TextView
-            android:id="@+id/createdTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="12dp"
-            android:fontFamily="@font/libre_caslon_text_regular"
-            android:text="Crie sua conta"
-            android:textSize="32sp" />
-
-        <com.google.android.material.textfield.TextInputLayout
-
-            android:id="@+id/editTextUser"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="20dp"
-            app:boxCornerRadiusBottomEnd="13dp"
-            app:boxCornerRadiusBottomStart="13dp"
-            app:boxCornerRadiusTopEnd="13dp"
-            app:boxCornerRadiusTopStart="13dp"
-            app:hintEnabled="false">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawableRight="@drawable/ic_person"
-                android:fontFamily="@font/montserrat_bold"
-                android:hint="Usuário"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textSize="14dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-
-            android:id="@+id/editTextEmail"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="20dp"
-            app:boxCornerRadiusBottomEnd="13dp"
-            app:boxCornerRadiusBottomStart="13dp"
-            app:boxCornerRadiusTopEnd="13dp"
-            app:boxCornerRadiusTopStart="13dp"
-            app:hintEnabled="false">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:drawableRight="@drawable/ic_email"
-                android:fontFamily="@font/montserrat_bold"
-                android:hint="E-mail"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textSize="14dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/editTextPassword"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="20dp"
-            app:boxCornerRadiusBottomEnd="13dp"
-            app:boxCornerRadiusBottomStart="13dp"
-            app:boxCornerRadiusTopEnd="13dp"
-            app:boxCornerRadiusTopStart="13dp"
-            app:endIconMode="password_toggle"
-            app:errorEnabled="true"
-            app:hintEnabled="false">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/montserrat_bold"
-                android:hint="Senha"
-                android:inputType="textPassword"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textSize="14dp" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCreate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/registerNotTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Já tem uma conta?" />
-
-        <TextView
-            android:id="@+id/loginTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text=" Entrar!"
-            android:textColor="@color/brown_medium" />
-
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/buttonCreate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/button_border"
-        android:padding="8dp"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/buttonCreateTextView"
+        <ImageView
+            android:id="@+id/arrowBackImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="REGISTRAR"
-            android:textColor="@color/brown_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_arrow_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/brown_medium" />
 
-        <ProgressBar
-            android:id="@+id/buttonCreateProgressBar"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:indeterminateTint="@color/brown_dark"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:padding="12dp"
+            android:paddingTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/arrowBackImageView">
+
+            <TextView
+                android:id="@+id/createdTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/libre_caslon_text_regular"
+                android:text="Crie sua conta"
+                android:textSize="32sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:id="@+id/editTextUser"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="20dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/ic_person"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:hint="Usuário"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="14dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:id="@+id/editTextEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="20dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:drawableRight="@drawable/ic_email"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:hint="E-mail"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="14dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/editTextPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="20dp"
+                app:boxCornerRadiusBottomEnd="13dp"
+                app:boxCornerRadiusBottomStart="13dp"
+                app:boxCornerRadiusTopEnd="13dp"
+                app:boxCornerRadiusTopStart="13dp"
+                app:endIconMode="password_toggle"
+                app:errorEnabled="true"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:hint="Senha"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textSize="14dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCreate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/registerNotTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Já tem uma conta?" />
+
+            <TextView
+                android:id="@+id/loginTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text=" Entrar!"
+                android:textColor="@color/brown_medium" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/buttonCreate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/button_border"
+            android:padding="8dp"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/buttonCreateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="REGISTRAR"
+                android:textColor="@color/brown_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/buttonCreateProgressBar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:indeterminateTint="@color/brown_dark"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
