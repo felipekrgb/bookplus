@@ -1,16 +1,15 @@
 package com.example.book.view.fragments
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
 import com.example.book.databinding.CategoryChooserFragmentBinding
 import com.example.book.model.UserCategories
-import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
 import com.example.book.viewmodel.CategoryChooserViewModel
@@ -29,19 +28,20 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
     private lateinit var binding: CategoryChooserFragmentBinding
     private val listOfCategories = mutableListOf<String>()
 
-    private val observerSignedUser = Observer<FirebaseUser> { user ->
+    private val observerUser = Observer<FirebaseUser> { user ->
         setupSaveCategoriesButton(user.uid)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = CategoryChooserFragmentBinding.bind(view)
         viewModel = ViewModelProvider(this).get(CategoryChooserViewModel::class.java)
 
-        viewModel.user.observe(viewLifecycleOwner, observerSignedUser)
+        viewModel.user.observe(viewLifecycleOwner, observerUser)
 
-        setupChips()
         viewModel.getCurrentUser()
+        setupChips()
     }
 
     private fun setupChips() {

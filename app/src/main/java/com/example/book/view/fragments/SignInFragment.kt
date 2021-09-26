@@ -24,22 +24,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     companion object {
-        fun newInstance(email: String?): SignInFragment {
-            return SignInFragment().apply {
-                email?.let {
-                    arguments = Bundle().apply {
-                        putString("user_email", it)
-                    }
-                }
-            }
-        }
+        fun newInstance() = SignInFragment()
     }
 
     private lateinit var viewModel: SignInViewModel
     private lateinit var binding: SignInFragmentBinding
 
     private val observerUser = Observer<FirebaseUser?> {
-        viewModel.getUserCategories(it.uid)
+        Intent(requireContext(), HomeActivity::class.java).apply {
+            startActivity(this)
+            requireActivity().finish()
+        }
     }
 
     private val observerError = Observer<String> {
@@ -69,16 +64,6 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
             showSnackbar(R.string.error_generic_login, R.color.red)
         }
     }
-    private val observerCategories = Observer<List<String>?> { categories ->
-        if (categories != null) {
-            Intent(requireContext(), HomeActivity::class.java).apply {
-                startActivity(this)
-                requireActivity().finish()
-            }
-        } else {
-            (requireActivity() as AppCompatActivity).replaceFragment(CategoryChooserFragment())
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -87,6 +72,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
         val userEmail = arguments?.getString("user_email")
         userEmail?.apply {
+            showSnackbar(R.string.user_created, R.color.green)
             binding.userEmailEditText.setText(this)
         }
 
@@ -98,7 +84,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.error.observe(viewLifecycleOwner, observerError)
-        viewModel.categories.observe(viewLifecycleOwner, observerCategories)
+        //viewModel.categories.observe(viewLifecycleOwner, observerCategories)
     }
 
     private fun setupSettingsSignIn() {

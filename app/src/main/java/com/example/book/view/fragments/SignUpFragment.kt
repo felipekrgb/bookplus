@@ -1,5 +1,6 @@
 package com.example.book.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.ColorRes
@@ -13,6 +14,7 @@ import com.example.book.databinding.SignUpFragmentBinding
 import com.example.book.utils.hideKeyboard
 import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
+import com.example.book.view.activities.CategoryActivity
 import com.example.book.view.activities.MainActivity
 import com.example.book.viewmodel.SignUpViewModel
 import com.google.firebase.auth.FirebaseUser
@@ -47,7 +49,11 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
             alpha = 1f
         }
 
-        (requireActivity() as AppCompatActivity).replaceFragment(SignInFragment.newInstance(binding.editTextEmail.editText?.text.toString()))
+        Intent(requireContext(), CategoryActivity::class.java).apply {
+            startActivity(this)
+            requireActivity().finish()
+        }
+
     }
 
     private val observerError = Observer<String> {

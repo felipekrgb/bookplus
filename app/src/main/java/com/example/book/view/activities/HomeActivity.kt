@@ -7,7 +7,6 @@ import com.example.book.R
 import com.example.book.databinding.HomeActivityBinding
 import com.example.book.utils.checkForInternet
 import com.example.book.utils.replaceFragment
-import com.example.book.utils.snackBar
 import com.example.book.view.fragments.BookFavoritesFragment
 import com.example.book.view.fragments.BookListingFragment
 import com.example.book.view.fragments.BookSearchFragment
@@ -22,10 +21,11 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = HomeActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         if (checkForInternet(this)) {
             replaceFragment(BookListingFragment.newInstance(), R.id.containerHome)
-            binding.bottomNav.apply {
 
+            binding.bottomNav.apply {
                 setOnItemSelectedListener {
                     when (it.itemId) {
                         R.id.home -> {
