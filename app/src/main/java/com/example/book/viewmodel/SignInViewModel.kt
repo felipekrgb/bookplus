@@ -22,9 +22,6 @@ class SignInViewModel @Inject constructor(
     private val _user = MutableLiveData<FirebaseUser?>()
     val user: LiveData<FirebaseUser?> = _user
 
-    private val _categories = MutableLiveData<List<String>?>()
-    val categories: LiveData<List<String>?> = _categories
-
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
 
@@ -34,14 +31,6 @@ class SignInViewModel @Inject constructor(
                 _user.value = userFirebase
             } else {
                 _error.value = error ?: "Erro de Login"
-            }
-        }
-    }
-
-    fun getUserCategories(userId: String) {
-        viewModelScope.launch {
-            userCategoriesRepository.getUserCategories(userId).apply {
-                _categories.value = this?.categories
             }
         }
     }

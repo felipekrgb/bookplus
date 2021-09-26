@@ -27,8 +27,8 @@ class BookListingViewModel @Inject constructor(
     private val _user = MutableLiveData<FirebaseUser>()
     val user: LiveData<FirebaseUser> = _user
 
-    private val _categories = MutableLiveData<List<String>>()
-    val categories: LiveData<List<String>> = _categories
+    private val _categories = MutableLiveData<List<String>?>()
+    val categories: LiveData<List<String>?> = _categories
 
     private val _isSigned = MutableLiveData<Boolean>(true)
     val isSignedIn: LiveData<Boolean> = _isSigned
@@ -48,8 +48,11 @@ class BookListingViewModel @Inject constructor(
 
     fun getUserCategories(userId: String) {
         viewModelScope.launch {
-            userCategoriesRepository.getUserCategories(userId)?.let { userCategories ->
-                _categories.value = userCategories.categories
+            val userCategories = userCategoriesRepository.getUserCategories(userId)
+            if (userCategories != null) {
+            _categories.value = userCategories.categories
+            } else {
+                _categories.value = null
             }
         }
     }
