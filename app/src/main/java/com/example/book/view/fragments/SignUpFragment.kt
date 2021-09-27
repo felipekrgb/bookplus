@@ -11,11 +11,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
 import com.example.book.databinding.SignUpFragmentBinding
+import com.example.book.utils.checkForInternet
 import com.example.book.utils.hideKeyboard
 import com.example.book.utils.replaceFragment
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.CategoryActivity
 import com.example.book.view.activities.MainActivity
+import com.example.book.view.activities.NoInternetActivity
 import com.example.book.viewmodel.SignUpViewModel
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
@@ -80,7 +82,15 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
         } else if (it == "The email address is badly formatted.") {
             showSnackbar(R.string.error_email_format, R.color.red)
         } else {
-            showSnackbar(R.string.error_generic_created, R.color.red)
+            if (it == "A network error (such as timeout, interrupted connection or unreachable host) has occurred." &&
+                !(requireActivity() as AppCompatActivity).checkForInternet(requireContext())
+            ) {
+                Intent(requireActivity(), NoInternetActivity::class.java).apply {
+                    startActivity(this)
+                }
+            } else {
+                showSnackbar(R.string.error_generic_created, R.color.red)
+            }
         }
     }
 
@@ -127,11 +137,34 @@ class SignUpFragment : Fragment(R.layout.sign_up_fragment) {
 
             if (!inputEmail?.text.isNullOrEmpty() && !inputPassword?.text.isNullOrEmpty() && !inputUser?.text.isNullOrEmpty()) {
                 if (inputPassword!!.length() >= 6) {
-                    viewModel.signUpEmailAndPassword(
-                        email = inputEmail?.text.toString(),
-                        password = inputPassword?.text.toString(),
-                        name = inputUser?.text.toString()
-                    )
+                    if ((requireActivity() as AppCompatActivity).checkForInternet(requireContext())) {
+                        viewModel.signUpEmailAndPassword(
+                            email = inputEmail?.text.toString(),
+                            password = inputPassword?.text.toString(),
+                            name = inputUser?.text.toString()
+                        )
+                    } else {
+                        binding.buttonCreate.apply {
+                            isEnabled = true
+                            alpha = 1f
+                        }
+                        binding.buttonCreateTextView.visibility = View.VISIBLE
+                        binding.buttonCreateProgressBar.visibility = View.INVISIBLE
+
+                        binding.arrowBackImageView.apply {
+                            isClickable = true
+                            alpha = 1f
+                        }
+
+                        binding.loginTextView.apply {
+                            isClickable = true
+                            alpha = 1f
+                        }
+
+                        Intent(requireActivity(), NoInternetActivity::class.java).apply {
+                            startActivity(this)
+                        }
+                    }
                 } else {
 
                     binding.buttonCreate.apply {

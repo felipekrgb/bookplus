@@ -16,6 +16,8 @@ import com.example.book.R
 import com.example.book.adapter.BookSearchAdapter
 import com.example.book.databinding.BookSearchFragmentBinding
 import com.example.book.model.Book
+import com.example.book.utils.checkForInternet
+import com.example.book.utils.goToNoInternetActivity
 import com.example.book.utils.hideKeyboard
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
@@ -70,7 +72,11 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
 
     private val observerStartIndex = Observer<Int> { startIndex ->
         if (!searchTerm.isNullOrEmpty()) {
-            viewModel.getBooksByTerm(searchTerm!!, startIndex)
+            if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+                viewModel.getBooksByTerm(searchTerm!!, startIndex)
+            } else {
+                goToNoInternetActivity()
+            }
         }
     }
 
@@ -106,11 +112,15 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
                 if (searchTerm.isNullOrEmpty()) {
                     showSnackbar(R.string.no_search_term, R.color.red)
                 } else {
-                    didSearchTermChanged = true
-                    binding.emptyBooksTextView.visibility = View.GONE
-                    binding.recyclerViewBookSearch.visibility = View.GONE
-                    viewModel.getBooksByTerm(searchTerm!!)
-                    (requireActivity() as AppCompatActivity).hideKeyboard()
+                    if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+                        didSearchTermChanged = true
+                        binding.emptyBooksTextView.visibility = View.GONE
+                        binding.recyclerViewBookSearch.visibility = View.GONE
+                        viewModel.getBooksByTerm(searchTerm!!)
+                        (requireActivity() as AppCompatActivity).hideKeyboard()
+                    } else {
+                        goToNoInternetActivity()
+                    }
                 }
                 return@OnKeyListener true
             }
@@ -123,8 +133,12 @@ class BookSearchFragment : Fragment(R.layout.book_search_fragment) {
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    binding.swipeContainer.isRefreshing = true
-                    viewModel.nextBooks()
+                    if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+                        binding.swipeContainer.isRefreshing = true
+                        viewModel.nextBooks()
+                    } else {
+                        goToNoInternetActivity()
+                    }
                 }
             }
         })

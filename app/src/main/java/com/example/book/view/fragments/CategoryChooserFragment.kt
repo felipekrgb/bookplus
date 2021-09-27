@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
 import com.example.book.databinding.CategoryChooserFragmentBinding
 import com.example.book.model.UserCategories
+import com.example.book.utils.checkForInternet
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
+import com.example.book.view.activities.NoInternetActivity
 import com.example.book.viewmodel.CategoryChooserViewModel
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseUser
@@ -123,9 +125,15 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
                     UserCategories(userId = userId, categories = listOfCategories)
                 )
 
-                Intent(requireContext(), HomeActivity::class.java).apply {
-                    startActivity(this)
-                    requireActivity().finish()
+                if ((requireActivity() as AppCompatActivity).checkForInternet(requireContext())) {
+                    Intent(requireContext(), HomeActivity::class.java).apply {
+                        startActivity(this)
+                        requireActivity().finish()
+                    }
+                } else {
+                    Intent(requireActivity(), NoInternetActivity::class.java).apply {
+                        startActivity(this)
+                    }
                 }
             }
         }
