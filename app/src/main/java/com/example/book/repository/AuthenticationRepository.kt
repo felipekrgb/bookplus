@@ -55,6 +55,14 @@ class AuthenticationRepository @Inject constructor(
             }
     }
 
+    fun updateUserName(name: String) {
+        fireStore.collection(COLLECTION_USERS).document(currentUser()!!.uid).set(
+            hashMapOf(
+                "name" to name
+            )
+        )
+    }
+
     fun currentUserName(callback: (String?) -> Unit) {
         val task = fireStore.collection(COLLECTION_USERS).document(currentUser()!!.uid).get()
 

@@ -18,11 +18,14 @@ class ProfileEditViewModel @Inject constructor(
     private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {
 
+    private val _userCategories = MutableLiveData<UserCategories>()
+    val userCategories: LiveData<UserCategories> = _userCategories
+
     private val _user = MutableLiveData<FirebaseUser>()
     val user: LiveData<FirebaseUser> = _user
 
-    private val _userCategories = MutableLiveData<UserCategories>()
-    val userCategories: LiveData<UserCategories> = _userCategories
+    private val _userName = MutableLiveData<String>()
+    val userName: LiveData<String> = _userName
 
     fun getUserCategories(userId: String) {
         viewModelScope.launch {
@@ -38,9 +41,21 @@ class ProfileEditViewModel @Inject constructor(
         }
     }
 
+    fun updateName(name: String) {
+        viewModelScope.launch {
+            authenticationRepository.updateUserName(name)
+        }
+    }
+
     fun getCurrentUser() {
         authenticationRepository.currentUser()?.apply {
             _user.value = this
+        }
+    }
+
+    fun getCurrentUserName() {
+        authenticationRepository.currentUserName {
+            _userName.value = it
         }
     }
 

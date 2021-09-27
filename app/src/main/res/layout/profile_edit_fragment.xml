@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextUser"
+        android:id="@+id/userNameEditText"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -46,15 +46,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="#eee"
-        app:layout_constraintTop_toBottomOf="@id/editTextUser"
-        tools:layout_editor_absoluteX="16dp" />
-
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/chipGroup"
         android:layout_width="wrap_content"
@@ -62,7 +53,7 @@
         app:layout_constraintBottom_toTopOf="@id/editProfileButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view">
+        app:layout_constraintTop_toBottomOf="@+id/userNameEditText">
 
         <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/flexboxLayout"

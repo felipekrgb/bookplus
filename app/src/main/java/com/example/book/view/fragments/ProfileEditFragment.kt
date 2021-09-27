@@ -11,8 +11,10 @@ import com.example.book.R
 import com.example.book.databinding.ProfileEditFragmentBinding
 import com.example.book.model.Category
 import com.example.book.model.UserCategories
+import com.example.book.utils.checkForInternet
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
+import com.example.book.view.activities.NoInternetActivity
 import com.example.book.viewmodel.ProfileEditViewModel
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseUser
@@ -36,11 +38,27 @@ class ProfileEditFragment : Fragment(R.layout.profile_edit_fragment) {
         viewModel.getUserCategories(user.uid)
     }
 
+    private val observerUserName = Observer<String> { userName ->
+        binding.userNameEditText.editText?.setText(userName)
+    }
+
     private val observerUserCategories = Observer<UserCategories> { userCategories ->
         this.userCategories.addAll(userCategories.categories)
         this.userCategoriesId = userCategories.id
         setupChips()
-        setupSaveCategoriesButton(user.uid)
+        setupEditProfileButton(user.uid)
+    }
+
+    override fun onResume() {
+        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+            viewModel.getCurrentUserName()
+            viewModel.getCurrentUser()
+        } else {
+            Intent(requireActivity(), NoInternetActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+        super.onResume()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,9 +67,8 @@ class ProfileEditFragment : Fragment(R.layout.profile_edit_fragment) {
         binding = ProfileEditFragmentBinding.bind(view)
 
         viewModel.user.observe(viewLifecycleOwner, observerUser)
+        viewModel.userName.observe(viewLifecycleOwner, observerUserName)
         viewModel.userCategories.observe(viewLifecycleOwner, observerUserCategories)
-
-        viewModel.getCurrentUser()
     }
 
     private fun checkIfCategoryMatch(chipCategory: Category): Boolean {
@@ -72,7 +89,7 @@ class ProfileEditFragment : Fragment(R.layout.profile_edit_fragment) {
         }
 
         binding.chipCulinary.apply {
-            isCheckable = checkIfCategoryMatch(Category.CULINARY)
+            isChecked = checkIfCategoryMatch(Category.CULINARY)
             setOnCheckedChangeListener { group, checkedId ->
                 handleChipChecked(group as Chip, checkedId, Category.CULINARY)
             }
@@ -180,15 +197,22 @@ class ProfileEditFragment : Fragment(R.layout.profile_edit_fragment) {
         }
     }
 
-    private fun setupSaveCategoriesButton(userId: String) {
+    private fun setupEditProfileButton(userId: String) {
         binding.editProfileButton.setOnClickListener {
-            if (userCategories.size != 3) {
+            if (binding.userNameEditText?.editText?.text.isNullOrEmpty()) {
+                (requireActivity() as AppCompatActivity).snackBar(
+                    it,
+                    R.string.error_name_field_empty,
+                    R.color.red,
+                )
+            } else if (userCategories.size != 3) {
                 (requireActivity() as AppCompatActivity).snackBar(
                     it,
                     R.string.categories_error,
                     R.color.red,
                 )
             } else {
+                viewModel.updateName(binding.userNameEditText.editText?.text.toString())
                 viewModel.updateCategories(
                     UserCategories(
                         id = userCategoriesId,
