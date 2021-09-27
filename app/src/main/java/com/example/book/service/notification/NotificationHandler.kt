@@ -24,8 +24,8 @@ class NotificationHandler @Inject constructor(private val context: Context) {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            val name = "New Images"
-            val descriptionText = "New images"
+            val name = "New information"
+            val descriptionText = "New information"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
