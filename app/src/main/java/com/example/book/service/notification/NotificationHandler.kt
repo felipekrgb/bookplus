@@ -49,7 +49,7 @@ class NotificationHandler @Inject constructor(private val context: Context) {
             .setContentTitle(title)
             .setStyle(
                 NotificationCompat.BigTextStyle()
-                    .bigText("Muitos homens iniciaram uma nova era na sua vida a partir da leitura de um livro \uD83D\uDE09")
+                    .bigText("Muitas pessoas iniciaram uma nova era na sua vida a partir da leitura de um livro \uD83D\uDE09")
             )
             .setVibrate(longArrayOf(200))
             .setContentText(message)
