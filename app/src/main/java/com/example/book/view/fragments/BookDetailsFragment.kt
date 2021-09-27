@@ -43,9 +43,9 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
     }
 
     private lateinit var viewModelFireBase: BookFavoritesViewModel
-    private lateinit var bookFavs: String
     private lateinit var viewModel: BookDetailsViewModel
     private lateinit var binding: BookDetailsFragmentBinding
+    private lateinit var bookId: String
     private var colorPallete: Int? = null
     private val observerBook = Observer<Book?> {
         if ((requireActivity() as BookDetailsActivity).checkForInternet(requireContext())) {
@@ -55,7 +55,7 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         }
     }
     private val observerBookFav = Observer<List<String>> { listOfFavorites ->
-        binding.checkBoxSave.isChecked = listOfFavorites.contains(bookFavs)
+        binding.checkBoxSave.isChecked = listOfFavorites.contains(bookId)
     }
     private val observerLoading = Observer<Boolean> { isLoading ->
         if (isLoading) {
@@ -69,6 +69,16 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         }
     }
 
+    override fun onResume() {
+        if ((requireActivity() as BookDetailsActivity).checkForInternet(requireContext())) {
+            viewModel.getBookById(bookId)
+            viewModelFireBase.fetchAllBooksFav()
+        } else {
+            goToNoInternetActivity()
+        }
+        super.onResume()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BookDetailsFragmentBinding.bind(view)
@@ -77,33 +87,18 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         viewModel = ViewModelProvider(this).get(BookDetailsViewModel::class.java)
 
         setupObservers()
-        setupViewModelFuns()
         setupCheckIcon()
 
-        val bookId = arguments?.getString("book_id") as String
-        bookFavs = bookId
-        if ((requireActivity() as BookDetailsActivity).checkForInternet(requireContext())) {
-            viewModel.getBookById(bookId)
-        } else {
-            goToNoInternetActivity()
-        }
+        bookId = arguments?.getString("book_id") as String
     }
 
     private fun setupCheckIcon() {
         binding.checkBoxSave.setOnCheckedChangeListener { checked, isChecked ->
             if (isChecked) {
-                viewModelFireBase.save(bookFavs)
+                viewModelFireBase.save(bookId)
             } else {
-                viewModelFireBase.delete(bookFavs)
+                viewModelFireBase.delete(bookId)
             }
-        }
-    }
-
-    private fun setupViewModelFuns() {
-        if ((requireActivity() as BookDetailsActivity).checkForInternet(requireContext())) {
-            viewModelFireBase.fetchAllBooksFav()
-        } else {
-            goToNoInternetActivity()
         }
     }
 

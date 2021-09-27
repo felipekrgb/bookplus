@@ -17,6 +17,7 @@ import com.example.book.utils.goToNoInternetActivity
 import com.example.book.view.activities.CategoryActivity
 import com.example.book.view.activities.HomeActivity
 import com.example.book.view.activities.MainActivity
+import com.example.book.view.activities.NoInternetActivity
 import com.example.book.view.dialogs.BasicDetailsFragment
 import com.example.book.viewmodel.BookListingViewModel
 import com.google.firebase.auth.FirebaseUser
@@ -108,6 +109,18 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         binding.greetingsTextView.text = "Olá, $it"
     }
 
+    override fun onResume() {
+        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+            viewModel.getCurrentUserName()
+            viewModel.getCurrentUser()
+        } else {
+            Intent(requireActivity(), NoInternetActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+        super.onResume()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BookListingFragmentBinding.bind(view)
@@ -117,18 +130,6 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         setupRecyclerView()
         setupObservers()
         setupButtons()
-
-        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
-            viewModel.getCurrentUserName()
-        } else {
-            goToNoInternetActivity()
-        }
-
-        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
-            viewModel.getCurrentUser()
-        } else {
-            goToNoInternetActivity()
-        }
     }
 
     private fun setupButtons() {

@@ -61,6 +61,14 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
         }
     }
 
+    override fun onResume() {
+        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+            viewModel.fetchAllBooksFav()
+        } else {
+            goToNoInternetActivity()
+        }
+        super.onResume()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,11 +82,6 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     private fun startViewModel() {
         viewModel.booksFavs.observe(viewLifecycleOwner, observerBookFav)
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
-        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
-            viewModel.fetchAllBooksFav()
-        } else {
-            goToNoInternetActivity()
-        }
     }
 
     private fun startRecyclerView() {
