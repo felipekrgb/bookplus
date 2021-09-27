@@ -51,7 +51,7 @@ class NotificationHandler @Inject constructor(private val context: Context) {
                 NotificationCompat.BigTextStyle()
                     .bigText("Muitos homens iniciaram uma nova era na sua vida a partir da leitura de um livro \uD83D\uDE09")
             )
-            .setVibrate(longArrayOf(400))
+            .setVibrate(longArrayOf(200))
             .setContentText(message)
             .setContentIntent(createPendingIntent())
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
