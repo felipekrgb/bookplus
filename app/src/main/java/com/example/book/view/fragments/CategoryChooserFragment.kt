@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
 import com.example.book.databinding.CategoryChooserFragmentBinding
+import com.example.book.model.Category
 import com.example.book.model.UserCategories
 import com.example.book.utils.checkForInternet
 import com.example.book.utils.snackBar
@@ -147,26 +148,5 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
         } else {
             listOfCategories.remove(category.categoryName)
         }
-        println(listOfCategories)
     }
-
-    enum class Category(val categoryName: String) {
-        BIOLOGY("Biologia"),
-        CULINARY("Culinária"),
-        SPORT("Esporte"),
-        GEOGRAPHY("Geografia"),
-        POLITICS("Política"),
-        EDUCATION("Educação"),
-        ACTION("Ação"),
-        ADVENTURE("Aventura"),
-        HORROR("Terror"),
-        BIOGRAPHY("Biografia"),
-        SELF_HELP("Autoajuda"),
-        PSYCHOLOGY("Psicologia"),
-        TECHNOLOGY("Tecnologia"),
-        DRAMA("Drama"),
-        ROMANCE("Romance"),
-        CHILDREN("Infantil"),
-    }
-
 }

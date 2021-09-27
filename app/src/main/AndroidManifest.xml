@@ -15,9 +15,6 @@
         android:theme="@style/Theme.Book"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.activities.UserActivity"
-            android:exported="true" />
-        <activity
             android:name=".view.activities.CategoryActivity"
             android:exported="true" />
         <activity
@@ -40,8 +37,7 @@
         <activity
             android:name=".view.activities.HomeActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

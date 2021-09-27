@@ -16,3 +16,22 @@ data class UserCategories(
     @ColumnInfo(name = "categories")
     val categories: List<String>
 )
+
+enum class Category(val categoryName: String) {
+    BIOLOGY("Biologia"),
+    CULINARY("Culinária"),
+    SPORT("Esporte"),
+    GEOGRAPHY("Geografia"),
+    POLITICS("Política"),
+    EDUCATION("Educação"),
+    ACTION("Ação"),
+    ADVENTURE("Aventura"),
+    HORROR("Terror"),
+    BIOGRAPHY("Biografia"),
+    SELF_HELP("Autoajuda"),
+    PSYCHOLOGY("Psicologia"),
+    TECHNOLOGY("Tecnologia"),
+    DRAMA("Drama"),
+    ROMANCE("Romance"),
+    CHILDREN("Infantil"),
+}
