@@ -38,9 +38,7 @@ class BookApplication : Application(), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onAppDestroy() {
-        CoroutineScope(Dispatchers.Main).async {
             startWork()
-        }
     }
 
     suspend fun showNotification() {
@@ -55,8 +53,7 @@ class BookApplication : Application(), LifecycleObserver {
             }
     }
 
-    suspend fun startWork() {
-        delay(2000)
+    fun startWork() {
         WorkManager.getInstance(applicationContext).let {
             val workManager = WorkManager.getInstance(applicationContext)
 
