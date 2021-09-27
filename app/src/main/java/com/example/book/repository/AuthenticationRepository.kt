@@ -12,7 +12,7 @@ class AuthenticationRepository @Inject constructor(
     private val fireStore: FirebaseFirestore
 ) {
 
-    fun singEmailAndPassword(
+    fun signInEmailAndPassword(
         email: String,
         password: String,
         callback: (FirebaseUser?, String?) -> Unit
@@ -22,7 +22,7 @@ class AuthenticationRepository @Inject constructor(
             if (it.user != null) {
                 callback(it.user, null)
             } else {
-                callback(null, "Error de Login")
+                callback(null, "Erro de Login")
             }
 
         }
