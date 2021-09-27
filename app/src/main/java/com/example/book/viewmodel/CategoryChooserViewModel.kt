@@ -44,4 +44,10 @@ class CategoryChooserViewModel @Inject constructor(
         }
     }
 
+    fun updateCategories(userCategories: UserCategories) {
+        viewModelScope.launch {
+            userCategoriesRepository.updateUserCategories(userCategories)
+        }
+    }
+
 }

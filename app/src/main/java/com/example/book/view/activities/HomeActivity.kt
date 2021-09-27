@@ -7,9 +7,7 @@ import com.example.book.R
 import com.example.book.databinding.HomeActivityBinding
 import com.example.book.utils.checkForInternet
 import com.example.book.utils.replaceFragment
-import com.example.book.view.fragments.BookFavoritesFragment
-import com.example.book.view.fragments.BookListingFragment
-import com.example.book.view.fragments.BookSearchFragment
+import com.example.book.view.fragments.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -68,6 +66,19 @@ class HomeActivity : AppCompatActivity() {
                                 }
                             }
 
+                        }
+                        R.id.user -> {
+                            if (checkForInternet(context)) {
+                                replaceFragment(
+                                    EditProfileFragment(),
+                                    R.id.containerHome
+                                )
+                            } else {
+                                Intent(context, NoInternetActivity::class.java).apply {
+                                    startActivity(this)
+                                    finish()
+                                }
+                            }
                         }
                     }
                     true
