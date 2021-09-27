@@ -1,12 +1,16 @@
 package com.example.book.view.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.book.R
 import com.example.book.databinding.NoInternetFragmentBinding
-import com.example.book.view.activities.HomeActivity
+import com.example.book.utils.checkForInternet
+import com.example.book.utils.snackBar
+import com.example.book.view.activities.NoInternetActivity
 
 class NoInternetFragment : Fragment(R.layout.no_internet_fragment) {
 
@@ -20,9 +24,18 @@ class NoInternetFragment : Fragment(R.layout.no_internet_fragment) {
         binding.bookSearchAnimation.playAnimation()
 
         binding.textViewNoInternet.setOnClickListener {
-            Intent(context, HomeActivity::class.java).apply {
-                startActivity(this)
+            if ((requireActivity() as AppCompatActivity).checkForInternet(requireContext())) {
+                requireActivity().finish()
+            } else {
+                showSnackbar(R.string.no_conection, R.color.red)
             }
         }
     }
+
+    private fun showSnackbar(@StringRes msgId: Int, @ColorRes colorId: Int) {
+        val activity = requireActivity() as NoInternetActivity
+        val view = binding.textViewNoInternet
+        activity.snackBar(view, msgId, colorId)
+    }
+
 }

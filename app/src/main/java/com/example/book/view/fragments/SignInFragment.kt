@@ -70,12 +70,6 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         viewModel = ViewModelProvider(this).get(SignInViewModel::class.java)
         binding = SignInFragmentBinding.bind(view)
 
-        val userEmail = arguments?.getString("user_email")
-        userEmail?.apply {
-            showSnackbar(R.string.user_created, R.color.green)
-            binding.userEmailEditText.setText(this)
-        }
-
         setupObservers()
         setupSettingsSignIn()
         setupBackButton()
@@ -84,7 +78,6 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.error.observe(viewLifecycleOwner, observerError)
-        //viewModel.categories.observe(viewLifecycleOwner, observerCategories)
     }
 
     private fun setupSettingsSignIn() {

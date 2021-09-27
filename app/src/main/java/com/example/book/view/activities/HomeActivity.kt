@@ -20,51 +20,47 @@ class HomeActivity : AppCompatActivity() {
         binding = HomeActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (checkForInternet(this)) {
-            replaceFragment(BookListingFragment.newInstance(), R.id.containerHome)
+        replaceFragment(BookListingFragment.newInstance(), R.id.containerHome)
 
-            binding.bottomNav.apply {
-                setOnItemSelectedListener {
-                    when (it.itemId) {
-                        R.id.home -> {
-                            if (checkForInternet(context)) {
-                                replaceFragment(
-                                    BookListingFragment.newInstance(),
-                                    R.id.containerHome
-                                )
-                            } else {
-                                Intent(context, NoInternetActivity::class.java).apply {
-                                    startActivity(this)
-                                    finish()
-                                }
+        binding.bottomNav.apply {
+            setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.home -> {
+                        if (checkForInternet(context)) {
+                            replaceFragment(
+                                BookListingFragment.newInstance(),
+                                R.id.containerHome
+                            )
+                        } else {
+                            Intent(context, NoInternetActivity::class.java).apply {
+                                startActivity(this)
                             }
                         }
+                    }
 
-                        R.id.search -> {
-                            if (checkForInternet(context)) {
-                                replaceFragment(
-                                    BookSearchFragment.newInstance(),
-                                    R.id.containerHome
-                                )
-                            } else {
-                                Intent(context, NoInternetActivity::class.java).apply {
-                                    startActivity(this)
-                                    finish()
-                                }
+                    R.id.search -> {
+                        if (checkForInternet(context)) {
+                            replaceFragment(
+                                BookSearchFragment.newInstance(),
+                                R.id.containerHome
+                            )
+                        } else {
+                            Intent(context, NoInternetActivity::class.java).apply {
+                                startActivity(this)
                             }
                         }
-                        R.id.favorites -> {
-                            if (checkForInternet(context)) {
-                                replaceFragment(
-                                    BookFavoritesFragment(),
-                                    R.id.containerHome
-                                )
-                            } else {
-                                Intent(context, NoInternetActivity::class.java).apply {
-                                    startActivity(this)
-                                    finish()
-                                }
+                    }
+                    R.id.favorites -> {
+                        if (checkForInternet(context)) {
+                            replaceFragment(
+                                BookFavoritesFragment(),
+                                R.id.containerHome
+                            )
+                        } else {
+                            Intent(context, NoInternetActivity::class.java).apply {
+                                startActivity(this)
                             }
+                        }
 
                         }
                         R.id.user -> {
@@ -84,13 +80,6 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
 
-            }
-
-        } else {
-            Intent(applicationContext, NoInternetActivity::class.java).apply {
-                startActivity(this)
-                finish()
-            }
         }
 
     }

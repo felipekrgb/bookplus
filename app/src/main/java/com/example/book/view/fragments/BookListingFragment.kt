@@ -12,8 +12,12 @@ import com.example.book.R
 import com.example.book.adapter.BookAdapter
 import com.example.book.databinding.BookListingFragmentBinding
 import com.example.book.model.Book
+import com.example.book.utils.checkForInternet
+import com.example.book.utils.goToNoInternetActivity
 import com.example.book.view.activities.CategoryActivity
+import com.example.book.view.activities.HomeActivity
 import com.example.book.view.activities.MainActivity
+import com.example.book.view.activities.NoInternetActivity
 import com.example.book.view.dialogs.BasicDetailsFragment
 import com.example.book.viewmodel.BookListingViewModel
 import com.google.firebase.auth.FirebaseUser
@@ -59,7 +63,11 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
     private val observerCategories = Observer<List<String>?> { categories ->
         if (categories != null) {
             this.categories.addAll(categories)
-            viewModel.getBooksByTerms(categories)
+            if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+                viewModel.getBooksByTerms(categories)
+            } else {
+                goToNoInternetActivity()
+            }
         } else {
             Intent(requireContext(), CategoryActivity::class.java).apply {
                 startActivity(this)
@@ -69,32 +77,48 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
     }
 
     private val observerBooks = Observer<HashMap<String, List<Book>>> { hashMap ->
-        val key = hashMap.keys.map { it }[0]
-        val finalKey = categories.filter { it == key }[0]
+        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+            val key = hashMap.keys.map { it }[0]
+            val finalKey = categories.filter { it == key }[0]
 
-        if (finalKey == categories[0]) {
-            adapterFirstCategory.update(hashMap[finalKey]?.map { it })
-            binding.bookFirstCategoryTextView.text = categories[0]
-        } else if (finalKey == categories[1]) {
-            adapterSecondCategory.update(hashMap[finalKey]?.map { it })
-            binding.bookSecondCategoryTextView.text = categories[1]
-        } else if (finalKey == categories[2]) {
-            adapterThirdCategory.update(hashMap[finalKey]?.map { it })
-            binding.bookThirdCategoryTextView.text = categories[2]
-        }
+            if (finalKey == categories[0]) {
+                adapterFirstCategory.update(hashMap[finalKey]?.map { it })
+                binding.bookFirstCategoryTextView.text = categories[0]
+            } else if (finalKey == categories[1]) {
+                adapterSecondCategory.update(hashMap[finalKey]?.map { it })
+                binding.bookSecondCategoryTextView.text = categories[1]
+            } else if (finalKey == categories[2]) {
+                adapterThirdCategory.update(hashMap[finalKey]?.map { it })
+                binding.bookThirdCategoryTextView.text = categories[2]
+            }
 
-        booksListed++
+            booksListed++
 
-        if (booksListed == 3) {
-            binding.booksLoadingAnimation.visibility = View.GONE
-            binding.booksLoadingAnimation.cancelAnimation()
-            binding.container.visibility = View.VISIBLE
-            binding.infoContainer.visibility = View.VISIBLE
+            if (booksListed == 3) {
+                binding.booksLoadingAnimation.visibility = View.GONE
+                binding.booksLoadingAnimation.cancelAnimation()
+                binding.container.visibility = View.VISIBLE
+                binding.infoContainer.visibility = View.VISIBLE
+            }
+        } else {
+            goToNoInternetActivity()
         }
     }
 
     private val observerUserName = Observer<String> {
         binding.greetingsTextView.text = "Olá, $it"
+    }
+
+    override fun onResume() {
+        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+            viewModel.getCurrentUserName()
+            viewModel.getCurrentUser()
+        } else {
+            Intent(requireActivity(), NoInternetActivity::class.java).apply {
+                startActivity(this)
+            }
+        }
+        super.onResume()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -106,9 +130,6 @@ class BookListingFragment : Fragment(R.layout.book_listing_fragment) {
         setupRecyclerView()
         setupObservers()
         setupButtons()
-
-        viewModel.getCurrentUserName()
-        viewModel.getCurrentUser()
     }
 
     private fun setupButtons() {

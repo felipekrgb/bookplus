@@ -2,6 +2,7 @@ package com.example.book.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -14,6 +15,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.book.R
+import com.example.book.view.activities.NoInternetActivity
 import com.google.android.material.snackbar.Snackbar
 
 fun AppCompatActivity.replaceFragment(
@@ -79,6 +81,12 @@ fun AppCompatActivity.checkForInternet(context: Context): Boolean {
             connectivityManager.activeNetworkInfo ?: return false
         @Suppress("DEPRECATION")
         return networkInfo.isConnected
+    }
+}
+
+fun Fragment.goToNoInternetActivity() {
+    Intent(requireActivity(), NoInternetActivity::class.java).apply {
+        startActivity(this)
     }
 }
 
