@@ -67,7 +67,7 @@ class BookApplication : Application(), LifecycleObserver {
                 .build()
 
             val periodicWorkRequest = PeriodicWorkRequestBuilder<NotificationWorkMenage>(
-                1,
+                30,
                 TimeUnit.MINUTES
             ).setConstraints(constraints).build()
 
