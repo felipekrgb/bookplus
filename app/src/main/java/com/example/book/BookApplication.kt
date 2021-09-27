@@ -38,9 +38,7 @@ class BookApplication : Application(), LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     fun onAppDestroy() {
-        CoroutineScope(Dispatchers.Main).async {
             startWork()
-        }
     }
 
     suspend fun showNotification() {
@@ -55,8 +53,7 @@ class BookApplication : Application(), LifecycleObserver {
             }
     }
 
-    suspend fun startWork() {
-        delay(2000)
+    fun startWork() {
         WorkManager.getInstance(applicationContext).let {
             val workManager = WorkManager.getInstance(applicationContext)
 
@@ -67,7 +64,7 @@ class BookApplication : Application(), LifecycleObserver {
                 .build()
 
             val periodicWorkRequest = PeriodicWorkRequestBuilder<NotificationWorkMenage>(
-                1,
+                30,
                 TimeUnit.MINUTES
             ).setConstraints(constraints).build()
 

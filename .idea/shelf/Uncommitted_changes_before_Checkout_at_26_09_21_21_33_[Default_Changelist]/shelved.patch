@@ -1,0 +1,187 @@
+Index: app/src/main/res/layout/sign_up_fragment.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><ScrollView xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:background=\"@color/brown_light\"\n    android:fillViewport=\"true\"\n    android:padding=\"16dp\">\n\n    <androidx.constraintlayout.widget.ConstraintLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"wrap_content\">\n\n        <ImageView\n            android:id=\"@+id/arrowBackImageView\"\n            android:layout_width=\"wrap_content\"\n            android:layout_height=\"wrap_content\"\n            android:src=\"@drawable/ic_arrow_back\"\n            app:layout_constraintStart_toStartOf=\"parent\"\n            app:layout_constraintTop_toTopOf=\"parent\"\n            app:tint=\"@color/brown_medium\" />\n\n        <LinearLayout\n            android:id=\"@+id/linearLayout2\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"wrap_content\"\n            android:clipChildren=\"false\"\n            android:clipToPadding=\"false\"\n            android:orientation=\"vertical\"\n            android:padding=\"12dp\"\n            android:paddingTop=\"16dp\"\n            app:layout_constraintEnd_toEndOf=\"parent\"\n            app:layout_constraintStart_toStartOf=\"parent\"\n            app:layout_constraintTop_toBottomOf=\"@id/arrowBackImageView\">\n\n            <TextView\n                android:id=\"@+id/createdTextView\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:layout_gravity=\"center\"\n                android:layout_marginBottom=\"12dp\"\n                android:fontFamily=\"@font/libre_caslon_text_regular\"\n                android:text=\"Crie sua conta\"\n                android:textSize=\"32sp\" />\n\n            <com.google.android.material.textfield.TextInputLayout\n\n                android:id=\"@+id/editTextUser\"\n                style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"60dp\"\n                android:layout_marginTop=\"12dp\"\n                android:layout_marginBottom=\"20dp\"\n                app:boxCornerRadiusBottomEnd=\"13dp\"\n                app:boxCornerRadiusBottomStart=\"13dp\"\n                app:boxCornerRadiusTopEnd=\"13dp\"\n                app:boxCornerRadiusTopStart=\"13dp\"\n                app:hintEnabled=\"false\">\n\n                <com.google.android.material.textfield.TextInputEditText\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"match_parent\"\n                    android:drawableRight=\"@drawable/ic_person\"\n                    android:fontFamily=\"@font/montserrat_bold\"\n                    android:hint=\"Usuário\"\n                    android:maxLines=\"1\"\n                    android:singleLine=\"true\"\n                    android:textSize=\"14dp\" />\n\n            </com.google.android.material.textfield.TextInputLayout>\n\n            <com.google.android.material.textfield.TextInputLayout\n\n                android:id=\"@+id/editTextEmail\"\n                style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"60dp\"\n                android:layout_marginTop=\"12dp\"\n                android:layout_marginBottom=\"20dp\"\n                app:boxCornerRadiusBottomEnd=\"13dp\"\n                app:boxCornerRadiusBottomStart=\"13dp\"\n                app:boxCornerRadiusTopEnd=\"13dp\"\n                app:boxCornerRadiusTopStart=\"13dp\"\n                app:hintEnabled=\"false\">\n\n                <com.google.android.material.textfield.TextInputEditText\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"match_parent\"\n                    android:drawableRight=\"@drawable/ic_email\"\n                    android:fontFamily=\"@font/montserrat_bold\"\n                    android:hint=\"E-mail\"\n                    android:inputType=\"textEmailAddress\"\n                    android:maxLines=\"1\"\n                    android:singleLine=\"true\"\n                    android:textSize=\"14dp\" />\n\n            </com.google.android.material.textfield.TextInputLayout>\n\n            <com.google.android.material.textfield.TextInputLayout\n                android:id=\"@+id/editTextPassword\"\n                style=\"@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"60dp\"\n                android:layout_marginTop=\"12dp\"\n                android:layout_marginBottom=\"20dp\"\n                app:boxCornerRadiusBottomEnd=\"13dp\"\n                app:boxCornerRadiusBottomStart=\"13dp\"\n                app:boxCornerRadiusTopEnd=\"13dp\"\n                app:boxCornerRadiusTopStart=\"13dp\"\n                app:endIconMode=\"password_toggle\"\n                app:errorEnabled=\"true\"\n                app:hintEnabled=\"false\">\n\n                <com.google.android.material.textfield.TextInputEditText\n                    android:layout_width=\"match_parent\"\n                    android:layout_height=\"match_parent\"\n                    android:fontFamily=\"@font/montserrat_bold\"\n                    android:hint=\"Senha\"\n                    android:inputType=\"textPassword\"\n                    android:maxLines=\"1\"\n                    android:singleLine=\"true\"\n                    android:textSize=\"14dp\" />\n\n            </com.google.android.material.textfield.TextInputLayout>\n\n        </LinearLayout>\n\n        <androidx.constraintlayout.widget.ConstraintLayout\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"0dp\"\n            app:layout_constraintBottom_toBottomOf=\"parent\"\n            app:layout_constraintEnd_toEndOf=\"parent\"\n            app:layout_constraintStart_toStartOf=\"parent\"\n            app:layout_constraintTop_toBottomOf=\"@+id/linearLayout2\">\n\n            <LinearLayout\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:orientation=\"horizontal\"\n                app:layout_constraintBottom_toTopOf=\"@+id/buttonCreate\"\n                app:layout_constraintEnd_toEndOf=\"parent\"\n                app:layout_constraintStart_toStartOf=\"parent\">\n\n                <TextView\n                    android:id=\"@+id/registerNotTextView\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:layout_marginBottom=\"8dp\"\n                    android:fontFamily=\"@font/montserrat_bold\"\n                    android:text=\"Já tem uma conta?\" />\n\n                <TextView\n                    android:id=\"@+id/loginTextView\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:layout_marginBottom=\"8dp\"\n                    android:fontFamily=\"@font/montserrat_bold\"\n                    android:text=\" Entrar!\"\n                    android:textColor=\"@color/brown_medium\" />\n\n            </LinearLayout>\n\n            <androidx.constraintlayout.widget.ConstraintLayout\n                android:id=\"@+id/buttonCreate\"\n                android:layout_width=\"match_parent\"\n                android:layout_height=\"wrap_content\"\n                android:layout_margin=\"8dp\"\n                android:background=\"@drawable/button_border\"\n                android:padding=\"8dp\"\n                app:cornerRadius=\"10dp\"\n                app:layout_constraintBottom_toBottomOf=\"parent\"\n                app:layout_constraintEnd_toEndOf=\"parent\"\n                app:layout_constraintStart_toStartOf=\"parent\">\n\n                <TextView\n                    android:id=\"@+id/buttonCreateTextView\"\n                    android:layout_width=\"wrap_content\"\n                    android:layout_height=\"wrap_content\"\n                    android:fontFamily=\"@font/montserrat_bold\"\n                    android:text=\"REGISTRAR\"\n                    android:textColor=\"@color/brown_text\"\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\n                    app:layout_constraintEnd_toEndOf=\"parent\"\n                    app:layout_constraintStart_toStartOf=\"parent\"\n                    app:layout_constraintTop_toTopOf=\"parent\" />\n\n                <ProgressBar\n                    android:id=\"@+id/buttonCreateProgressBar\"\n                    android:layout_width=\"32dp\"\n                    android:layout_height=\"32dp\"\n                    android:indeterminateTint=\"@color/brown_dark\"\n                    android:visibility=\"invisible\"\n                    app:layout_constraintBottom_toBottomOf=\"parent\"\n                    app:layout_constraintEnd_toEndOf=\"parent\"\n                    app:layout_constraintStart_toStartOf=\"parent\"\n                    app:layout_constraintTop_toTopOf=\"parent\" />\n\n            </androidx.constraintlayout.widget.ConstraintLayout>\n\n        </androidx.constraintlayout.widget.ConstraintLayout>\n\n    </androidx.constraintlayout.widget.ConstraintLayout>\n</ScrollView>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/sign_up_fragment.xml b/app/src/main/res/layout/sign_up_fragment.xml
+--- a/app/src/main/res/layout/sign_up_fragment.xml	
++++ b/app/src/main/res/layout/sign_up_fragment.xml	
+@@ -20,7 +20,6 @@
+             app:tint="@color/brown_medium" />
+ 
+         <LinearLayout
+-            android:id="@+id/linearLayout2"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:clipChildren="false"
+@@ -124,78 +123,68 @@
+ 
+         </LinearLayout>
+ 
+-        <androidx.constraintlayout.widget.ConstraintLayout
+-            android:layout_width="match_parent"
+-            android:layout_height="0dp"
+-            app:layout_constraintBottom_toBottomOf="parent"
+-            app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintStart_toStartOf="parent"
+-            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+-
+-            <LinearLayout
+-                android:layout_width="wrap_content"
+-                android:layout_height="wrap_content"
+-                android:orientation="horizontal"
+-                app:layout_constraintBottom_toTopOf="@+id/buttonCreate"
+-                app:layout_constraintEnd_toEndOf="parent"
+-                app:layout_constraintStart_toStartOf="parent">
++        <LinearLayout
++            android:layout_width="wrap_content"
++            android:layout_height="wrap_content"
++            android:orientation="horizontal"
++            app:layout_constraintBottom_toTopOf="@+id/buttonCreate"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent">
+ 
+-                <TextView
+-                    android:id="@+id/registerNotTextView"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginBottom="8dp"
+-                    android:fontFamily="@font/montserrat_bold"
+-                    android:text="Já tem uma conta?" />
++            <TextView
++                android:id="@+id/registerNotTextView"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginBottom="8dp"
++                android:fontFamily="@font/montserrat_bold"
++                android:text="Já tem uma conta?" />
+ 
+-                <TextView
+-                    android:id="@+id/loginTextView"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:layout_marginBottom="8dp"
+-                    android:fontFamily="@font/montserrat_bold"
+-                    android:text=" Entrar!"
+-                    android:textColor="@color/brown_medium" />
++            <TextView
++                android:id="@+id/loginTextView"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:layout_marginBottom="8dp"
++                android:fontFamily="@font/montserrat_bold"
++                android:text=" Entrar!"
++                android:textColor="@color/brown_medium" />
+ 
+-            </LinearLayout>
++        </LinearLayout>
+ 
+-            <androidx.constraintlayout.widget.ConstraintLayout
+-                android:id="@+id/buttonCreate"
+-                android:layout_width="match_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_margin="8dp"
+-                android:background="@drawable/button_border"
+-                android:padding="8dp"
+-                app:cornerRadius="10dp"
+-                app:layout_constraintBottom_toBottomOf="parent"
+-                app:layout_constraintEnd_toEndOf="parent"
+-                app:layout_constraintStart_toStartOf="parent">
++        <androidx.constraintlayout.widget.ConstraintLayout
++            android:id="@+id/buttonCreate"
++            android:layout_width="match_parent"
++            android:layout_height="wrap_content"
++            android:layout_margin="8dp"
++            android:background="@drawable/button_border"
++            android:padding="8dp"
++            app:cornerRadius="10dp"
++            app:layout_constraintBottom_toBottomOf="parent"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent">
+ 
+-                <TextView
+-                    android:id="@+id/buttonCreateTextView"
+-                    android:layout_width="wrap_content"
+-                    android:layout_height="wrap_content"
+-                    android:fontFamily="@font/montserrat_bold"
+-                    android:text="REGISTRAR"
+-                    android:textColor="@color/brown_text"
+-                    app:layout_constraintBottom_toBottomOf="parent"
+-                    app:layout_constraintEnd_toEndOf="parent"
+-                    app:layout_constraintStart_toStartOf="parent"
+-                    app:layout_constraintTop_toTopOf="parent" />
++            <TextView
++                android:id="@+id/buttonCreateTextView"
++                android:layout_width="wrap_content"
++                android:layout_height="wrap_content"
++                android:fontFamily="@font/montserrat_bold"
++                android:text="REGISTRAR"
++                android:textColor="@color/brown_text"
++                app:layout_constraintBottom_toBottomOf="parent"
++                app:layout_constraintEnd_toEndOf="parent"
++                app:layout_constraintStart_toStartOf="parent"
++                app:layout_constraintTop_toTopOf="parent" />
+ 
+-                <ProgressBar
+-                    android:id="@+id/buttonCreateProgressBar"
+-                    android:layout_width="32dp"
+-                    android:layout_height="32dp"
+-                    android:indeterminateTint="@color/brown_dark"
+-                    android:visibility="invisible"
+-                    app:layout_constraintBottom_toBottomOf="parent"
+-                    app:layout_constraintEnd_toEndOf="parent"
+-                    app:layout_constraintStart_toStartOf="parent"
+-                    app:layout_constraintTop_toTopOf="parent" />
++            <ProgressBar
++                android:id="@+id/buttonCreateProgressBar"
++                android:layout_width="32dp"
++                android:layout_height="32dp"
++                android:indeterminateTint="@color/brown_dark"
++                android:visibility="invisible"
++                app:layout_constraintBottom_toBottomOf="parent"
++                app:layout_constraintEnd_toEndOf="parent"
++                app:layout_constraintStart_toStartOf="parent"
++                app:layout_constraintTop_toTopOf="parent" />
+ 
+-            </androidx.constraintlayout.widget.ConstraintLayout>
+-
+         </androidx.constraintlayout.widget.ConstraintLayout>
+ 
+     </androidx.constraintlayout.widget.ConstraintLayout>
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"deploymentTargetDropDown\">\n    <targetSelectedWithDropDown>\n      <Target>\n        <type value=\"QUICK_BOOT_TARGET\" />\n        <deviceKey>\n          <Key>\n            <type value=\"VIRTUAL_DEVICE_PATH\" />\n            <value value=\"$USER_HOME$/.android/avd/Pixel_3a_API_30.avd\" />\n          </Key>\n        </deviceKey>\n      </Target>\n    </targetSelectedWithDropDown>\n    <timeTargetWasSelectedWithDropDown value=\"2021-09-23T16:08:32.850081Z\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+--- a/.idea/deploymentTargetDropDown.xml	
++++ b/.idea/deploymentTargetDropDown.xml	
+@@ -1,17 +1,17 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="deploymentTargetDropDown">
+-    <targetSelectedWithDropDown>
++    <runningDeviceTargetSelectedWithDropDown>
+       <Target>
+-        <type value="QUICK_BOOT_TARGET" />
++        <type value="RUNNING_DEVICE_TARGET" />
+         <deviceKey>
+           <Key>
+-            <type value="VIRTUAL_DEVICE_PATH" />
+-            <value value="$USER_HOME$/.android/avd/Pixel_3a_API_30.avd" />
++            <type value="SERIAL_NUMBER" />
++            <value value="0054061791" />
+           </Key>
+         </deviceKey>
+       </Target>
+-    </targetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2021-09-23T16:08:32.850081Z" />
++    </runningDeviceTargetSelectedWithDropDown>
++    <timeTargetWasSelectedWithDropDown value="2021-09-27T00:28:14.707750Z" />
+   </component>
+ </project>
+\ No newline at end of file

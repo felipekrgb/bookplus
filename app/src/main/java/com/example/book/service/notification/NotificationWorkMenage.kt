@@ -17,7 +17,7 @@ class NotificationWorkMenage(appContext: Context, workerParameters: WorkerParame
             "Leitura é a chave para se ter um universo de ideias e uma tempestade de palavras \uD83C\uDF0C ⚡️"
         ).let {
             NotificationManagerCompat.from(applicationContext)
-                .notify(1, it)
+                .notify(4, it)
         }
         return Result.success()
     }
