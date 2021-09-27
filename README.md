@@ -4,7 +4,7 @@
 
 Book+ é um aplicativo de exibição de livros com uma coleção de mais de 15 milhões de livros. Nele, o usuário poderá pesquisar, favoritar, ver uma prévia, comprar e conhecer mais sobre o livro através da sua sinopse.
 
-## Tecnologias Utilizadas
+## Tecnologia Utilizada
 
 - Kotlin
 
@@ -25,7 +25,7 @@ Book+ é um aplicativo de exibição de livros com uma coleção de mais de 15 m
   $ cd bookplus
 ```
 
-- Executar aplicativou pelo Android Studio ou executar o APK
+- Executar aplicativo pelo Android Studio ou executar o APK que está na pasta 'APK' na raiz do projeto
 
 ## Navegando pelo aplicativo e instruções
 
