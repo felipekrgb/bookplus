@@ -37,7 +37,6 @@ class HomeActivity : AppCompatActivity() {
                             } else {
                                 Intent(context, NoInternetActivity::class.java).apply {
                                     startActivity(this)
-                                    finish()
                                 }
                             }
                         }
@@ -51,7 +50,6 @@ class HomeActivity : AppCompatActivity() {
                             } else {
                                 Intent(context, NoInternetActivity::class.java).apply {
                                     startActivity(this)
-                                    finish()
                                 }
                             }
                         }
@@ -64,7 +62,6 @@ class HomeActivity : AppCompatActivity() {
                             } else {
                                 Intent(context, NoInternetActivity::class.java).apply {
                                     startActivity(this)
-                                    finish()
                                 }
                             }
 
@@ -78,7 +75,6 @@ class HomeActivity : AppCompatActivity() {
         } else {
             Intent(applicationContext, NoInternetActivity::class.java).apply {
                 startActivity(this)
-                finish()
             }
         }
 

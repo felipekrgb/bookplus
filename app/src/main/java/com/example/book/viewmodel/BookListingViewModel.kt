@@ -30,7 +30,7 @@ class BookListingViewModel @Inject constructor(
     private val _categories = MutableLiveData<List<String>?>()
     val categories: LiveData<List<String>?> = _categories
 
-    private val _isSigned = MutableLiveData<Boolean>(true)
+    private val _isSigned = MutableLiveData(true)
     val isSignedIn: LiveData<Boolean> = _isSigned
 
     private val _userName = MutableLiveData<String>()
@@ -50,7 +50,7 @@ class BookListingViewModel @Inject constructor(
         viewModelScope.launch {
             val userCategories = userCategoriesRepository.getUserCategories(userId)
             if (userCategories != null) {
-            _categories.value = userCategories.categories
+                _categories.value = userCategories.categories
             } else {
                 _categories.value = null
             }

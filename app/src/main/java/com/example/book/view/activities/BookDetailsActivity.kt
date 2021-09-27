@@ -2,6 +2,8 @@ package com.example.book.view.activities
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.ColorRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.example.book.R
 import com.example.book.databinding.BookDetailsActivityBinding
@@ -28,12 +30,15 @@ class BookDetailsActivity : AppCompatActivity() {
             replaceFragment(BookDetailsFragment.newInstance(book.id), R.id.containerDetails)
 
         } else {
-            snackBar(binding.root, R.string.no_conection, R.color.red)
+            showSnackbar(R.string.no_conection, R.color.red)
             Intent(applicationContext, NoInternetActivity::class.java).apply {
                 startActivity(this)
-                finish()
-
             }
         }
+    }
+
+    private fun showSnackbar(@StringRes msgId: Int, @ColorRes colorId: Int) {
+        val view = binding.root
+        snackBar(view, msgId, colorId)
     }
 }

@@ -13,7 +13,10 @@ import com.example.book.R
 import com.example.book.adapter.BookFavoritesAdapter
 import com.example.book.databinding.BookFavoritesFragmentBinding
 import com.example.book.model.Book
+import com.example.book.utils.checkForInternet
+import com.example.book.utils.goToNoInternetActivity
 import com.example.book.view.activities.BookDetailsActivity
+import com.example.book.view.activities.HomeActivity
 import com.example.book.viewmodel.BookFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +39,11 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     }
 
     private val observerBookFav = Observer<List<String>> { listOfFavs ->
-        viewModel.getFavBooksByApi(listOfFavs)
+        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+            viewModel.getFavBooksByApi(listOfFavs)
+        } else {
+            goToNoInternetActivity()
+        }
     }
 
     private val observerBooks = Observer<List<Book>> { listOfBooks ->
@@ -67,7 +74,11 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
     private fun startViewModel() {
         viewModel.booksFavs.observe(viewLifecycleOwner, observerBookFav)
         viewModel.books.observe(viewLifecycleOwner, observerBooks)
-        viewModel.fetchAllBooksFav()
+        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+            viewModel.fetchAllBooksFav()
+        } else {
+            goToNoInternetActivity()
+        }
     }
 
     private fun startRecyclerView() {
@@ -78,7 +89,11 @@ class BookFavoritesFragment : Fragment(R.layout.book_favorites_fragment) {
 
     private fun loadFavBook() {
         swipeRefreshLayout.isRefreshing = false
-        viewModel.fetchAllBooksFav()
+        if ((requireActivity() as HomeActivity).checkForInternet(requireContext())) {
+            viewModel.fetchAllBooksFav()
+        } else {
+            goToNoInternetActivity()
+        }
     }
 
     private fun startSwipe() {

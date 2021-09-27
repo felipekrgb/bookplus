@@ -3,7 +3,6 @@ package com.example.book.view.fragments
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +11,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -22,6 +22,9 @@ import com.bumptech.glide.request.target.Target
 import com.example.book.R
 import com.example.book.databinding.BookDetailsFragmentBinding
 import com.example.book.model.Book
+import com.example.book.utils.checkForInternet
+import com.example.book.utils.goToNoInternetActivity
+import com.example.book.view.activities.BookDetailsActivity
 import com.example.book.viewmodel.BookDetailsViewModel
 import com.example.book.viewmodel.BookFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,7 +48,11 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
     private lateinit var binding: BookDetailsFragmentBinding
     private var colorPallete: Int? = null
     private val observerBook = Observer<Book?> {
-        bindData(it)
+        if ((requireActivity() as BookDetailsActivity).checkForInternet(requireContext())) {
+            bindData(it)
+        } else {
+            goToNoInternetActivity()
+        }
     }
     private val observerBookFav = Observer<List<String>> { listOfFavorites ->
         binding.checkBoxSave.isChecked = listOfFavorites.contains(bookFavs)
@@ -75,7 +82,11 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
 
         val bookId = arguments?.getString("book_id") as String
         bookFavs = bookId
-        viewModel.getBookById(bookId)
+        if ((requireActivity() as BookDetailsActivity).checkForInternet(requireContext())) {
+            viewModel.getBookById(bookId)
+        } else {
+            goToNoInternetActivity()
+        }
     }
 
     private fun setupCheckIcon() {
@@ -89,7 +100,11 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
     }
 
     private fun setupViewModelFuns() {
-        viewModelFireBase.fetchAllBooksFav()
+        if ((requireActivity() as BookDetailsActivity).checkForInternet(requireContext())) {
+            viewModelFireBase.fetchAllBooksFav()
+        } else {
+            goToNoInternetActivity()
+        }
     }
 
     private fun setupObservers() {
