@@ -7,7 +7,10 @@ import com.example.book.R
 import com.example.book.databinding.HomeActivityBinding
 import com.example.book.utils.checkForInternet
 import com.example.book.utils.replaceFragment
-import com.example.book.view.fragments.*
+import com.example.book.view.fragments.BookFavoritesFragment
+import com.example.book.view.fragments.BookListingFragment
+import com.example.book.view.fragments.BookSearchFragment
+import com.example.book.view.fragments.ProfileEditFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,7 +69,7 @@ class HomeActivity : AppCompatActivity() {
                         R.id.user -> {
                             if (checkForInternet(context)) {
                                 replaceFragment(
-                                    EditProfileFragment(),
+                                    ProfileEditFragment(),
                                     R.id.containerHome
                                 )
                             } else {

@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CategoryChooserViewModel @Inject constructor(
+class ProfileEditViewModel @Inject constructor(
     private val userCategoriesRepository: UserCategoriesRepository,
     private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {
@@ -21,12 +21,20 @@ class CategoryChooserViewModel @Inject constructor(
     private val _user = MutableLiveData<FirebaseUser>()
     val user: LiveData<FirebaseUser> = _user
 
-    private val _categories = MutableLiveData<List<String>?>()
-    val categories: LiveData<List<String>?> = _categories
+    private val _userCategories = MutableLiveData<UserCategories>()
+    val userCategories: LiveData<UserCategories> = _userCategories
 
-    fun addUserCategories(userCategories: UserCategories) {
+    fun getUserCategories(userId: String) {
         viewModelScope.launch {
-            userCategoriesRepository.addUserCategories(userCategories)
+            userCategoriesRepository.getUserCategories(userId).apply {
+                _userCategories.value = this
+            }
+        }
+    }
+
+    fun updateCategories(userCategories: UserCategories) {
+        viewModelScope.launch {
+            userCategoriesRepository.updateUserCategories(userCategories)
         }
     }
 
@@ -35,4 +43,5 @@ class CategoryChooserViewModel @Inject constructor(
             _user.value = this
         }
     }
+
 }
