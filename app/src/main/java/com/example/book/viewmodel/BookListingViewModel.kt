@@ -27,13 +27,19 @@ class BookListingViewModel @Inject constructor(
     private val _user = MutableLiveData<FirebaseUser>()
     val user: LiveData<FirebaseUser> = _user
 
-    private val _categories = MutableLiveData<List<String>>()
-    val categories: LiveData<List<String>> = _categories
+    private val _categories = MutableLiveData<List<String>?>()
+    val categories: LiveData<List<String>?> = _categories
 
-    fun getBooksByTerms(terms: List<String>) {
+    private val _isSigned = MutableLiveData(true)
+    val isSignedIn: LiveData<Boolean> = _isSigned
+
+    private val _userName = MutableLiveData<String>()
+    val userName: LiveData<String> = _userName
+
+    fun getBooksByTerms(terms: List<String>, startIndex: Int = 0) {
         viewModelScope.launch {
             terms.forEach { term ->
-                booksRepository.getBooksByTerms(term.replace(" ", "+"))?.let { books ->
+                booksRepository.getBooksByTerms(term.replace(" ", "+"), startIndex)?.let { books ->
                     _books.value = hashMapOf(term to books)
                 }
             }
@@ -42,9 +48,18 @@ class BookListingViewModel @Inject constructor(
 
     fun getUserCategories(userId: String) {
         viewModelScope.launch {
-            userCategoriesRepository.getUserCategories(userId)?.let { userCategories ->
+            val userCategories = userCategoriesRepository.getUserCategories(userId)
+            if (userCategories != null) {
                 _categories.value = userCategories.categories
+            } else {
+                _categories.value = null
             }
+        }
+    }
+
+    fun getCurrentUserName() {
+        authenticationRepository.currentUserName {
+            _userName.value = it
         }
     }
 
@@ -52,5 +67,10 @@ class BookListingViewModel @Inject constructor(
         authenticationRepository.currentUser()?.apply {
             _user.value = this
         }
+    }
+
+    fun signOut() {
+        authenticationRepository.signOut()
+        _isSigned.value = false
     }
 }

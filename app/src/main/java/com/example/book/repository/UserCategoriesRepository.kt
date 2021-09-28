@@ -22,4 +22,10 @@ class UserCategoriesRepository @Inject constructor(
         }
     }
 
+    suspend fun updateUserCategories(userCategories: UserCategories) {
+        return withContext(Dispatchers.Default) {
+            userCategoriesDAO.updateUserCategories(userCategories)
+        }
+    }
+
 }

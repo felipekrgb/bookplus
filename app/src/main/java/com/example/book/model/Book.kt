@@ -11,6 +11,7 @@ data class Book(
 
     val id: String,
     val volumeInfo: VolumeInfo,
+    val saleInfo: SaleInfo?
 ) : Serializable
 
 data class VolumeInfo(
@@ -20,7 +21,12 @@ data class VolumeInfo(
     val description: String?,
     val publishedDate: String?,
     val pageCount: Int?,
-    val imageLinks: ImageLinks?
+    val imageLinks: ImageLinks?,
+    val previewLink: String?
+) : Serializable
+
+data class SaleInfo(
+    val buyLink: String?
 ) : Serializable
 
 data class ImageLinks(

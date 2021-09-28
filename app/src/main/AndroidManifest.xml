@@ -3,6 +3,7 @@
     package="com.example.book">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".BookApplication"
@@ -14,9 +15,15 @@
         android:theme="@style/Theme.Book"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.activities.CategoryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.NoInternetActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.activities.MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,11 +32,12 @@
         </activity>
         <activity
             android:name=".view.activities.BookDetailsActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".view.activities.HomeActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

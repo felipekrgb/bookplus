@@ -1,6 +1,8 @@
 package com.example.book.view.fragments
 
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +22,11 @@ import com.bumptech.glide.request.target.Target
 import com.example.book.R
 import com.example.book.databinding.BookDetailsFragmentBinding
 import com.example.book.model.Book
+import com.example.book.utils.checkForInternet
+import com.example.book.utils.goToNoInternetActivity
+import com.example.book.view.activities.BookDetailsActivity
 import com.example.book.viewmodel.BookDetailsViewModel
+import com.example.book.viewmodel.BookFavoritesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,13 +42,21 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         }
     }
 
+    private lateinit var viewModelFireBase: BookFavoritesViewModel
     private lateinit var viewModel: BookDetailsViewModel
     private lateinit var binding: BookDetailsFragmentBinding
+    private lateinit var bookId: String
     private var colorPallete: Int? = null
     private val observerBook = Observer<Book?> {
-        bindData(it)
+        if ((requireActivity() as BookDetailsActivity).checkForInternet(requireContext())) {
+            bindData(it)
+        } else {
+            goToNoInternetActivity()
+        }
     }
-
+    private val observerBookFav = Observer<List<String>> { listOfFavorites ->
+        binding.checkBoxSave.isChecked = listOfFavorites.contains(bookId)
+    }
     private val observerLoading = Observer<Boolean> { isLoading ->
         if (isLoading) {
             binding.bookSearchAnimation.visibility = View.VISIBLE
@@ -55,18 +69,43 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
         }
     }
 
+    override fun onResume() {
+        if ((requireActivity() as BookDetailsActivity).checkForInternet(requireContext())) {
+            viewModel.getBookById(bookId)
+            viewModelFireBase.fetchAllBooksFav()
+        } else {
+            goToNoInternetActivity()
+        }
+        super.onResume()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = BookDetailsFragmentBinding.bind(view)
 
+        viewModelFireBase = ViewModelProvider(this).get(BookFavoritesViewModel::class.java)
         viewModel = ViewModelProvider(this).get(BookDetailsViewModel::class.java)
+
+        setupObservers()
+        setupCheckIcon()
+
+        bookId = arguments?.getString("book_id") as String
+    }
+
+    private fun setupCheckIcon() {
+        binding.checkBoxSave.setOnCheckedChangeListener { checked, isChecked ->
+            if (isChecked) {
+                viewModelFireBase.save(bookId)
+            } else {
+                viewModelFireBase.delete(bookId)
+            }
+        }
+    }
+
+    private fun setupObservers() {
         viewModel.book.observe(viewLifecycleOwner, observerBook)
         viewModel.isLoading.observe(viewLifecycleOwner, observerLoading)
-
-        val bookId = arguments?.getString("book_id") as String
-
-        viewModel.getBookById(bookId)
-
+        viewModelFireBase.booksFavs.observe(viewLifecycleOwner, observerBookFav)
     }
 
     private fun bindData(book: Book?) {
@@ -152,6 +191,32 @@ class BookDetailsFragment : Fragment(R.layout.book_details_fragment) {
 
         binding.backButton.setOnClickListener {
             (requireActivity() as AppCompatActivity).finish()
+        }
+
+        binding.buyActionButton.apply {
+
+            if (book.saleInfo?.buyLink != null) {
+
+                setOnClickListener {
+                    val browserIntent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse(book.saleInfo!!.buyLink))
+                    startActivity(browserIntent)
+                }
+
+            } else if (book.volumeInfo.previewLink != null) {
+
+                this.text = getText(R.string.preview)
+                setOnClickListener {
+                    val browserIntent =
+                        Intent(Intent.ACTION_VIEW, Uri.parse(book.volumeInfo.previewLink))
+                    startActivity(browserIntent)
+                }
+
+            } else {
+                this.isEnabled = false
+                this.alpha = 0.5f
+            }
+
         }
 
     }

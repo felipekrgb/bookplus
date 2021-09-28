@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        app:lottie_url="https://assets5.lottiefiles.com/packages/lf20_2scSKA.json" />
+        app:lottie_rawRes="@raw/book_loading"/>
 
 
     <ScrollView
@@ -58,7 +58,7 @@
                     android:id="@+id/materialCardView"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_margin="20dp"
+                    android:layout_margin="16dp"
                     android:background="@color/brown_light"
                     android:elevation="10dp"
                     app:cardCornerRadius="40dp"
@@ -97,17 +97,38 @@
                     app:strokeColor="@color/brown_light"
                     app:strokeWidth="8dp">
 
-                    <ImageView
-                        android:id="@+id/bookImageView"
-                        android:layout_width="144dp"
-                        android:layout_height="214dp"
-                        android:src="@drawable/no_cover_thumb"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="8dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/bookImageView"
+                            android:layout_width="153.6dp"
+                            android:layout_height="218.4dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/no_cover_thumb"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </com.google.android.material.card.MaterialCardView>
+
+                <CheckBox
+                    android:id="@+id/checkBoxSave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:button="@drawable/selector_item_fav"
+                    android:buttonTint="@color/brown_dark"
+                    android:gravity="start"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -140,7 +161,7 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/author"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/bookTitleTextView" />
 
@@ -152,7 +173,7 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-black"
                     android:hint="@string/book_author"
-                    android:textSize="12dp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@id/authorLabelTextView"
                     app:layout_constraintTop_toBottomOf="@id/bookTitleTextView" />
 
@@ -160,7 +181,8 @@
                     android:id="@+id/additionalInfoLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/bookAuthorTextView">
+                    app:layout_constraintTop_toBottomOf="@+id/bookAuthorTextView"
+                    tools:layout_editor_absoluteX="16dp">
 
                     <TextView
                         android:id="@+id/labelPageCountTextView"
@@ -206,7 +228,7 @@
                     android:layout_marginTop="30dp"
                     android:fontFamily="sans-serif-black"
                     android:hint="@string/book_description"
-                    android:textSize="16dp"
+                    android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@id/additionalInfoLayout" />
 
 
@@ -219,6 +241,27 @@
                     android:hint="@string/book_description"
                     android:textSize="16sp"
                     app:layout_constraintTop_toBottomOf="@id/labelBookDescriptionTextView" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buyActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:layout_marginBottom="12dp"
+                    android:backgroundTint="@color/white"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:paddingStart="24dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="24dp"
+                    android:paddingBottom="12dp"
+                    android:text="@string/buy"
+                    android:textColor="@color/brown_text"
+                    app:cornerRadius="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bookDescriptionTextView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

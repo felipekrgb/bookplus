@@ -25,4 +25,23 @@
     <string name="author">Autor:</string>
     <string name="no_user">Informe um usuário válido</string>
     <string name="categories_error">Escolha três categorias</string>
+    <string name="preview">Preview</string>
+    <string name="buy">Comprar</string>
+    <string name="favorite_books">Seus Livros Favoritos</string>
+    <string name="no_book_found">Nenhum livro encontrado</string>
+    <string name="book_search">Pesquise seu Livro</string>
+    <string name="search_field">Pesquise por uma palavra chave...</string>
+    <string name="user_invalided">E-mail ou senha inválido</string>
+    <string name="user_created">Usuário criado com sucesso</string>
+    <string name="error_created_account">Erro na criação de conta</string>
+    <string name="error_name_field_empty">Preencha o campo</string>
+    <string name="error_created_account_empty">Por favor, preencha todos os campos</string>
+    <string name="error_created_account_user_existent">E-mail já cadastrado</string>
+    <string name="error_created_account_password_invalided">A senha necessita no mínimo 6 caracters</string>
+    <string name="error_login_no_user">Usuário não cadastrado</string>
+    <string name="error_generic_login">Houve um erro ao fazer login</string>
+    <string name="error_generic_created">Houve um erro ao criar a conta</string>
+    <string name="error_email_format">Formato do e-mail inválido</string>
+    <string name="no_conection">Por favor, verifique sua conexão com a internet</string>
+
 </resources>

@@ -21,6 +21,9 @@ class CategoryChooserViewModel @Inject constructor(
     private val _user = MutableLiveData<FirebaseUser>()
     val user: LiveData<FirebaseUser> = _user
 
+    private val _categories = MutableLiveData<List<String>?>()
+    val categories: LiveData<List<String>?> = _categories
+
     fun addUserCategories(userCategories: UserCategories) {
         viewModelScope.launch {
             userCategoriesRepository.addUserCategories(userCategories)
@@ -32,5 +35,4 @@ class CategoryChooserViewModel @Inject constructor(
             _user.value = this
         }
     }
-
 }

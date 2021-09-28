@@ -8,6 +8,7 @@ import com.example.book.repository.BooksRepository
 import com.example.book.repository.UserCategoriesRepository
 import com.example.book.service.GoogleBookAPIService
 import com.example.book.service.RetrofitBuilder
+import com.example.book.service.notification.NotificationHandler
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -30,17 +31,16 @@ object HiltModule {
         BooksRepository(service)
 
     @Provides
-    fun provideFirebaseAuth(): FirebaseAuth =
-        FirebaseAuth.getInstance()
-
-    @Provides
-    fun provideRepositoryAuth(auth: FirebaseAuth): AuthenticationRepository {
-        return AuthenticationRepository(auth)
+    fun provideRepositoryAuth(
+        auth: FirebaseAuth,
+        fireStore: FirebaseFirestore
+    ): AuthenticationRepository {
+        return AuthenticationRepository(auth, fireStore)
     }
 
     @Provides
-    fun provideUserCategoriesDAO(@ApplicationContext context: Context): UserCategoriesDAO =
-        AppDatabase.getDatabase(context).getUserCategoriesDAO()
+    fun provideFirebaseAuth(): FirebaseAuth =
+        FirebaseAuth.getInstance()
 
     @Provides
     fun provideFirebaseFirestore(): FirebaseFirestore {
@@ -48,6 +48,14 @@ object HiltModule {
     }
 
     @Provides
+    fun provideUserCategoriesDAO(@ApplicationContext context: Context): UserCategoriesDAO =
+        AppDatabase.getDatabase(context).getUserCategoriesDAO()
+
+    @Provides
     fun provideUserCategorieRepository(dao: UserCategoriesDAO): UserCategoriesRepository =
         UserCategoriesRepository(dao)
+
+    @Provides
+    fun provideNotification(@ApplicationContext context: Context): NotificationHandler =
+        NotificationHandler(context)
 }

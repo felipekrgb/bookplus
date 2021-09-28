@@ -1,18 +1,20 @@
 package com.example.book.view.fragments
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.book.R
 import com.example.book.databinding.CategoryChooserFragmentBinding
+import com.example.book.model.Category
 import com.example.book.model.UserCategories
-import com.example.book.utils.replaceFragment
+import com.example.book.utils.checkForInternet
 import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
+import com.example.book.view.activities.NoInternetActivity
 import com.example.book.viewmodel.CategoryChooserViewModel
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseUser
@@ -29,24 +31,25 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
     private lateinit var binding: CategoryChooserFragmentBinding
     private val listOfCategories = mutableListOf<String>()
 
-    private val observerSignedUser = Observer<FirebaseUser> { user ->
+    private val observerUser = Observer<FirebaseUser> { user ->
         setupSaveCategoriesButton(user.uid)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = CategoryChooserFragmentBinding.bind(view)
         viewModel = ViewModelProvider(this).get(CategoryChooserViewModel::class.java)
 
-        viewModel.user.observe(viewLifecycleOwner, observerSignedUser)
+        viewModel.user.observe(viewLifecycleOwner, observerUser)
 
-        setupChips()
         viewModel.getCurrentUser()
+        setupChips()
     }
 
     private fun setupChips() {
-        binding.chipAnimal.setOnCheckedChangeListener { group, checkedId ->
-            handleChipChecked(group as Chip, checkedId, Category.ANIMAL)
+        binding.chipBiology.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.BIOLOGY)
         }
 
         binding.chipCulinary.setOnCheckedChangeListener { group, checkedId ->
@@ -96,6 +99,18 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
         binding.chipTechnology.setOnCheckedChangeListener { group, checkedId ->
             handleChipChecked(group as Chip, checkedId, Category.TECHNOLOGY)
         }
+
+        binding.chipDrama.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.DRAMA)
+        }
+
+        binding.chipRomance.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.ROMANCE)
+        }
+
+        binding.chipChildren.setOnCheckedChangeListener { group, checkedId ->
+            handleChipChecked(group as Chip, checkedId, Category.CHILDREN)
+        }
     }
 
     private fun setupSaveCategoriesButton(userId: String) {
@@ -111,9 +126,15 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
                     UserCategories(userId = userId, categories = listOfCategories)
                 )
 
-                Intent(requireContext(), HomeActivity::class.java).apply {
-                    startActivity(this)
-                    requireActivity().finish()
+                if ((requireActivity() as AppCompatActivity).checkForInternet(requireContext())) {
+                    Intent(requireContext(), HomeActivity::class.java).apply {
+                        startActivity(this)
+                        requireActivity().finish()
+                    }
+                } else {
+                    Intent(requireActivity(), NoInternetActivity::class.java).apply {
+                        startActivity(this)
+                    }
                 }
             }
         }
@@ -127,23 +148,5 @@ class CategoryChooserFragment : Fragment(R.layout.category_chooser_fragment) {
         } else {
             listOfCategories.remove(category.categoryName)
         }
-        println(listOfCategories)
     }
-
-    enum class Category(val categoryName: String) {
-        ANIMAL("Animal"),
-        CULINARY("Culinária"),
-        SPORT("Esporte"),
-        GEOGRAPHY("Geografia"),
-        POLITICS("Política"),
-        EDUCATION("Educação"),
-        ACTION("Ação"),
-        ADVENTURE("Aventura"),
-        HORROR("Terror"),
-        BIOGRAPHY("Biografia"),
-        SELF_HELP("Autoajuda"),
-        PSYCHOLOGY("Psicologia"),
-        TECHNOLOGY("Tecnologia"),
-    }
-
 }

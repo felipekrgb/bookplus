@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/libre_caslon_text_regular"
-        android:text="Escolha suas categorias favoritas"
+        android:text="Escolha 3 categorias"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@id/chipGroup"
@@ -39,12 +39,12 @@
             app:justifyContent="center">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_animal"
+                android:id="@+id/chip_biology"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
-                android:text="Animal" />
+                android:text="Biologia" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_culinary"
@@ -142,18 +142,43 @@
                 android:layout_marginEnd="12dp"
                 android:text="Tecnologia" />
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_drama"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="Drama" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_romance"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="Romance" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_children"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:text="Infantil" />
+
         </com.google.android.flexbox.FlexboxLayout>
     </com.google.android.material.chip.ChipGroup>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/saveCategoriesButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/brown_medium"
+        android:padding="18dp"
         android:text="Escolher categorias"
+        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chipGroup"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,6 @@ import com.example.book.utils.snackBar
 import com.example.book.view.activities.HomeActivity
 import com.example.book.view.activities.MainActivity
 import com.example.book.viewmodel.SignInViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,21 +31,37 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
     private lateinit var binding: SignInFragmentBinding
 
     private val observerUser = Observer<FirebaseUser?> {
-        viewModel.getUserCategories(it.uid)
+        Intent(requireContext(), HomeActivity::class.java).apply {
+            startActivity(this)
+            requireActivity().finish()
+        }
     }
 
     private val observerError = Observer<String> {
-        Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
-    }
+        binding.buttonLogin.apply {
+            isEnabled = true
+            alpha = 1f
+        }
 
-    private val observerCategories = Observer<List<String>?> { categories ->
-        if (categories != null) {
-            Intent(requireContext(), HomeActivity::class.java).apply {
-                startActivity(this)
-                requireActivity().finish()
-            }
+        binding.buttonLoginTextView.visibility = View.VISIBLE
+        binding.buttonLoginProgressBar.visibility = View.INVISIBLE
+
+        binding.arrowBackImageView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
+        binding.registerTextView.apply {
+            isClickable = true
+            alpha = 1f
+        }
+
+        if (it == "There is no user record corresponding to this identifier. The user may have been deleted.") {
+            showSnackbar(R.string.error_login_no_user, R.color.red)
+        } else if (it == "The password is invalid or the user does not have a password.") {
+            showSnackbar(R.string.user_invalided, R.color.red)
         } else {
-            (requireActivity() as AppCompatActivity).replaceFragment(CategoryChooserFragment())
+            showSnackbar(R.string.error_generic_login, R.color.red)
         }
     }
 
@@ -58,19 +73,35 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
         setupObservers()
         setupSettingsSignIn()
         setupBackButton()
-
     }
 
     private fun setupObservers() {
         viewModel.user.observe(viewLifecycleOwner, observerUser)
         viewModel.error.observe(viewLifecycleOwner, observerError)
-        viewModel.categories.observe(viewLifecycleOwner, observerCategories)
     }
 
     private fun setupSettingsSignIn() {
         binding.buttonLogin.setOnClickListener {
-            val inputEmail = binding.editTextUser.editText
+            val inputEmail = binding.userEmailEditText
             val inputPassword = binding.editTextPassword.editText
+
+            binding.buttonLogin.apply {
+                isEnabled = false
+                alpha = 0.5f
+            }
+
+            binding.buttonLoginTextView.visibility = View.GONE
+            binding.buttonLoginProgressBar.visibility = View.VISIBLE
+
+            binding.arrowBackImageView.apply {
+                isClickable = false
+                alpha = 0.5f
+            }
+
+            binding.registerTextView.apply {
+                isClickable = false
+                alpha = 0.5f
+            }
 
             (requireActivity() as AppCompatActivity).hideKeyboard()
 
@@ -80,9 +111,28 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
                     password = inputPassword?.text.toString()
                 )
             } else {
+                binding.buttonLogin.apply {
+                    isEnabled = true
+                    alpha = 1f
+                }
+
+                binding.buttonLoginTextView.visibility = View.VISIBLE
+                binding.buttonLoginProgressBar.visibility = View.INVISIBLE
+
+                binding.arrowBackImageView.apply {
+                    isClickable = true
+                    alpha = 1f
+                }
+
+                binding.registerTextView.apply {
+                    isClickable = true
+                    alpha = 1f
+                }
+
                 showSnackbar(R.string.no_user, R.color.red)
             }
         }
+
         binding.registerTextView.setOnClickListener {
             (requireActivity() as AppCompatActivity).replaceFragment(SignUpFragment.newInstance())
         }
@@ -96,7 +146,7 @@ class SignInFragment : Fragment(R.layout.sign_in_fragment) {
 
     private fun showSnackbar(@StringRes msgId: Int, @ColorRes colorId: Int) {
         val activity = requireActivity() as MainActivity
-        val bottomNav = activity.binding.container
-        activity.snackBar(bottomNav, msgId, colorId)
+        val view = binding.registerNotTextView
+        activity.snackBar(view, msgId, colorId)
     }
 }
