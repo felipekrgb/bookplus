@@ -25,7 +25,7 @@ Book+ é um aplicativo de exibição de livros com uma coleção de mais de 15 m
   $ cd bookplus
 ```
 
-- Executar aplicativo pelo Android Studio ou executar o APK que está na pasta 'APK' na raiz do projeto
+- Executar aplicativo pelo Android Studio ou executar o APK que está na pasta '[APK](https://github.com/felipekrgb/bookplus/tree/main/APK)' na raiz do projeto
 
 ## Navegando pelo aplicativo e instruções
 
